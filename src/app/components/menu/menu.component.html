@@ -1,0 +1,28 @@
+<ion-menu side="start" menuId="first" contentId="principal">
+  <ion-header>
+    <ion-toolbar color="transparent">
+      <ion-title>Wawapp</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list lines="none">
+      <ion-item button (click)="goToHome()">
+        <ion-icon name="home" slot="start">
+        </ion-icon>
+        Home
+      </ion-item>
+      <ion-item button (click)="goToGraficas()">
+        <ion-icon name="reader-outline" slot="start"></ion-icon>
+        Gráficas de crecimiento
+      </ion-item>
+      <ion-item button (click)="goToMyparents()">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Mis citas
+      </ion-item>
+      <ion-item button (click)="closeSesion()">
+        <ion-icon name="close-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

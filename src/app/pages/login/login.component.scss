@@ -1,0 +1,54 @@
+ion-content{
+    --background:#47ACDE!important;
+    /* background-image:url('../assets/img/fondo/loginfondo.png');  */
+    background-size:cover;
+  }
+  .textoBlanco{
+    color:#fff;
+    font-weight:400;
+    padding-top:2vh;
+    width: 85%;
+    margin-left:7.5%;
+    text-align: center;
+    font-size:.9em;
+  }
+  .contenedorInputs{
+    margin-top:10vh;
+  }
+  ion-item{
+    height: 68px;
+    border-bottom:1px solid #fff!important;
+    margin-bottom:.5em!important;
+    --background:transparent!important;
+    color:#fff;
+  }
+  ion-label{
+    color:#fff!important;
+  }
+  .item-md.item-block .item-inner{
+    border-bottom:none;
+  }
+  .inicioSesion{
+    margin-top:2em;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  ion-button{
+    height: 50px !important;
+  }
+  .mensaje{
+    color:red;
+  }
+  .botonPassword{
+      margin-top:20px;
+    color:#FFC839;
+    text-align: center;
+    --background: rgba(255, 255, 255, 0.3);
+  }
+  .centrado{
+    text-align: center;
+  }
+  .item-native{
+      border-style: none!important;
+      border-color:transparent!important;
+  }

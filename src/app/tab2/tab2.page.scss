@@ -1,0 +1,194 @@
+.fecha{
+    font-size:.9em;
+    color:#fff;
+    text-align: right;
+    margin-right: 15px;
+    margin-top: -15px;
+}
+.realizadoControl{
+    --background: #fff!important;
+    color:#fff;
+}
+ion-thumbnail{
+    img{
+        width: 60px!important;
+        height: 60px!important;
+        margin-top:5px;
+    }
+}
+ion-list{
+    button{
+        height: 86px!important;
+    }
+}
+.boxControls{
+  display:flex;
+  flex-direction: column;
+  width: 92%;
+  margin-left:4%;
+  height: 150px;
+  --background: #47ACDE;
+  margin-bottom:25px;
+  border-radius:5px;
+  .containerFecha{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    --background-color:#1A8FC9!important;
+    }
+}
+.boxControlsHecho{
+  height: 150px;
+  --background: #66CBEC!important;
+  margin-bottom:15px;
+  border-radius:5px;
+  .tituloCita{
+    font-size:1em;
+    text-align: left;
+    font-weight:600;
+  }
+  .nombreDoctor{
+    color:#fff;
+    font-weight:800px;
+    font-size:1.2em;
+    margin-top:10px;
+    margin-bottom:15px;
+  }
+  .servicioCita{
+    color:#fff;
+    font-weight: 400;
+    margin-right:10px;
+    margin-top:-15px;
+    font-size:1em;
+  }
+
+  .elDia, .hora, .cita{
+    text-align: right;
+    margin-right: 10px;
+    margin-top:-10px;
+    color:#9883c1;
+  }
+  .elDia{
+    margin-top:2px;
+  }
+  .diaCita{
+    color:#fff;
+    text-align:right;
+    margin-top:-15px;
+    margin-right:10px;
+    font-size:1.2em;
+    padding-bottom:5px;
+  }
+  .horaCita{
+    color:#fff;
+    text-align: right;
+    margin-top:-15px;
+    margin-right:10px;
+    font-size:1.1em;
+    padding-bottom:5px;
+  }
+  .centroCita{
+    color:#fff;
+    font-size:1.1em;
+    text-align:right;
+    margin-right: 10px;
+    margin-top:-15px;
+    padding-bottom:5px;
+
+  }
+}
+ion-col{
+  padding:0!important;
+}
+
+.containerData .when{
+  color:#fff!important;
+  font-size:1.1em;
+  width:100%;
+  text-align: right;
+  margin-top:45px;
+  p{
+    margin-right: 16px;
+  }
+}
+.when{
+  padding-right:16px;
+}
+.numeroControl{
+  color:#fff;
+  font-size:4em;
+  font-weight:600;
+  margin-left:15px;
+  margin-top:10px!important;
+  margin-bottom:10px!important;
+}
+.centrar{
+  text-align: center;
+}
+.nombre{
+  color:#fff;
+  margin-top:-.5em;
+  font-size:.8em;
+}
+.input{
+  color:#fff;
+  font-weight: 600;
+  font-size:1.4em;
+  margin-top:.1em;
+  margin-bottom:0;
+}
+.buttonOptions{
+color:#fff;
+}
+.barraContactos{
+background: #F7F8FB;
+height: 80px;
+/*    margin-top:10px; */
+margin-bottom:20px;
+  .item-md{
+    background:none;
+  }
+}
+.botonInactivo{
+color:#fff;
+}
+.boxFaltantes{
+background:#E6EAEA;
+height: 180px;
+width: 92%;
+margin-left:4%;
+border-radius:10px;
+margin-top: 5px;
+  p{
+    color:#7467B2;
+  }
+  .numeroControl{
+    font-size:3em;
+    color:#F7F8FB;
+    margin-top:10px;
+  }
+}
+.cajaCita{
+background:#66CBEC;
+color:#7467B2;
+height:150px;
+width:92%;
+border-radius:5px;
+}
+#profile-image{
+width:80px;
+border-radius:10px;
+text-align:center;
+}
+.contenedorImagen{
+text-align: center;
+}
+.item-md.item-block .item-inner{
+border-bottom:none;
+}
+
+.item-md ion-avatar img{
+margin-left: 8px;
+}
+.dependendName{
+color:#000;
+}

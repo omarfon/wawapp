@@ -1,0 +1,171 @@
+/* background:#FAFBFB!important; */
+.botones{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contendorDatos{
+  height: 120px;
+  --background:#00B972;
+  color:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    p{
+      font-size:1.3em;
+      text-align: center;
+    }
+}
+.contenedorBotones{
+  position: sticky;
+
+}
+.fondoDepes{
+  --background: rgb(244, 247, 253);
+}
+
+// estilos nutricion
+.categoriaAlimentacion{
+  color:#A7A9AC;
+  font-size:1.2em;
+}
+.semanaPertenece{
+  font-size:.8em;
+  color:#50504F;
+}
+.tituloAlimentacion{
+  color:#FFC839;
+  font-size:1.4em;
+  margin-top:15px;
+}
+.contenidoAlimentacion{
+  color:#A7A9AC;
+  text-align: left;
+  line-height: 1.3em;
+}
+.contenedorBebe img{
+  width: 40px!important;
+}
+// estilo de los hitos
+.tituloHitos{
+  color:#FF634C;
+  font-size:1.4em;
+}
+.categoriaHitos{
+  color:#A7A9AC;
+  font-size:1.2em;
+}
+.contenidoHitos{
+  color:#A7A9AC;
+  line-height:1.3;
+}
+// estilos hogar
+.categoriaHogar{
+  color:#A7A9AC;
+  font-size:1.2em;
+}
+.semanaHogar{
+  font-size:.8em;
+  color:#50504F;
+}
+.tituloHogar{
+  color:#47ACDE;
+  font-size:1.4em;
+}
+.contenidoHogar{
+  color:#A7A9AC;
+  line-height: 1.3em;
+}
+// estilos cuidado y salud
+.categoriaCuidado{
+  color:#A7A9AC;
+  font-size:1.2em;
+}
+.tituloCuidado{
+  color:#00B972;
+  font-size:1.3em;
+}
+.contenidoCuidado{
+  color:#A7A9AC;
+  line-height: 1.3em;
+}
+.botonDependens {
+  ion-select{
+    width: 90%!important;
+    max-width:100%;
+      .select-placeholder{
+        width: 80%;
+      }
+  }
+  .select-icon{
+    .select-icon-inner{
+      color:#fff!important;
+    }
+  }
+}
+// aqui comienzan los estilos de los acordeones
+.mat-expansion-panel:not([class*=mat-elevation-z]){
+  box-shadow:none!important;
+  .mat-content{
+    text-align: right;
+  }
+}
+ion-slide{
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;
+}
+ion-slide p {
+  margin-bottom: 2.5em!important;
+  color:#A7A9AC!important;
+  font-size:.7em!important;
+  text-align: center;
+}
+mat-panel-title h2{
+  color:#00B972 !important;
+  margin-left:0!important;
+  font-size: 1.2em!important;
+}
+.estimulacionbutton{
+  // font-size:.85em;
+  text-transform: capitalize;
+  height: 60px;
+}
+.hitosbutton{
+  // font-size:.85em;
+  text-transform: capitalize;
+  height: 60px;
+}
+.hijos{
+  width: 90%;
+  margin-left:5%;
+}
+.textoConsejos{
+  color:#A7A9AC;
+  font-size:.9em;
+}
+.mes{
+  font-size:2.2em;
+  color:#00B972;
+  font-weight: 600;
+  text-align: right;
+}
+.mesHogar{
+  font-size:2.2em;
+  color:#47ACDE;
+  font-weight: 600;
+  text-align: right;
+}
+.mesNutricion{
+  font-size:2.2em;
+  color:#FFC839;
+  font-weight: 600;
+  text-align: right;
+}
+.cuidadoCard{
+  border-top-left-radius: 15px;
+  // border-top-right-radius: 10px;
+}
+.containerButtons{
+    margin-top:30px;
+}

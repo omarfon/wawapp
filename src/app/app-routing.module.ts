@@ -1,10 +1,57 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { DetailVacunaComponent } from './components/detail-vacuna/detail-vacuna.component';
+import { DatesComponent } from './pages/dates/dates.component';
+import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
+import { GraficasComponent } from './pages/graficas/graficas.component';
+import { HitosComponent } from './pages/hitos/hitos.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RecoveryComponent } from './pages/recovery/recovery.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { Tab1Page } from './tab1/tab1.page';
+import { TabsPageModule } from './tabs/tabs.module';
+import { TabsPage } from './tabs/tabs.page';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'login',
+    component:  LoginComponent
+  },
+  {
+    path: 'register',
+    component:  RegisterComponent
+  },
+  {
+    path: 'graficas',
+    component:  GraficasComponent
+  },
+  {
+    path: 'detail',
+    component:  DetailVacunaComponent
+  },
+  {
+    path: 'home',
+    component:  TabsPageModule
+  },
+  {
+    path: 'recovery/:dataObj',
+    component:  RecoveryComponent
+  },
+  {
+    path: 'dates',
+    component:  DatesComponent
+  },
+  {
+    path: 'hitos',
+    component:  HitosComponent
+  },
+  {
+    path: 'estimulacion',
+    component:  EstimulacionComponent
   }
 ];
 @NgModule({

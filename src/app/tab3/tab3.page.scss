@@ -1,0 +1,100 @@
+#box{
+    background: #F5F5F5;
+    margin-bottom:10px;
+    border-left:5px solid #fff;
+    border-right:5px solid #fff;
+    height: 250px;
+    border-top-right-radius: 35px;
+    .month{
+        font-size:62px;
+        text-align: right;
+        font-weight: bold;
+        color:#FFC839;
+        margin:0;
+        padding:0;
+    }
+    ul{
+        padding-top:10px;
+        padding-right:10px;
+        text-align:right;
+        padding-left:10px;
+    }
+    li{
+        list-style-type: none;
+        padding:0!important;
+        font-family:"Roboto";
+        font-size:.9em;
+        margin-bottom:5px;
+        color:#9B9B9B;
+
+    }
+    .contenedor{
+        margin-top:-35px;
+    }
+    ion-icon{
+        color:#FFC839;
+        font-size:2em;
+        text-shadow: 0 1px 1px #9B9B9B;
+    }
+    .trofeos{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: -30px;
+    }
+    .indicadores{
+        margin-top:15px;
+    }
+}
+.palabrameses{
+  margin: 0!important;
+  text-align: right;
+  font-size: 1em;
+  color:#FFC839;
+  margin-top: 10px!important;
+  margin-bottom:15px!important;
+}
+.item-md{
+  background: none;
+}
+.list-md .item-block .item-inner, .item-md.item-block .item-inner{
+  border-bottom: none;
+}
+ion-icon{
+  font-size: 1em!important;
+  margin:0!important;
+  text-shadow:none!important;
+  color:#0AD641!important;
+  margin-top: 5px;
+}
+.label-md p{
+  font-size: .8em!important;
+  color: #9B9B9B;
+}
+div.item-inner{
+  margin-left:0!important;
+  height: 28!important;
+}
+.item{
+  height: 24px!important;
+}
+.contenedorVacunas{
+  margin-top: -20px;
+}
+ion-label{
+  margin-top:0!important;
+}
+.vacunaContainer{
+  margin-bottom:-8px;
+}
+.textVaccine{
+  color:#B6BFBF!important;
+  font-weight: 400;
+  font-size: 1em;
+  text-align: center;
+  padding-bottom:1em;
+  padding-top:1em;
+  width: 90%;
+  margin-left:5%;
+
+}

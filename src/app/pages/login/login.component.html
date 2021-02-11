@@ -1,0 +1,39 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar hideBackButton="true" persistent="true">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size='small'>
+     Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content class="ion-padding">
+  <h5 class="bajar textoBlanco" text-center> Bienvenido a Wawapp!!!.. para continuar ingresa tu email y contraseña y si aun no tienes una registrate es super facil</h5>
+  <div class="contenedorInputs">
+    <ion-item >
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="emal" #email></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" #password></ion-input>
+    </ion-item>
+ 
+  <ion-button class="inicioSesion" color="warning" expand="block" (click)="signIn(email.value , password.value)">
+   Login
+  </ion-button>
+  </div>
+  <ion-button expand='block' class="alto50" (click)="register()">
+    Register
+   </ion-button>
+  <ion-button 
+  expand='block'  
+  fill='clear'
+  class="inicioSesion"
+  (click)="recovery()"
+  class="botonPassword">
+    Olvide la contraseña
+   </ion-button>
+  
+</ion-content>

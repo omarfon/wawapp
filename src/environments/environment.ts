@@ -3,8 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  
 };
+
+//DESARROLLO
+export const apiUrl ="https://dappapache02.eastus.cloudapp.azure.com/middleware2/api/v2/";
+export const api = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/";
+export const apiCms = "https://dappapache02.eastus.cloudapp.azure.com/middleware2/dev/wawa-data/";
+
 
 /*
  * For easier debugging in development mode, you can import the following file
