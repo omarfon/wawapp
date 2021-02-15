@@ -17,11 +17,19 @@
             *ngIf="dependend.edad <= 5">
                     <ion-item button
                               clear
+                              class="itemButtonDependend"
                               (click)="getDataParent(dependend)" >
-                      <ion-avatar>
-                        <img src="https://picsum.photos/200" alt="">
-                      </ion-avatar>
-                      <p class="dependendName">{{dependend.name}}</p>
+                              <ion-row>
+                                <ion-col size="12" class="centrar">
+                                  <ion-avatar>
+                                    <img src="https://picsum.photos/200" alt="">
+                                  </ion-avatar>
+                                </ion-col>
+                                <ion-col size="12" class="centrar">
+                                  <label class="dependendName">{{dependend.name}}</label>
+                                </ion-col>
+                              </ion-row>
+                          
                     </ion-item>
         </ion-col>
       </div>
@@ -110,26 +118,6 @@
     </ion-col>
 
   </ion-row>
-
-  <!-- <div >
-    <ion-row>
-      <ion-col col-6 *ngFor="let allc of AllControls"
-      (click)=createDate(allc)>
-        <div class="boxFaltantes">
-            <ion-row>
-                <ion-col col-4
-                          class="numeroControl">
-                 {{allc.control}}
-                </ion-col>
-                <ion-col col-8>
-                  <p>{{allc.fecha}}</p>
-                  <p>{{allc.date}}</p>
-                </ion-col>
-            </ion-row>
-        </div>
-      </ion-col>
-    </ion-row>
-  </div> -->
 </ion-grid>
 <ion-fab horizontal="end" vertical="bottom" slot="fixed" (click)="getDates()" >
   <ion-fab-button >

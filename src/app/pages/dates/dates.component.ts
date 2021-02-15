@@ -16,8 +16,8 @@ export class DatesComponent implements OnInit {
   c: any;
   servicios: any;
   disponibles: boolean;
-  doctors: any;
-  doctorsF: any;
+  public doctors;
+  public doctorsF;
   id: any;
   fromDate: any;
   toDate: any;
@@ -51,7 +51,6 @@ export class DatesComponent implements OnInit {
 
   ngOnInit() {
     this.escogido = 44;
-    console.log(this.escogido);
     this.id = 39;
     this.fromDate = moment().format('YYYY-MM-DD');
     this.toDate = moment(this.fromDate).add(5, 'days').format('YYYY-MM-DD');
@@ -78,7 +77,6 @@ export class DatesComponent implements OnInit {
         this.disponibles = true;
         return null;
       }
-      console.log(doctors);
       this.doctors = doctors;
       for (let doctor of doctors) {
         this.citasSrv.getAvailablesPerDoctor(doctor.id, this.escogido, doctor.service.id, this.fromDate, this.toDate).subscribe((availables: any) => {
@@ -93,9 +91,6 @@ export class DatesComponent implements OnInit {
       console.log(this.doctorsF);
       loading.dismiss();
       console.log('cerrando el loading')
-      /*     if(this.doctors = doctors.length){
-          } */
-      /* console.log('this.doctors:', this.doctors); */
     }, err => {
       console.log('err', err)
     },

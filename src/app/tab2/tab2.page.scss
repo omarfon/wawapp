@@ -191,4 +191,21 @@ margin-left: 8px;
 }
 .dependendName{
 color:#000;
+margin-top:-10px;
+--background: transparent!important;
+}
+.itemButtonDependend{
+  --background: transparent!important;
+}
+ion-avatar{
+  img{
+    height: 35px;
+    width: 35px;
+    margin-top:15px;
+  }
+}
+.centrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
