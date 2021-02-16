@@ -6,6 +6,14 @@
     <ion-title size='small'>
      Desarrollo
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="goToHitos()">
+        <ion-icon name="bar-chart"></ion-icon>
+      </ion-button>
+      <ion-button  (click)="goToEstimulation()">
+        <ion-icon name="accessibility"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,29 +21,34 @@
   <ion-row>
     <ion-col size="12" class="fondoDepes">
       <ion-row *ngIf="filtrados">
-        <ion-col size="3" *ngFor="let dep of filtrados">
-          <ion-button outline class="hijos" round (click)="renderizarInfoPorHijo(dep)">
-            {{dep.name}}
-          </ion-button>
+        <ion-col size="3" *ngFor="let dep of filtrados" >  
+          <ion-row>
+            <ion-col>
+              <ion-avatar (click)="renderizarInfoPorHijo(dep)">
+                <img src="https://www.shareicon.net/data/2016/08/05/807214_people_512x512.png" alt="">
+              </ion-avatar>
+            </ion-col>
+            <ion-col class="containerNombreDepe">
+                <p>{{dep.name}}</p> 
+            </ion-col>
+          </ion-row>  
         </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>
-  <div class="containerButtons">
-    <div class="row">
-      <ion-col size="5"></ion-col>
-      <ion-col size="3">
-        <ion-button (click)="goToHitos()">Hitos</ion-button>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button  (click)="goToEstimulation()">Estimulación</ion-button>
-      </ion-col>
-    </div>
-  </div> 
-  <div class="contenedorCategorias" *ngFor="let nota of notas">
+ <div class="containerMeses">
+   <ion-slides [options]="slideOpts">
+     <ion-slide *ngFor="let m of meses">
+       <div class="containerMesSlide" (click)="mesSelect(m)">
+        <p class="mesSlide">{{m.mes}}</p>
+       </div>
+     </ion-slide>
+   </ion-slides>
+ </div>
+<!--   <div class="contenedorCategorias" > -->
 
-    <div id="nutricion">
-      <ion-card *ngIf="nota.tipo == 'bebenutricion'" class="animated bounceInUp">
+  <!-- <div id="nutricion">
+      <ion-card *ngIf="nota.type == 'bebenutricion'" class="animated bounceInUp">
         <ion-card-content>
           <ion-row>
             <ion-col size="2">
@@ -43,23 +56,19 @@
             </ion-col>
             <ion-col size="8">
               <h5 class="categoriaAlimentacion">Alimentación y Nutrición</h5>
-              <!-- <p class="semanaPertenece">estamos en la semana {{nota.semana}}</p> -->
             </ion-col>
             <ion-col size="2" class="contenedorBebe">
                 <p class="mesNutricion"> {{nota.mes}} </p>
             </ion-col>
-            <!-- <ion-col col-12>
-              <h2 class="tituloAlimentacion">{{nota.titulo}}</h2>
-            </ion-col> -->
             <ion-col size="12">
               <p class="contenidoAlimentacion">{{nota.texto}}</p>
             </ion-col>
           </ion-row>
         </ion-card-content>
       </ion-card>
-    </div>
+    </div> -->
 
-    <div id="hitos" *ngIf="nota.tipo == 'bebecrecimiento'">
+    <!-- <div id="hitos" *ngIf="nota.type == 'bebecrecimiento'">
       <ion-card class="animated bounceInUp">
         <img src="{{nota.imagenUrl}}" />
         <ion-card-content>
@@ -72,7 +81,6 @@
               <p class="semanaPertenece">estamos en la semana {{nota.semana}}</p>
             </ion-col>
             <ion-col size="1" class="contenedorBebe">
-              <!-- <img src="assets/img/icons/bebe.png" alt=""> -->
             </ion-col>
             <ion-col size="12">
               <h3 class="tituloHitos">{{nota.titulo}}</h3>
@@ -85,9 +93,9 @@
           </ion-row>
         </ion-card-content>
       </ion-card>
-    </div>
+    </div> -->
 
-    <div id="hogar" *ngIf="nota.tipo == 'bebehogar'">
+   <!--  <div id="hogar" *ngIf="nota.type == 'bebehogar'">
       <ion-card class="animated bounceInUp">
         <ion-card-content>
           <ion-row>
@@ -96,14 +104,10 @@
             </ion-col>
             <ion-col size="8">
               <h5 class="categoriaHogar">Hogar y Familia</h5>
-              <!-- <p class="semanaHogar">estamos en la semana {{nota.semana}}</p> -->
             </ion-col>
             <ion-col size="2" class="contenedorBebe">
                 <p class="mesHogar"> {{nota.mes}} </p>
             </ion-col>
-            <!-- <ion-col col-12>
-              <h2 class="tituloHogar">{{nota.titulo}}</h2>
-            </ion-col> -->
             <ion-col size="12">
               <p class="contenidoHogar">{{nota.texto}}</p>
             </ion-col>
@@ -111,9 +115,52 @@
 
         </ion-card-content>
       </ion-card>
-    </div>
+    </div> -->
 
-    <div id="cuidado" *ngIf="nota.tipo == 'bebecuidado'">
+    <div class="containerCardsSlider">
+      <ion-slides [options]="slidOptions">
+        <ion-slide *ngFor="let nota of notas">
+          <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'">
+              <h5>{{nota.titulo}}</h5>
+          </ion-card>
+
+          <ion-card id="bebenutricion" *ngIf="nota.type == 'bebenutricion'">
+            <ion-card-header>
+              <ion-row>
+                <ion-col size="2">
+                  <img src="assets/img/icons/nutricion.png">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-card-title>
+                    {{nota.titulo}}
+                  </ion-card-title>
+                </ion-col>
+              </ion-row>
+              <ion-card-subtitle>
+                {{nota.resumen}}
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{nota.desarrolloContenido}}</p>
+            </ion-card-content>
+            <p></p>
+        </ion-card>
+        <ion-card id="cuidado" *ngIf="nota.type == 'bebefamilia'">
+          <h5>{{nota.titulo}}</h5>
+      </ion-card>
+      <ion-card id="cuidado" *ngIf="nota.type == 'bebehitos'">
+        <h5>{{nota.titulo}}</h5>
+      </ion-card>
+      <ion-card id="cuidado" *ngIf="nota.type == 'bebeestimulacion'">
+        <h5>{{nota.titulo}}</h5>
+      </ion-card>
+      <ion-card id="cuidado" *ngIf="nota.type == 'bebevacunas'">
+        <h5>{{nota.titulo}}</h5>
+      </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <!-- <div id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'">
       <ion-card class="animated bounceInUp cuidadoCard">
         <img src="{{nota.imagenUrl}}" />
         <ion-card-content>
@@ -123,14 +170,10 @@
             </ion-col>
             <ion-col size="8">
               <h3 class="categoriaCuidado">Cuidado y Salud</h3>
-              <!-- <p class="semanaPertenece">estamos en la semana {{nota.semana}}</p> -->
             </ion-col>
             <ion-col size="2" class="contenedorBebe">
               <p class="mes"> {{nota.mes}} </p>
             </ion-col>
-            <!-- <ion-col col-12>
-              <h3 class="tituloCuidado">{{nota.titulo}}</h3>
-            </ion-col> -->
             <ion-col size="12" (click)="goToDetailCuidado(nota)">
               <p class="contenidoCuidado">
                 {{nota.resumen}}
@@ -144,17 +187,11 @@
                   <h2>Consejos Utiles</h2>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-           <!--    <ion-slides pager speed="1500" loop="true" *ngIf="nota.contenidoJson[0].consejos">
-                <ion-slide *ngFor="let consejo of nota.contenidoJson[0].consejos">
-                    <p class="textoConsejos"> {{consejo.consejo}} </p>
-                </ion-slide>
-              </ion-slides> -->
             </mat-expansion-panel>
           </mat-accordion>
         </ion-card-content>
       </ion-card>
-    </div>
+    </div> -->
 
-  </div>
-
+  <!-- </div> -->
 </ion-content>

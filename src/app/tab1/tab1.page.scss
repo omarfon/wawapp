@@ -1,4 +1,6 @@
-/* background:#FAFBFB!important; */
+ion-content{
+  --background:#f4f9f9!important;
+}
 .botones{
   display: flex;
   justify-content: center;
@@ -21,7 +23,7 @@
 
 }
 .fondoDepes{
-  background: rgb(244, 247, 253);
+  background: #f4f9f9;
 }
 
 // estilos nutricion
@@ -168,4 +170,75 @@ mat-panel-title h2{
 }
 .containerButtons{
     margin-top:30px;
+}
+ion-avatar{
+  img{
+    height: auto;
+    margin-top:10px;
+    margin-left: calc(50% - 22.5px);
+  }
+}
+.containerNombreDepe{
+  color:#50504F;
+  text-transform: lowercase;
+  text-align: center;
+}
+.containerMeses{
+  ion-slide{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:20px;
+  }
+  .mesSlide{
+    color:#fff!important;
+  }
+  
+  .containerMesSlide{
+    background: #d3e0ea;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    p{
+      color:#000!important;
+      font-size:1.1em!important;
+      font-weight: 500;
+      margin-top:15px;
+  
+    }
+  }
+}
+
+.containerCardsSlider{
+  ion-slider{
+    width:100%;
+  }
+  ion-slide{
+    width:100%;
+  }
+  #bebenutricion{
+    ion-card-title{
+      text-align: left;
+      color:#FFC839;
+      font-size:1.1em;
+    }
+    ion-card-subtitle{
+      text-align: left;
+      font-size:.9em;
+    }
+  }
+  ion-card{
+    width:95%;
+    margin-left:2.5%;
+    height: 400px;
+    h5{
+      color:#47ACDE;
+      font-size:1em;
+      margin-top:10px;
+    }
+  }
+}
+.containerCardsSlider{
+  margin-top:15px;
 }

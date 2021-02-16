@@ -15,7 +15,7 @@ export class NotasService {
     const authorization = localStorage.getItem('authorization');
     let headers = new HttpHeaders({'Authorization': authorization});
 
-    return this.http.get(this.SERVER + 'wawa/notas', {headers}).pipe(
+    return this.http.get(this.SERVER + 'wawa/data', {headers}).pipe(
       map(res => {
         return res
       })

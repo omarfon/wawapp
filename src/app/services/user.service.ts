@@ -12,6 +12,8 @@ export class UserService {
   private apiUrl = `${this.SERVER}auth/login`;
   private apiUrlDatos = `${this.SERVER}ebooking`
   public userId;
+  public patientId;
+  public content;
   constructor(public http: HttpClient) { }
 
 

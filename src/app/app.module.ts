@@ -17,8 +17,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, 
+  entryComponents: [ ],
+  imports: [
+    BrowserModule, 
     ComponentsModule,
     IonicModule.forRoot(), 
     HttpClientModule,

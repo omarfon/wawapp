@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title size='small'>
+     Parametros del control
+    </ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card id="contenedorPoppover">
+    <h4  class="titulo">Parametros Clínicos</h4>
+    <ion-row>
+      <ion-grid>
+        <ion-row *ngFor="let parametro of parametros; let i = index">
+          <ion-col size="2" class="imagen"><img src="./assets/imgs/{{i}}.png" ></ion-col>
+          <ion-col size="5" class="descripcion">{{ parametro.descripcion}}</ion-col>
+          <ion-col size="5" class="valor">{{ parametro.valor }}   <span> {{ parametro.unidad}} </span></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+</ion-card>
+
+<ion-card>
+  <ion-card-header class="tituloRecomendaciones">
+    Recomendaciones del doctor
+  </ion-card-header>
+  <ion-card-content class="textoRecomendaciones">
+    <p>No abrigar excesivamente a juanito, usar interiores de algodón y revisar siempre los pañales para evitar escaldaduras. </p>
+  </ion-card-content>
+</ion-card>
+</ion-content>

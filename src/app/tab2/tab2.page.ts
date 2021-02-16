@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { LoadingController } from '@ionic/angular';
 import { ControlsService } from '../services/controls.service';
 import { AppoinmentService } from '../services/appoinment.service';
+import { ParametersComponent } from '../pages/parameters/parameters.component';
 
 @Component({
   selector: 'app-tab2',
@@ -87,8 +88,15 @@ getDataParent(dependend) {
 }
 
 getDates(){
-  this.userSrv.userId = this.userId;
+  this.userSrv.userId = this._id;
   this.router.navigate(['dates'])
+}
+
+goToParameters(c){
+  console.log(c);
+  this.userSrv.patientId = this._id;
+  this.userSrv.content = c;
+  this.router.navigate(['parametros']);
 }
 
 }

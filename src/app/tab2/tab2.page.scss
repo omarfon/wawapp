@@ -6,7 +6,7 @@
     margin-top: -15px;
 }
 .realizadoControl{
-    --background: #fff!important;
+    background: #fff!important;
     color:#fff;
 }
 ion-thumbnail{
@@ -27,18 +27,18 @@ ion-list{
   width: 92%;
   margin-left:4%;
   height: 150px;
-  --background: #47ACDE;
+  background: #47ACDE;
   margin-bottom:25px;
   border-radius:5px;
   .containerFecha{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    --background-color:#1A8FC9!important;
+    background-color:#1A8FC9!important;
     }
 }
 .boxControlsHecho{
   height: 150px;
-  --background: #66CBEC!important;
+  background: #66CBEC!important;
   margin-bottom:15px;
   border-radius:5px;
   .tituloCita{

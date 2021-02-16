@@ -6,6 +6,7 @@ import { EstimulacionComponent } from './pages/estimulacion/estimulacion.compone
 import { GraficasComponent } from './pages/graficas/graficas.component';
 import { HitosComponent } from './pages/hitos/hitos.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ParametersComponent } from './pages/parameters/parameters.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { Tab1Page } from './tab1/tab1.page';
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path: 'estimulacion',
     component:  EstimulacionComponent
+  },
+  {
+    path: 'parametros',
+    component:  ParametersComponent
   }
 ];
 @NgModule({

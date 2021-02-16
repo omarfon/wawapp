@@ -96,20 +96,20 @@
                 *ngIf="c.tiene_receta"
                 class="centrar"
                 (click)="goToRecipes(c)">
-                <button clear ion-button
+                <ion-button fill="clear"
                         class="botonInactivo">
                   <ion-icon name="list-box"></ion-icon>
-                </button>
+                </ion-button>
               <p class="nombre">recetas</p>
             </ion-col>
             <ion-col
                   size="6"
-                  (click)="goToParameters($event, c)"
+                  (click)="goToParameters( c)"
                   class="centrar">
-                  <button clear ion-button
+                  <ion-button fill="clear"
                           class="botonInactivo">
                     <ion-icon name="analytics"></ion-icon>
-                  </button>
+                  </ion-button>
                   <p class="nombre">parametros</p>
               </ion-col>
           </ion-row>
