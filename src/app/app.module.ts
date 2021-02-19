@@ -13,10 +13,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //importaciones de material
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ParametersComponent } from './pages/parameters/parameters.component';
+import { DatesComponent } from './pages/dates/dates.component';
+import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
+import { CuidadobebeComponent } from './modals/cuidadobebe/cuidadobebe.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ParametersComponent, DatesComponent, DetailRecipeComponent, CuidadobebeComponent],
   entryComponents: [ ],
   imports: [
     BrowserModule, 

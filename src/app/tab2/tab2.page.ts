@@ -8,6 +8,8 @@ import { LoadingController } from '@ionic/angular';
 import { ControlsService } from '../services/controls.service';
 import { AppoinmentService } from '../services/appoinment.service';
 import { ParametersComponent } from '../pages/parameters/parameters.component';
+import { FinancerService } from '../services/financer.service';
+
 
 @Component({
   selector: 'app-tab2',
@@ -26,11 +28,14 @@ public _items;
 public control;
 public _control;
 public _dates;
+public dependend;
+public $dependend;
   constructor(public dependentsSrv: DependentsService,
               public userSrv: UserService,
               public loading: LoadingController,
               public constrolSrv: ControlsService,
               public appoinmentSrv: AppoinmentService,
+              public financerSrv: FinancerService,
               public router: Router) {}
 
 
@@ -38,15 +43,19 @@ async ngOnInit(){
     const loading = await this.loading.create({
       message: 'cargando información...'
     })
-    await loading.present()
+    await loading.present();
     this.dependentsSrv.getDependens().subscribe((dependientes:any) =>{
       this.dependends = dependientes.map(dependend =>{
         dependend.edad = moment().diff(dependend.birthdate, 'years');
         loading.dismiss();
         return dependend
       });
+      if(this.dependends){
+        const filtrados = this.dependends.filter(x => x.edad < 6)
+        this.id = filtrados[0].patientId;
+      }
       console.log('lista de dependientes:', this.dependends);
-      this.id = 1083;
+     /*  this.id = 1803; */
       this.fechaInicio = this.dependends.birthdate;
       this.constrolSrv.getAllControlPerContact(this.id).subscribe((data:any) => {
         this._items = data
@@ -67,8 +76,9 @@ async ngOnInit(){
         });
         this.appoinmentSrv.getAppoinmentsPerUserControl(this.id).subscribe(data => {
           this._dates = data;
-          this.dates = this._dates[0].appointments[0];
-          console.log('this.dates:', this.dates);
+          console.log(this._dates);
+       /*    this.dates = this._dates[0].appointments[0]; */
+          console.log('this.dates:', this._dates);
         });
     });
 }
@@ -76,7 +86,8 @@ async ngOnInit(){
 // this method change te ParentId for recharge the controls
 getDataParent(dependend) {
   console.log('dependend:', dependend);
-  this._id = dependend.patientId;
+  this.dependend = dependend;
+  this._id = this.dependend.patientId;
   this.id = this._id;
   console.log('this.id', this.id);
   this.constrolSrv.getAllControlPerContact(this.id).subscribe((data: any) => {
@@ -94,9 +105,16 @@ getDates(){
 
 goToParameters(c){
   console.log(c);
-  this.userSrv.patientId = this._id;
+  this.userSrv.userId = this.id;
   this.userSrv.content = c;
   this.router.navigate(['parametros']);
-}
+  }
+
+goToRecipes(c){
+  console.log(c);
+  this.financerSrv.dataDoctorFInancer = c;
+  this.financerSrv.patientId = this.id;
+  this.router.navigate(['detail-recipe']);
+  }
 
 }

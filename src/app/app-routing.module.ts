@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DetailVacunaComponent } from './components/detail-vacuna/detail-vacuna.component';
 import { DatesComponent } from './pages/dates/dates.component';
+import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
 import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
+import { FinancerComponent } from './pages/financer/financer.component';
 import { GraficasComponent } from './pages/graficas/graficas.component';
 import { HitosComponent } from './pages/hitos/hitos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ParametersComponent } from './pages/parameters/parameters.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { Tab1Page } from './tab1/tab1.page';
@@ -57,6 +60,18 @@ const routes: Routes = [
   {
     path: 'parametros',
     component:  ParametersComponent
+  },
+  {
+    path: 'financer',
+    component:  FinancerComponent
+  },
+  {
+    path: 'recetas',
+    component:  RecipesComponent
+  },
+  {
+    path: 'detail-recipe',
+    component:  DetailRecipeComponent
   }
 ];
 @NgModule({

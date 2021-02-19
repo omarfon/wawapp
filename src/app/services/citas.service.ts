@@ -11,7 +11,7 @@ export class CitasService {
   servicios: any[] = [];
   doctores: any[] = [];
   private SERVER = apiUrl;
-
+  public dataDate;
   constructor(public http: HttpClient) { }
 
   getServicios( ){

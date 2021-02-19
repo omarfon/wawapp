@@ -1,5 +1,7 @@
 {
   "name": "wawappv4",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

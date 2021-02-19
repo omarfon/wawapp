@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { DependentsService } from '../services/dependents.service';
 import { NotasService } from '../services/notas.service';
-import * as moment from 'moment';
+import * as moment from 'moment'
+import { CuidadobebeComponent } from '../modals/cuidadobebe/cuidadobebe.component';
+import { ThisReceiver, ThrowStmt } from '@angular/compiler';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,16 +14,17 @@ import * as moment from 'moment';
 })
 export class Tab1Page {
   public notas;
+  public hitos;
   public dependends;
   public filtrados;
   public slideOpts = {
-    slidesPerView: 5,
+    slidesPerView: 5.2,
     virtualTranslate: false,
-    spaceBetween: 20,
-    slidesPerGroup: 3,
+    spaceBetween: 0, 
+    initialSlide:12
   }
   public slidOptions = {
-    slidesPerView: 1.1,
+    slidesPerView: 1.4,
     virtualTranslate: false,
   }
   public meses = [
@@ -108,6 +112,7 @@ export class Tab1Page {
   constructor(public router:Router,
               public notasSrv: NotasService,
               public dependentSrv: DependentsService,
+              public modalCtrl: ModalController,
               public loadingCtrl: LoadingController) {}
 
  ngOnInit(){
@@ -127,6 +132,10 @@ async getNotes(){
   await loading.present();
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia');
+    const filtradasTwo = this.notas.filter(x => x.type === 'bebehitos' || x.type === 'bebevacunas')
+    this.notas = filtradasOne;
+    this.hitos = filtradasTwo;
     console.log(this.notas);
     loading.dismiss();
   })
@@ -179,4 +188,15 @@ goToEstimulation(){
 mesSelect(m){
   console.log(m);
 }
+
+async openModalbebeCuidadoySalud(nota){
+  this.notasSrv.dataNota = nota;
+  const modal = await this.modalCtrl.create({
+    component: CuidadobebeComponent,
+    cssClass: 'modalBebeCuidadoSalud',
+    showBackdrop:true
+  });
+  await modal.present();
+}
+
 }

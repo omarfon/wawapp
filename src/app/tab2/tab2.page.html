@@ -96,11 +96,17 @@
                 *ngIf="c.tiene_receta"
                 class="centrar"
                 (click)="goToRecipes(c)">
-                <ion-button fill="clear"
+                <ion-row>
+                  <ion-col>
+                    <ion-button fill="clear"
                         class="botonInactivo">
-                  <ion-icon name="list-box"></ion-icon>
+                  <ion-icon name="document-text"></ion-icon>
                 </ion-button>
-              <p class="nombre">recetas</p>
+                  </ion-col>
+                  <ion-col>
+                    <p class="nombre">recetas</p>
+                  </ion-col>
+                </ion-row>
             </ion-col>
             <ion-col
                   size="6"

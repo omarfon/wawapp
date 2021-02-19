@@ -36,7 +36,8 @@
       </ion-row>
     </ion-col>
   </ion-row>
- <div class="containerMeses">
+ <div class="containerMeses" *ngIf="filtrados">
+   <!-- <h5 class="tituloMes">Omar está en este mes</h5> -->
    <ion-slides [options]="slideOpts">
      <ion-slide *ngFor="let m of meses">
        <div class="containerMesSlide" (click)="mesSelect(m)">
@@ -45,86 +46,31 @@
      </ion-slide>
    </ion-slides>
  </div>
-<!--   <div class="contenedorCategorias" > -->
-
-  <!-- <div id="nutricion">
-      <ion-card *ngIf="nota.type == 'bebenutricion'" class="animated bounceInUp">
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="2">
-              <img src="assets/img/icons/nutricion.png" alt="">
-            </ion-col>
-            <ion-col size="8">
-              <h5 class="categoriaAlimentacion">Alimentación y Nutrición</h5>
-            </ion-col>
-            <ion-col size="2" class="contenedorBebe">
-                <p class="mesNutricion"> {{nota.mes}} </p>
-            </ion-col>
-            <ion-col size="12">
-              <p class="contenidoAlimentacion">{{nota.texto}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </div> -->
-
-    <!-- <div id="hitos" *ngIf="nota.type == 'bebecrecimiento'">
-      <ion-card class="animated bounceInUp">
-        <img src="{{nota.imagenUrl}}" />
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="2">
-              <img src="assets/img/icons/hitos.png" alt="">
-            </ion-col>
-            <ion-col size="9">
-              <h3 class="categoriaHitos">Crecimiento y Desarrollo</h3>
-              <p class="semanaPertenece">estamos en la semana {{nota.semana}}</p>
-            </ion-col>
-            <ion-col size="1" class="contenedorBebe">
-            </ion-col>
-            <ion-col size="12">
-              <h3 class="tituloHitos">{{nota.titulo}}</h3>
-            </ion-col>
-            <ion-col size="12">
-              <p class="contenidoHitos">
-                {{nota.texto}}
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </div> -->
-
-   <!--  <div id="hogar" *ngIf="nota.type == 'bebehogar'">
-      <ion-card class="animated bounceInUp">
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="2">
-              <img src="assets/img/icons/hogar.png" alt="">
-            </ion-col>
-            <ion-col size="8">
-              <h5 class="categoriaHogar">Hogar y Familia</h5>
-            </ion-col>
-            <ion-col size="2" class="contenedorBebe">
-                <p class="mesHogar"> {{nota.mes}} </p>
-            </ion-col>
-            <ion-col size="12">
-              <p class="contenidoHogar">{{nota.texto}}</p>
-            </ion-col>
-          </ion-row>
-
-        </ion-card-content>
-      </ion-card>
-    </div> -->
-
     <div class="containerCardsSlider">
       <ion-slides [options]="slidOptions">
         <ion-slide *ngFor="let nota of notas">
-          <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'">
+          <!-- card bebecuidadoysalud  -->
+          <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'" (click)="openModalbebeCuidadoySalud(nota)">
+            <img src="https://www.britishbubbles.es/blogs/wp-content/uploads/2014/06/bebe-banandose.jpg" alt="">
+            <ion-card-header>
               <h5>{{nota.titulo}}</h5>
+            </ion-card-header>
+            <ion-row>
+              <ion-col size="2">
+                <img class="iconType" src="./assets/img/icons/cuidado.png" alt="">
+              </ion-col>
+              <ion-col size="8" class="textoCategoria">
+                Cuidado y salud
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon class="iconMore" name="newspaper"></ion-icon>
+              </ion-col>
+            </ion-row>
+
           </ion-card>
 
           <ion-card id="bebenutricion" *ngIf="nota.type == 'bebenutricion'">
+            <img src="https://cdn.www.gob.pe/uploads/document/file/433992/standard_lactancia_para_a_web_2.jpg" alt="">
             <ion-card-header>
               <ion-row>
                 <ion-col size="2">
@@ -137,61 +83,46 @@
                 </ion-col>
               </ion-row>
               <ion-card-subtitle>
-                {{nota.resumen}}
+                {{nota.resumen | slice:0:150}} ...
               </ion-card-subtitle>
             </ion-card-header>
-            <ion-card-content>
-              <p>{{nota.desarrolloContenido}}</p>
+            <ion-card-content id="containerSeeMore">
+                  <ion-button fill="clear" class="seemore" (click)="openModalbebeCuidadoySalud()">
+                      ver más
+                  </ion-button>
             </ion-card-content>
             <p></p>
         </ion-card>
-        <ion-card id="cuidado" *ngIf="nota.type == 'bebefamilia'">
+        <ion-card id="familia" *ngIf="nota.type == 'bebefamilia'">
+          <img src="https://deposeguro.com/wp-content/uploads/2018/12/casa-segura-para-ni%C3%B1os.jpg" alt="">
+          {{nota.type}}
           <h5>{{nota.titulo}}</h5>
+        </ion-card>
+        <ion-card id="cuidado" *ngIf="nota.type == 'bebehitos'">
+          <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="" style="width:fit-content;">
+          <ion-card-header>
+            {{nota.type}}
+          <ion-card-title>
+            <h5>{{nota.titulo}}</h5>
+          </ion-card-title>
+        </ion-card-header>
       </ion-card>
-      <ion-card id="cuidado" *ngIf="nota.type == 'bebehitos'">
+      <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'">
+        <img src="https://i.ytimg.com/vi/uV0VwCCkRSc/maxresdefault.jpg" alt="">
+        {{nota.type}}
         <h5>{{nota.titulo}}</h5>
       </ion-card>
-      <ion-card id="cuidado" *ngIf="nota.type == 'bebeestimulacion'">
-        <h5>{{nota.titulo}}</h5>
-      </ion-card>
-      <ion-card id="cuidado" *ngIf="nota.type == 'bebevacunas'">
+      <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'">
+        <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/18/14478583344315.jpg" alt="">
+        {{nota.type}}
         <h5>{{nota.titulo}}</h5>
       </ion-card>
         </ion-slide>
       </ion-slides>
     </div>
-    <!-- <div id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'">
-      <ion-card class="animated bounceInUp cuidadoCard">
-        <img src="{{nota.imagenUrl}}" />
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="2">
-              <img src="assets/img/icons/cuidado.png" alt="">
-            </ion-col>
-            <ion-col size="8">
-              <h3 class="categoriaCuidado">Cuidado y Salud</h3>
-            </ion-col>
-            <ion-col size="2" class="contenedorBebe">
-              <p class="mes"> {{nota.mes}} </p>
-            </ion-col>
-            <ion-col size="12" (click)="goToDetailCuidado(nota)">
-              <p class="contenidoCuidado">
-                {{nota.resumen}}
-              </p>
-            </ion-col>
-          </ion-row>
-          <mat-accordion class="accordionCambiosMama">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <h2>Consejos Utiles</h2>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </ion-card-content>
-      </ion-card>
-    </div> -->
-
-  <!-- </div> -->
+    <div class="containerHitosyVacunas">
+        <ion-card *ngFor="let nota of hitos">
+            hola
+        </ion-card>
+      </div>
 </ion-content>

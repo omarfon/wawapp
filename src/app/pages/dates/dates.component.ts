@@ -191,13 +191,14 @@ export class DatesComponent implements OnInit {
         cmp: doctor.cmp
       }
     }
-    const user = localStorage.getItem('role')
-    const datosObj = JSON.stringify(datos);
+    this.citasSrv.dataDate = datos;
+    /* const datosObj = JSON.stringify(datos); */
     /* console.log('data armada', datosObj); */
+    const user = localStorage.getItem('role')
     if (user === 'public') {
-      this.router.navigate(['/register', datosObj])
+      this.router.navigate(['/register'])
     } else {
-      this.router.navigate(['financer', datosObj]);
+      this.router.navigate(['financer']);
     }
   }
 }

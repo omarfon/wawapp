@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { ParematersService } from 'src/app/services/parematers.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,13 +19,22 @@ export class ParametersComponent implements OnInit {
   public parametros;
   constructor(public nav: NavController,
               public parametersSrv: ParematersService,
+              public loading: LoadingController,
               public userSrv: UserService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.loading.create({
+      message: 'cargando parametros del control...'
+    });
+    await loading.present();
     this.c = this.userSrv.content;
-    this.id = this.userSrv.userId;
+    this.patientId = this.userSrv.userId;
+    if(this.c){
+      this.id = this.c.encuentro;
+    }
     console.log(this.c, this.id);
-
+    this.getParameters();
+    loading.dismiss();
   }
 
   getParameters(){
@@ -33,7 +42,7 @@ export class ParametersComponent implements OnInit {
       this._parametros = data;
       console.log('this.parametros:', this._parametros);
       this.parametros = this._parametros[0].parametros;
-})
+      })
   }
 
   back(){

@@ -8,7 +8,8 @@ import { apiUrl } from 'src/environments/environment';
 })
 export class FinancerService {
   private SERVER = apiUrl;
-
+  public dataDoctorFInancer;
+  public patientId;
   constructor(public http: HttpClient) { }
 
   getFinancers(){

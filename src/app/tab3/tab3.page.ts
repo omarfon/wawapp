@@ -31,13 +31,22 @@ export class Tab3Page {
             return dependend;
           });
         let id = this.dependens[0].patientId;
-        this.vacinneSrv.getAllVaccinesPerUser(id).subscribe(data => {
-          this.vacunas = data;
+    /*     this.vacinneSrv.getAllVaccines().subscribe(data => {
+          this.vacunas = data; */
+          this.vacinneSrv.getAllVaccinesPerUser(id).subscribe(data => {
+            this.vacunas = data;
           this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540, 1440];
           console.log('vacunas', this.vacunas);
           loading.dismiss();
         });
       });
+      this.getAllVacine();
+    }
+
+    getAllVacine(){
+      this.vacinneSrv.getAllVaccines().subscribe(data => {
+        console.log('todas las vacunas',data);
+      })
     }
   
   

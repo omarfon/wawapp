@@ -7,7 +7,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NotasService {
-
+  public dataNota;
   private SERVER = apiUrl;
   constructor(public http: HttpClient) { }
 
