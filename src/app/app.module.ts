@@ -17,11 +17,29 @@ import { ParametersComponent } from './pages/parameters/parameters.component';
 import { DatesComponent } from './pages/dates/dates.component';
 import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
 import { CuidadobebeComponent } from './modals/cuidadobebe/cuidadobebe.component';
+import { ChartsModule } from 'ng2-charts';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { GraficasComponent } from './pages/graficas/graficas.component';
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
+import { NutricionComponent } from './modals/nutricion/nutricion.component';
+import { HitosComponent } from './pages/hitos/hitos.component';
+import { FlashComponent } from './components/flash/flash.component';
+import { BebefamiliaComponent } from './modals/bebefamilia/bebefamilia.component';
+import { CreateParentComponent } from './modals/create-parent/create-parent.component';
+import { DetailVacinneComponent } from './pages/detail-vacinne/detail-vacinne.component';
+import { RegisterComponent } from './pages/register/register.component';
+
+
+registerLocaleData(localeEs);
 
 
 @NgModule({
-  declarations: [AppComponent, ParametersComponent, DatesComponent, DetailRecipeComponent, CuidadobebeComponent],
-  entryComponents: [ ],
+  declarations: [AppComponent, ParametersComponent,EstimulacionComponent,DatesComponent,DatesComponent, DetailRecipeComponent, DetailRecipeComponent,NutricionComponent,HitosComponent,FlashComponent,BebefamiliaComponent,CreateParentComponent,DetailVacinneComponent,RegisterComponent,
+  GraficasComponent,CuidadobebeComponent],
+  entryComponents: [ CreateParentComponent],
   imports: [
     BrowserModule, 
     ComponentsModule,
@@ -31,9 +49,12 @@ import { CuidadobebeComponent } from './modals/cuidadobebe/cuidadobebe.component
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ChartsModule,
+    Ng2GoogleChartsModule
     ],
-  providers: [{ provide: RouteReuseStrategy, 
+  providers: [{ 
+                provide: LOCALE_ID, useValue: "es",
             useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

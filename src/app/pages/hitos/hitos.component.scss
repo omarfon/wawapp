@@ -1,0 +1,203 @@
+.swiper-slide{
+    height: 250px!important;
+  }
+  .tituloHito{
+    color:#fff!important;
+    font-size:1.1em;
+    text-align: left;
+    background: #1BABA0;
+    padding:.5em .8em;
+    text-align: center;
+  }
+  .swiper-pagination{
+    margin-top:-20px!important;
+  }
+  .tituloHitos{
+    text-align: center;
+    color:#A7A9AC;
+    font-size:1.3em;
+  }
+  .cajaImagen{
+    background:#1BABA0;
+    width:280px;
+    height: 120px;
+  }
+  .hechas{
+    height: 180px;
+  }
+  .descripcionHechas{
+    color:#A7A9AC;
+    font-size:.8em;
+    text-align: left;
+    margin-top:-10px;
+    // margin-left:10px;
+  }
+  .mesHechas{
+    font-size:2.5em;
+    font-weight: 600;
+    color:#A7A9AC;
+    margin-top:-20px;
+    margin-left:5px;
+    color:#A7A9AC;
+  }
+  .logro{
+    font-size:.7em;
+  }
+  .tituloAvances{
+    color:#fff;
+    font-size:1.2em;
+    text-align: center;
+    margin-bottom:0!important;
+    margin-top:5px;
+    padding-top:10px;
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+  .containerHechas{
+    background: #D6DBDB;
+    width:100%!important;
+  }
+  .containerPendientes{
+    background:#F1F6F6;
+    margin-top:12px!important; 
+  }
+  .imagenTarjeta{
+    width:100%!important; 
+    height: 130px;
+  }
+  .contenedorSinHitos{
+    background: #A7A9AC;
+    color:#1BABA0;
+    height: 200px;
+  }
+  .hitoPendienteDescripcion{
+    font-size:.8em;
+    text-align: left;
+    color:#A7A9AC;
+  }
+  .botonLogrado{
+    text-transform: lowercase;
+    text-align: right;
+    float: right;
+  }
+  .tarjeta{
+    background:#fff;
+    border:none;
+    box-shadow: none!important;
+    border-radius:20px!important;
+  }
+  .tituloPendietes{
+    font-size:1em;
+    color:#66CBEC;
+    text-align: left;
+    font-size:1.2em;
+  }
+  .descripcionBack{
+      width:90%;
+      margin-left:5%;
+      color:#66CBEC;
+      font-size:.8em;
+      font-weight: 200;
+  }
+  .tituloContenedorPendientes{
+    text-align: center;
+    color:#A7A9AC;
+    padding-top:5px;
+    font-size:1.2em;
+    font-weight: 400;
+    margin-bottom:0!important;
+  }
+  .hitoMes{
+    color:#F1F6F6;
+    z-index: 50;
+    font-size:2.5em;
+    font-weight: 600;
+    text-align: right;
+    margin-top:-50px;
+  }
+  .imagenHechas{
+    height: 100px;
+    width: 100%;
+    margin-top: -10px;
+  }
+  .tituloHechas{
+    font-weight: 400;
+    text-align: left;
+    color:#A7A9AC;
+    margin-left:16px;
+    margin-top:0px;
+    font-size:.6em!important;
+  }
+  .containerSlidesHechas{
+    height: 220px!important;
+    padding:1em;
+      .swiper-slide{
+        height: 200px!important;
+      }
+  }
+  .flip-container{
+    margin-top:0!important;
+    margin-bottom:0!important;
+  }
+  .containercheck{
+    background:#fff!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10px;
+  }
+  .disclaimerMarcar{
+    background:#fff!important;
+    color:#A7A9AC;
+    font-size:.6em;
+    text-align: left;
+    margin-left:10px;
+    margin-top:-10px!important;
+  }
+  .textoPruebaSinCards{
+    text-align: center;
+    margin-top:40px;
+    color: #fff;
+    font-size:1.3em;
+    font-weight:400;
+    width:80%;
+    margin-left:10%;
+  }
+  .cardContendorSinHechas{
+    height: 180px;
+    background:#019FE0;
+
+  }
+  .verMas{
+    text-align: right;
+    color:#019FE0;
+    float: right;
+    font-size:.8em;
+    margin-top:-5px;
+  }
+  .subir{
+    text-align: right;
+    margin-right: 10px;
+    z-index:100;
+    position: relative;
+    color:#FAA61A;
+  }
+  .zebraUno{
+    border: 12px solid #66CBEC!important;
+  }
+  .zebraDos{
+    border: 12px solid #9483C8!important;
+  }
+  .backCard{
+    border:13px solid #fff;
+    height: 240px!important;
+  }
+  ion-card{
+    border-radius:20px!important;
+  }
+  .containerContenidoTexto{
+    margin-top:-10px;
+  }
+  .card-content{
+    padding:0px!important;
+  }

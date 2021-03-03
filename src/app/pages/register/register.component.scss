@@ -1,0 +1,151 @@
+.registroDeUsuarioTitulo {
+    color: #fff;
+    text-align: left;
+    width: 80%;
+    margin-left: 10%;
+    font-size: 1.2em;
+    font-weight: 200;
+    padding-top: 20px;
+    padding-bottom: 10px !important;
+  }
+
+  ion-content {
+    --background: #1BABA0 !important;
+  }
+
+  ion-item {
+    --background: transparent !important;
+  }
+
+  ion-input {
+    background: #fff;
+    height: 50px;
+    border-bottom: none !important;
+  }
+
+  ion-input:active {
+    background-color: #1BABA0;
+
+  }
+
+  .contenedorTextoInicial {
+    background: #061175;
+    height: 80px;
+    color: #fff;
+    border-bottom-right-radius: 45px;
+  }
+
+  ion-label {
+    font-size: .8em;
+    margin-left: 10px;
+    z-index: 500;
+  }
+
+  .formulario {
+    margin-top: 5px !important;
+  }
+
+  .alto50 {
+    height: 50px;
+    margin-top: 15px;
+    --background: #061175;
+    color: #fff;
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .bajas {
+    text-transform: lowercase;
+    font-size: .9em;
+    font-weight: 400;
+    color: #061175;
+    font-weight: 400;
+    margin-top: -5px;
+  }
+
+  .izquierda {
+    text-align: left !important;
+  }
+
+  .derecha {
+    text-align: right !important;
+  }
+
+  ion-input {
+    color: #061175 !important;
+    --placeholder-color: #061175;
+    --placeholder-margin-left: 10px;
+    --placeholder-font-style: .8em;
+  }
+
+  ion-select {
+    width: 100% !important;
+    min-width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    font-size: .8em;
+    color: #061175 !important;
+    height: 50px;
+    --placeholder-color: #061175;
+  }
+
+  .datetime-text {
+    padding-left: -15px !important;
+    --placeholder-color: #061175 !important;
+    --placeholder-font-style: .9em;
+  }
+
+  ion-select::placeholder {
+    font-size: 1em;
+  }
+
+  .select-text {
+    min-width: 80px;
+    color: #000 !important;
+    font-size: 1em;
+  }
+
+  ion-datetime {
+    font-size: .8em;
+    background: #fff;
+    width: 100%;
+    height: 50px;
+    --placeholder-color: #061175 !important;
+
+  }
+
+  .error {
+    font-size: .7em;
+    color: red;
+    margin-top: 2px;
+    margin-left: 20px;
+    width: 90%;
+  }
+
+  .error:before {
+    content: '*';
+    margin-right: 5px;
+  }
+
+  .terminosyCondiciones {
+    color: #061175;
+  }
+
+  .outpadding {
+    width: 92%;
+    margin-left: 5%;
+    height: 50px;
+    background: #fff !important;
+    font-size: 1.3em;
+    text-align: left;
+  }
+
+  .datetime-md .datetime-placeholder {
+    margin-left: -15px;
+    font-size: .9em;
+    color: #061175;
+  }
+
+  .select-text {
+    color: #000 !important;
+  }

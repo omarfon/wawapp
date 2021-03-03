@@ -11,6 +11,8 @@ export class UserService {
   private SERVER = apiUrl;
   private apiUrl = `${this.SERVER}auth/login`;
   private apiUrlDatos = `${this.SERVER}ebooking`
+  private apiCreate = `${this.SERVER}users/register/`;
+  
   public userId;
   public patientId;
   public content;
@@ -89,6 +91,20 @@ export class UserService {
                             return data
                           })
                        )
+      }
+      
+      createNewUser(datos) {
+        // console.log('los datos de register:', datos)
+        const authorization = localStorage.getItem('authorization');
+        let headers = new HttpHeaders({ "Authorization": authorization });
+        let params = datos;
+        // console.log('los datos de register:', datos)
+        // params.provisions = [{"tipoPrestacion":"CONSULTA", "instructions":"", "name":"CONSULTA AMBULATORIA POR MEDICO ESPECIALISTA", "default":false, "id":44}]
+        return this.http.post(this.apiCreate, params, { headers }).pipe(
+          map((resp: any) => {
+            return resp;
+          })
+        )
       }
 
 }

@@ -1,0 +1,106 @@
+ion-card-header{
+    color:#79a3b1;
+    font-size:1.3em!important;
+    text-align: center;
+}
+#top{
+    margin-top:1em;
+    h3{
+        // text-align: right;
+        margin-right:10px;
+        font-size:1.2em;
+        color:#FFC839;
+    }
+    ul{
+        padding-left: 5px;
+        li{
+            list-style-type: none;
+        }
+    }
+}
+.tituloRestricciones{
+    color:red;
+    text-align: center;
+    padding-top:1em;
+}
+.bloquerestricciones{
+    background: #EAEAEA;
+}
+mat-expansion-panel{
+  mat-expansion-panel-header{
+    height: 80px!important;
+    padding-top:10px;
+  }
+}
+.nombreVacuna{
+  margin-top:15px!important;
+  color:#00BCD3;
+  font-size:1.2em;
+}
+.dosis{
+  color:#bdbdbd;
+  text-align: left!important;
+  margin-top:-10px;
+}
+.mat-expansion-indicator {
+  color:#00BCD3;
+}
+.contenedorPreviene{
+  h4{
+    margin-top:30px;
+    color:#FFC839;
+    font-size:1.2em;
+    text-align: center;
+  }
+  li{
+    color:#bdbdbd;
+    list-style-type: none;
+    margin-bottom:5px;
+  }
+}
+.contenedorAlertas{
+  h4{
+  color:#FFC839;
+  text-align: center;
+  font-size:1.2em;
+  margin-top:30px;
+  }
+  li{
+    color:#bdbdbd;
+    list-style-type:square;
+    margin-bottom:5px;
+  }
+}
+.contenedorRestricciones{
+  h4{
+    color:#FFC839;
+    text-align: center;
+    font-size:1.2em;
+    margin-top:30px;
+  }
+  li{
+    color:#bdbdbd;
+    list-style-type: none;
+    margin-bottom:5px;
+  }
+}
+.contenedorEfectuadas{
+  background: none;
+    ion-item{
+      background:none;
+      font-size:1.2rem;
+    }
+}
+.nombreVacunaHecho {
+  color:#bdbdbd!important;
+  font-size:.9em!important;
+}
+.vacunarecibida{
+  text-align: center;
+  color:#000;
+  font-weight: 600;
+}
+/* mat-accordion{
+    width:90%;
+    margin-left:5%;
+} */

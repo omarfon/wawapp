@@ -3,17 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title size='small'>
+    <ion-title size='small' class="ion-text-center">
      Desarrollo
     </ion-title>
-    <ion-buttons slot="end">
+<!--     <ion-buttons slot="end">
       <ion-button  (click)="goToHitos()">
         <ion-icon name="bar-chart"></ion-icon>
       </ion-button>
       <ion-button  (click)="goToEstimulation()">
         <ion-icon name="accessibility"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -23,15 +23,24 @@
       <ion-row *ngIf="filtrados">
         <ion-col size="3" *ngFor="let dep of filtrados" >  
           <ion-row>
-            <ion-col>
+            <ion-col *ngIf="dep.edad < 1">
               <ion-avatar (click)="renderizarInfoPorHijo(dep)">
                 <img src="https://www.shareicon.net/data/2016/08/05/807214_people_512x512.png" alt="">
+              </ion-avatar>
+            </ion-col>
+            <ion-col *ngIf="dep.edad > 0">
+              <ion-avatar (click)="renderizarInfoPorHijo(dep)">
+                <img class="nino" src="../../assets/img/icons/nino.png" alt="">
               </ion-avatar>
             </ion-col>
             <ion-col class="containerNombreDepe">
                 <p>{{dep.name}}</p> 
             </ion-col>
           </ion-row>  
+        </ion-col>
+        <ion-col size="3" class="addParent" (click)="addParent()">
+          <ion-icon name="add-circle"></ion-icon>
+          <p class="agregarDepeTexto">Agregar</p>
         </ion-col>
       </ion-row>
     </ion-col>
@@ -63,41 +72,47 @@
                 Cuidado y salud
               </ion-col>
               <ion-col size="2">
-                <ion-icon class="iconMore" name="newspaper"></ion-icon>
-              </ion-col>
+                <p class="mesInicio">{{nota.mesInicio}}</p> 
+                <!-- <ion-icon class="iconMore" name="newspaper"></ion-icon> -->
+              </ion-col> 
             </ion-row>
-
           </ion-card>
 
-          <ion-card id="bebenutricion" *ngIf="nota.type == 'bebenutricion'">
-            <img src="https://cdn.www.gob.pe/uploads/document/file/433992/standard_lactancia_para_a_web_2.jpg" alt="">
+          <ion-card id="nutricion" *ngIf="nota.type == 'bebenutricion'" (click)="openModalnutricion(nota)">
             <ion-card-header>
+              <h5> {{nota.titulo}}</h5>
+            </ion-card-header>
+            <img src="https://cdn.www.gob.pe/uploads/document/file/433992/standard_lactancia_para_a_web_2.jpg" alt="">
               <ion-row>
                 <ion-col size="2">
-                  <img src="assets/img/icons/nutricion.png">
+                  <img class="iconType" src="assets/img/icons/nutricion.png">
                 </ion-col>
-                <ion-col size="10">
-                  <ion-card-title>
-                    {{nota.titulo}}
-                  </ion-card-title>
+                <ion-col size="8" class="textoCategoria">
+                  Nutrición
+                </ion-col>
+                <ion-col>
+                  <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
                 </ion-col>
               </ion-row>
-              <ion-card-subtitle>
-                {{nota.resumen | slice:0:150}} ...
-              </ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content id="containerSeeMore">
-                  <ion-button fill="clear" class="seemore" (click)="openModalbebeCuidadoySalud()">
-                      ver más
-                  </ion-button>
-            </ion-card-content>
             <p></p>
         </ion-card>
-        <ion-card id="familia" *ngIf="nota.type == 'bebefamilia'">
+
+        <ion-card id="familia" *ngIf="nota.type == 'bebefamilia'" (click)="openBebeyFamilia(nota)">
           <img src="https://deposeguro.com/wp-content/uploads/2018/12/casa-segura-para-ni%C3%B1os.jpg" alt="">
-          {{nota.type}}
           <h5>{{nota.titulo}}</h5>
+          <ion-row>
+            <ion-col size="2">
+              <img class="iconType" src="assets/img/icons/nutricion.png">
+            </ion-col>
+            <ion-col size="8" class="textoCategoria">
+              Familia
+            </ion-col>
+            <ion-col>
+              <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+            </ion-col>
+          </ion-row>
         </ion-card>
+
         <ion-card id="cuidado" *ngIf="nota.type == 'bebehitos'">
           <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="" style="width:fit-content;">
           <ion-card-header>
@@ -107,22 +122,52 @@
           </ion-card-title>
         </ion-card-header>
       </ion-card>
+
       <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'">
         <img src="https://i.ytimg.com/vi/uV0VwCCkRSc/maxresdefault.jpg" alt="">
         {{nota.type}}
         <h5>{{nota.titulo}}</h5>
       </ion-card>
+
       <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'">
         <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/18/14478583344315.jpg" alt="">
         {{nota.type}}
         <h5>{{nota.titulo}}</h5>
       </ion-card>
+      
         </ion-slide>
       </ion-slides>
     </div>
-    <div class="containerHitosyVacunas">
-        <ion-card *ngFor="let nota of hitos">
-            hola
-        </ion-card>
+  <div class="containerHitosyEstimulacion" *ngIf="notas">
+    <ion-row>
+      <ion-col  size="6">
+        <ion-card (click)="openHitos()">
+          <ion-row>
+            <ion-col size="3" class="containerIconHitos">
+              <img src="../../assets/img/icons/hitosgris.png" alt="">
+            </ion-col>
+            <ion-col size="9" class="containerTextoHitos">
+              <h5>Hitos de desarrollo</h5>
+              <p>revisa el avance de tu bebé de manera constante</p>
+            </ion-col>
+          </ion-row>
+
+      </ion-card>
+    </ion-col>
+      <ion-col  size="6" >
+        <ion-card (click)="goToEstimulation()">
+          <ion-row>
+            <ion-col size="3" class="containerIconHitos">
+              <img src="../../assets/img/icons/estimulacion.png" alt="">
+            </ion-col>
+            <ion-col size="9" class="containerTextoHitos">
+              <h5>Estimulación</h5>
+              <p>Ayuda a tu bebé con sus capacidades</p>
+            </ion-col>
+          </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+       
       </div>
 </ion-content>

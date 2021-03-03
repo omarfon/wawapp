@@ -75,11 +75,9 @@ div.item-inner{
   margin-left:0!important;
   height: 28!important;
 }
-.item{
-  height: 24px!important;
-}
 .contenedorVacunas{
   margin-top: -20px;
+  background: transparent!important;
 }
 ion-label{
   margin-top:0!important;
@@ -96,5 +94,14 @@ ion-label{
   padding-top:1em;
   width: 90%;
   margin-left:5%;
-
+}
+.nombreVacuna{
+  font-size:.9em;
+  color:#9B9B9B;
+}
+ion-list{
+  background: transparent!important;
+  ion-item{
+    background: transparent!important;
+  }
 }

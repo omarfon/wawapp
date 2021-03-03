@@ -34,7 +34,7 @@ export class DetailRecipeComponent implements OnInit {
     if( this.datosControl){
       this.id = this.datosControl.encuentro; 
     }
-    this.recipeSrv.getRecipes(this.patientId, this.id).subscribe(data => {
+    const recetas = this.recipeSrv.getRecipes(this.patientId, this.id).subscribe(data => {
       this.recipes = data;
       loading.dismiss();
       // console.log('datos receta:', this.recipes);
@@ -44,6 +44,11 @@ export class DetailRecipeComponent implements OnInit {
       console.log('this.date:', this.fecha);
       console.log(this.datosControl, this.patientId, this.id);
 
+  }, err => {
+    console.log(err);
+    this.nav.back();
+    recetas.unsubscribe();
+    loading.dismiss();
   })
 }
 

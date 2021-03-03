@@ -5,7 +5,9 @@ import { DependentsService } from '../services/dependents.service';
 import { NotasService } from '../services/notas.service';
 import * as moment from 'moment'
 import { CuidadobebeComponent } from '../modals/cuidadobebe/cuidadobebe.component';
-import { ThisReceiver, ThrowStmt } from '@angular/compiler';
+import { NutricionComponent } from '../modals/nutricion/nutricion.component';
+import { BebefamiliaComponent } from '../modals/bebefamilia/bebefamilia.component';
+import { CreateParentComponent } from '../modals/create-parent/create-parent.component';
 
 @Component({
   selector: 'app-tab1',
@@ -28,86 +30,22 @@ export class Tab1Page {
     virtualTranslate: false,
   }
   public meses = [
-    {
-      mes:1,
-      de:0,
-      a: 4
-    },
-    {
-      mes:2,
-      de:4,
-      a: 8
-    },
-    {
-      mes:3,
-      de:8,
-      a: 12
-    },
-    {
-      mes:4,
-      de:12,
-      a: 16
-    },
-    {
-      mes:5,
-      de:16,
-      a: 20
-    },
-    {
-      mes:6,
-      de:20,
-      a: 24
-    },
-    {
-      mes:7,
-      de:24,
-      a: 28
-    },
-    {
-      mes:8,
-      de:24,
-      a: 28
-    },
-    {
-      mes:9,
-      de:24,
-      a: 28
-    },
-    {
-      mes:10,
-      de:24,
-      a: 28
-    },
-    {
-      mes:11,
-      de:24,
-      a: 28
-    },
-    {
-      mes:12,
-      de:24,
-      a: 28
-    },
-    {
-      mes:15,
-      de:24,
-      a: 28
-    },
-    {
-      mes:18,
-      de:24,
-      a: 28
-    },
-    {
-      mes:24,
-      de:24,
-      a: 28
-    },
-    {
-      mes:48,
-      de:24,
-      a: 28
-    },
+    {mes:1,de:0,a: 4},
+    {mes:2,de:4,a: 8},
+    {mes:3,de:8,a: 12},
+    {mes:4,de:12,a: 16},
+    {mes:5,de:16,a: 20},
+    {mes:6,de:20,a: 24},
+    {mes:7,de:24,a: 28},
+    {mes:8,de:24,a: 28},
+    {mes:9,de:24,a: 28},
+    {mes:10,de:24,a: 28},
+    {mes:11,de:24,a: 28},
+    {mes:12,de:24,a: 28},
+    {mes:15,de:24,a: 28},
+    {mes:18,de:24,a: 28},
+    {mes:24,de:24,a: 28},
+    {mes:48,de:24,a: 28},
   ]
   constructor(public router:Router,
               public notasSrv: NotasService,
@@ -132,11 +70,11 @@ async getNotes(){
   await loading.present();
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia');
-    const filtradasTwo = this.notas.filter(x => x.type === 'bebehitos' || x.type === 'bebevacunas')
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos');
+    const filtradasTwo = this.notas.filter(x => x.type === 'bebehitos' )
     this.notas = filtradasOne;
     this.hitos = filtradasTwo;
-    console.log(this.notas);
+    console.log(this.notas, this.hitos);
     loading.dismiss();
   })
 }
@@ -162,14 +100,23 @@ async renderizarInfoPorHijo(dep) {
   await loading.present();
   const meses = dep.birthdate;
   const diaActual = moment();
+  const mes = dep.edad;
+  const nombre = dep.name;
   // console.log(diaActual);
-  const mesesActual = diaActual.diff(meses, 'months')
+  const mesesActual = diaActual.diff(meses, 'months');
+  this.slideOpts.initialSlide = mesesActual;
   console.log('mesesActual:', mesesActual);
-  this.notasSrv.getAllNotes().subscribe(data => {
+  this.notasSrv.getNotesPerMonth(mesesActual).subscribe(data => {
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= mesesActual);
     this.notas = newNotas;
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas');
+    const filtradasTwo = this.notas.filter(x => x.type === 'bebehitos' )
+    this.notas = filtradasOne;
+    this.hitos = filtradasTwo;
+    console.log(this.notas);
     console.log('todas las notas:', this.notas);
+    console.log('this.htos', this.hitos);
     loading.dismiss();
   });
 }
@@ -197,6 +144,40 @@ async openModalbebeCuidadoySalud(nota){
     showBackdrop:true
   });
   await modal.present();
+}
+
+async openModalnutricion(nota){
+  this.notasSrv.dataNota = nota;
+  const modal = await this.modalCtrl.create({
+    component: NutricionComponent,
+    cssClass: 'modalBebeCuidadoSalud',
+    showBackdrop: true
+  })
+  await modal.present();
+}
+
+async openBebeyFamilia(nota){
+  this.notasSrv.dataNota = nota;
+  const modal = await this.modalCtrl.create({
+    component: BebefamiliaComponent,
+    cssClass: 'modalBebeCuidadoSalud',
+    showBackdrop: true
+  })
+  await modal.present();
+}
+
+openHitos(){
+  this.router.navigate(['hitos']);
+  console.log('abriendo hitos, guardar la fecha de y el sujeto para mandar los datos');
+}
+async addParent(){
+  console.log('abrir Modal');
+  const loading = await this.modalCtrl.create({
+    component: CreateParentComponent,
+    cssClass: 'modalCreateParent',
+    showBackdrop: true
+  });
+  await loading.present();
 }
 
 }

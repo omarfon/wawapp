@@ -34,7 +34,7 @@ ion-list{
   margin-bottom:25px;
   border-radius:5px;
   .containerFecha{
-    height: 80px;
+    height: 70px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color:#1A8FC9!important;
@@ -130,7 +130,7 @@ ion-col{
 }
 .nombre{
   color:#fff;
-/*   margin-top:-.5em; */
+  margin-top:-10px; 
   font-size:.8em;
 }
 .input{
@@ -206,7 +206,13 @@ ion-avatar{
     height: 35px;
     width: 35px;
     margin-top:15px;
+    margin-left:10px;
   }
+}
+.containerNombreDepe{
+  p{
+    margin-left:10px;
+  } 
 }
 .centrar{
   display: flex;

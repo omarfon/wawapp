@@ -30,6 +30,7 @@ public _control;
 public _dates;
 public dependend;
 public $dependend;
+public filtrados;
   constructor(public dependentsSrv: DependentsService,
               public userSrv: UserService,
               public loading: LoadingController,
@@ -51,10 +52,10 @@ async ngOnInit(){
         return dependend
       });
       if(this.dependends){
-        const filtrados = this.dependends.filter(x => x.edad < 6)
-        this.id = filtrados[0].patientId;
+        this.filtrados = this.dependends.filter(x => x.edad < 5)
+        this.id = this.filtrados[0].patientId;
       }
-      console.log('lista de dependientes:', this.dependends);
+      console.log('lista de dependientes:', this.dependends, this.filtrados);
      /*  this.id = 1803; */
       this.fechaInicio = this.dependends.birthdate;
       this.constrolSrv.getAllControlPerContact(this.id).subscribe((data:any) => {
@@ -84,18 +85,26 @@ async ngOnInit(){
 }
 
 // this method change te ParentId for recharge the controls
-getDataParent(dependend) {
+async getDataParent(dependend) {
+  const loading = await this.loading.create({
+    message: 'cargando controles...'
+  });
+  await loading.present();
   console.log('dependend:', dependend);
   this.dependend = dependend;
   this._id = this.dependend.patientId;
   this.id = this._id;
   console.log('this.id', this.id);
-  this.constrolSrv.getAllControlPerContact(this.id).subscribe((data: any) => {
+  const controles = this.constrolSrv.getAllControlPerContact(this.id).subscribe((data: any) => {
     this._items = data
     this._control = this._items[0].encuentros;
     this.control = this._control;
     console.log('los encuentros del paciente:', this._items, this.control);
+  }, err => {
+    console.log(err);
   });
+  loading.dismiss();
+  
 }
 
 getDates(){

@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title size='small'>
+     Detalle vacuna
+    </ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <!-- marcador para vacuna -->
+    <!-- <ion-item>
+        <ion-label>marcar si se realizó esta vacuna</ion-label>
+        <ion-checkbox [(ngModel)]="vacuna" (ionChange)="updateVacuna()"></ion-checkbox>
+      </ion-item> -->
+  <!-- fin de marcador para la vacuna     -->
+<ion-card>
+  <ion-card-header>
+        Detalles de vacuna aplicada
+  </ion-card-header>
+  <ion-card-content>
+      <ion-list class="contenedorEfectuadas">
+          <ion-item *ngFor="let vac of vacuna">
+            <div *ngIf="vac.estado == 1">
+              <ion-row >
+                <ion-col >
+                 <p class="nombreVacunaHecho"> {{vac.nom_vacuna}} :</p>
+                </ion-col>
+                <ion-col>
+                  aplicada el: {{vac.info_paciente.fecha_aplicacion_dosis | date}}
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-item>
+        </ion-list>
+      <!-- <p *ngIf="fechaVacunacion"> vacuna realizada el dia {{fechaVacunacion | date:'mediumDate'}} </p> -->
+      <p class="vacunarecibida" *ngIf="fechaVacunacion == null"> esta vacuna debería realizarse el día {{fechaEstimada | date:'mediumDate'}} </p>
+      <p class="vacunarecibida" *ngIf="vacunaAviva == 1">Vacuna recibida en Aviva</p>
+      <p class="vacunarecibida" *ngIf="vacunaAviva == 0 && vacunaExterna == 1">Vacuna no fue recibida en Aviva</p>
+      <p class="vacunarecibida" *ngIf="vacunaExterna == 0">Vacuna no fue recibida aún</p>
+  </ion-card-content>
+</ion-card>
+
+<div padding>
+
+  <mat-accordion >
+    <mat-expansion-panel *ngFor="let e of vacunas">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+              <ion-row>
+                <ion-col col-12>
+                  <h3 class="nombreVacuna">{{e.nombre}} </h3>
+                  <p class="dosis">{{e.dosis}} dosis </p>
+                </ion-col>
+              </ion-row>
+              </mat-panel-title>
+              <!-- <mat-panel-description>
+              </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <div class="contenedorPreviene">
+            <h4>Las enfermedades que previene:</h4>
+            <ul>
+                <li *ngFor="let e of e.enfermedades">
+                   <b>   {{e.enfermedad}}</b>
+                </li>
+              </ul>
+          </div>
+
+          <div class="contenedorAlertas">
+            <h4>Los signos de alarma</h4>
+            <ul>
+              <li *ngFor="let s of e.signosAlerta">
+                {{s.signo}}
+              </li>
+            </ul>
+          </div>
+
+          <div class="contenedorRestricciones">
+            <h4>Algunas restricciones:</h4>
+            <ul>
+              <li *ngFor="let r of e.restricciones">
+                  {{r.restriccion}}
+              </li>
+            </ul>
+          </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+<!-- <button ion-button color="acento" center (click)="sendAlertVaccine()" block>crear una alerta para esta vacuna</button>
+<button ion-button block (click)="ModalCalendar()"> tomar una cita para esta vacuna</button> -->
+</ion-content>
+

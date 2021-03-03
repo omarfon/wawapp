@@ -3,8 +3,67 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="back()"></ion-back-button>
     </ion-buttons>
-    <ion-title size='small'>
-     Gráficas
+    <ion-title size='small' class="ion-text-center">
+     Gráficas de desarrollo
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content >
+
+  <div class="containerGraficaPeso">
+    <h3 class="center top">Evolución Peso</h3>
+    <div style="display: block">
+      <canvas baseChart
+              width="350" height="320"
+              [datasets]="barChartDataPeso"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColorsPeso"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+<!--       <button ion-button
+            (click)="randomize()"
+            class="boton"
+            color="primary">cambiar vista</button> -->
+  </div>
+
+  <div class="containerGraficaPeso">
+    <h3 class="center top">Evolución Talla</h3>
+    <div style="display: block">
+      <canvas baseChart
+              width="350" height="320"
+              [datasets]="barChartDataTalla"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColorsTalla"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+   <!--  <button ion-button
+            (click)="randomize()"
+            class="boton"
+            color="primary">cambiar vista</button> -->
+  </div>
+<!-- 
+  <div class="containerGraficaPeso">
+    <h3 class="center">Evolución Perimetro Cefálico</h3>
+    <div style="display: block">
+      <canvas baseChart
+              width="350" height="320"
+              [datasets]="barChartDataPc"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColorsPc"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div> -->
+</ion-content>

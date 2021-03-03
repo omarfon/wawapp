@@ -3,38 +3,36 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title size='small'>
+    <ion-title size='small' class="ion-text-center">
      Controles
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="barraContactos">
-    <ion-row >
-      <div  *ngFor="let dependend of dependends ">
-        <ion-col size="3"
-            *ngIf="dependend.edad <= 5">
-                    <ion-item button
-                              clear
-                              class="itemButtonDependend"
-                              (click)="getDataParent(dependend)" >
-                              <ion-row>
-                                <ion-col size="12" class="centrar">
-                                  <ion-avatar>
-                                    <img src="https://picsum.photos/200" alt="">
-                                  </ion-avatar>
-                                </ion-col>
-                                <ion-col size="12" class="centrar">
-                                  <label class="dependendName">{{dependend.name}}</label>
-                                </ion-col>
-                              </ion-row>
-                          
-                    </ion-item>
+<ion-row>
+    <ion-col size="12" class="fondoDepes">
+      <ion-row *ngIf="filtrados">
+        <ion-col size="3" *ngFor="let dep of filtrados" >  
+          <ion-row>
+            <ion-col *ngIf="dep.edad < 1">
+              <ion-avatar (click)="getDataParent(dep)">
+                <img src="https://www.shareicon.net/data/2016/08/05/807214_people_512x512.png" alt="">
+              </ion-avatar>
+            </ion-col>
+            <ion-col *ngIf="dep.edad > 0">
+              <ion-avatar (click)="getDataParent(dep)">
+                <img class="nino" src="../../assets/img/icons/nino.png" alt="">
+              </ion-avatar>
+            </ion-col>
+            <ion-col class="containerNombreDepe">
+                <p>{{dep.name}}</p> 
+            </ion-col>
+          </ion-row>  
         </ion-col>
-      </div>
-    </ion-row>
-  </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 <ion-grid>
   <ion-row>
       <ion-col size="6"
@@ -97,13 +95,13 @@
                 class="centrar"
                 (click)="goToRecipes(c)">
                 <ion-row>
-                  <ion-col>
+                  <ion-col size="12">
                     <ion-button fill="clear"
                         class="botonInactivo">
                   <ion-icon name="document-text"></ion-icon>
                 </ion-button>
                   </ion-col>
-                  <ion-col>
+                  <ion-col size="12">
                     <p class="nombre">recetas</p>
                   </ion-col>
                 </ion-row>
@@ -112,11 +110,18 @@
                   size="6"
                   (click)="goToParameters( c)"
                   class="centrar">
-                  <ion-button fill="clear"
-                          class="botonInactivo">
-                    <ion-icon name="analytics"></ion-icon>
-                  </ion-button>
-                  <p class="nombre">parametros</p>
+                  <ion-row>
+                    <ion-col size="12">
+                      <ion-button fill="clear"
+                              class="botonInactivo">
+                        <ion-icon name="analytics"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                    <ion-col size="12">
+                      <p class="nombre">parametros</p>
+                    </ion-col>
+                  </ion-row>
+
               </ion-col>
           </ion-row>
         </div>

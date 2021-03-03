@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title size='small'>
+    <ion-title size='small' class="ion-text-center">
      Vacunas
     </ion-title>
   </ion-toolbar>
@@ -11,35 +11,33 @@
 
 <ion-content [fullscreen]="true">
   <h5 class="textVaccine">Chequea siempre este cuadro para que tengas a tu pequeño al día con sus vacunas</h5>
-  <div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size='6'  id="box" *ngFor="let key of vacunasKeys; let i = index" (click)="goToDetailVacuna(vacunas[key])">
-          <ion-grid>
-            <ion-row>
-              <ion-col  size="4" class="trofeos" >
-                <!-- <div *ngIf="i < 90">
-                  <ion-icon  name="medal" item-end></ion-icon>
-                </div > -->
-              </ion-col>
-              <ion-col size="8" class="indicadores">
-                  <p class="month" item-start>{{key / 30}}</p>
-                  <p class="palabrameses">meses</p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <div class="contenedorVacunas">
-            <ion-list>
-              <ion-item *ngFor="let v of vacunas[key]" class="vacunaContainer">
-                <ion-icon name="checkmark" item-start *ngIf="v.estado == 1"></ion-icon>
-                <p class="nombreVacuna"> {{v.nom_vacuna}}</p>
-              </ion-item>
-            </ion-list>
-          </div>
-  
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6"  id="box" *ngFor="let key of vacunasKeys; let i = index" (click)="goToDetailVacuna(vacunas[key])">
+        <ion-grid>
+          <ion-row>
+            <ion-col  size="4" class="trofeos" >
+              <!-- <div *ngIf="i < 90">
+                <ion-icon  name="medal" item-end></ion-icon>
+              </div > -->
+            </ion-col>
+            <ion-col size="8" class="indicadores">
+                <p class="month" item-start>{{key / 30}}</p>
+                <p class="palabrameses">meses</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="contenedorVacunas">
+          <ion-list>
+            <ion-item *ngFor="let v of vacunas[key]" class="vacunaContainer">
+              <ion-icon name="checkmark" item-start *ngIf="v.estado == 1"></ion-icon>
+              <p class="nombreVacuna"> {{v.nom_vacuna2}}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

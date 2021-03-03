@@ -3,8 +3,89 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="back()"></ion-back-button>
     </ion-buttons>
-    <ion-title size='small'>
+    <ion-title size='small' class="ion-text-center">
      Hitos de Desarrollo
     </ion-title> 
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <div class="containerPendientes">
+    <h4 class="tituloContenedorPendientes">Lista de hitos pendientes</h4>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let hito of porhacer">
+        <app-flash >
+          <div [ngClass]="{'zebraUno': hito.mes =='1' || hito.mes == '3' || hito.mes == '5' || hito.mes == '7' || hito.mes == 9 || hito.mes == '11', 'zebraDos': hito.mes == '2' || hito.mes == '4' || hito.mes == '6' || hito.mes == '8' || hito.mes == '10' || hito.mes == '12'}" class="flash-card-front animated bounce" >
+            <ion-card class="tarjeta">
+              <img class="imagenTarjeta" src="assets/imgs/hitos/coorvi.jpg" alt="">
+              <!-- <p class="hitoMes">{{hito.mes}}</p> -->
+              <ion-card-content>
+                <ion-row>
+                  <ion-col size="12">
+                    <h2 class="tituloPendietes">{{hito.titulo | slice:0:20}}</h2>
+                  </ion-col>
+                  <ion-col size="12" class="containerContenidoTexto">
+                    <p class="hitoPendienteDescripcion">{{hito.descripcion | slice:0:20}}...</p>
+                  </ion-col>
+                </ion-row>
+                <ion-col size="12" class="verMas">
+                  ver detalle
+                </ion-col>
+              </ion-card-content>
+            </ion-card>
+          </div>
+         <div class="flash-card-back animated bounce backCard">
+            <ion-row>
+              <ion-col col-12>
+                <p class="descripcionBack">
+                  {{hito.descripcion }}
+                </p>
+              </ion-col>
+              <div class="containercheck">
+                <ion-col size="8">
+                  <p class="disclaimerMarcar">para marcar como logrado haz check al hito</p>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-checkbox (click)="idChanged($event, hito)"></ion-checkbox>
+                </ion-col>
+              </div>
+            </ion-row>
+          </div> 
+        </app-flash>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="containerHechas">
+    <h4 class="tituloAvances">Los avances de tu bebé</h4>
+    <ion-slides [options]="slideOptions" class="containerSlidesHechas">
+      <ion-slide *ngIf="!hechas || hechas.length < 1">
+        <ion-card class="cardContendorSinHechas">
+          <p class="textoPruebaSinCards">Aqui aparecerán los hitos que tu bebé ya haya logrado...</p>
+        </ion-card>
+      </ion-slide>
+      <ion-slide *ngFor="let hito of hechas">
+        <ion-card class="hechas animated bounce">
+          <img class="imagenHechas" src="assets/imgs/hitos/coorvi.jpg">
+          <ion-card-content>
+            <ion-card-title>
+              <h2 class="tituloHechas">{{hito.titulo | slice:0:20}}</h2>
+            </ion-card-title>
+            <!-- <p class="logro">lo logro en : {{hito.fecha}}</p> -->
+            <ion-row>
+              <ion-col size="2">
+                <p class="mesHechas">{{hito.mes}}</p>
+              </ion-col>
+              <ion-col size="8">
+                <p class="descripcionHechas">{{hito.descripcion | slice:0:30}}</p>
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon name="checkbox-outline" class="subir" (click)="uncheckHito(hito)"> </ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

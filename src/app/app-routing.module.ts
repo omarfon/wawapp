@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DetailVacunaComponent } from './components/detail-vacuna/detail-vacuna.component';
 import { DatesComponent } from './pages/dates/dates.component';
 import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
+import { DetailVacinneComponent } from './pages/detail-vacinne/detail-vacinne.component';
 import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
 import { FinancerComponent } from './pages/financer/financer.component';
 import { GraficasComponent } from './pages/graficas/graficas.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'detail',
-    component:  DetailVacunaComponent
+    component:  DetailVacinneComponent
   },
   {
     path: 'home',

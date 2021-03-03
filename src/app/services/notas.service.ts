@@ -21,4 +21,15 @@ export class NotasService {
       })
     )
   }
+
+  getNotesPerMonth(mes){
+    const authorization = localStorage.getItem('authorization');
+    let headers = new HttpHeaders({'Authorization': authorization});
+
+    return this.http.get(this.SERVER + `wawa/data?mes=${mes}`, {headers}).pipe(
+      map(res => {
+        return res
+      })
+    )
+  }
 }
