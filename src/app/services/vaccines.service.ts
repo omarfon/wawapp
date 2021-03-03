@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class VaccinesService {
   public vacuna;
+  public month;
   private SERVER = apiUrl;
   private SERVERCMS = apiCms;
   apiUrl = `${this.SERVER}ebooking/dosis-calendario-vacunacion/2?groupby=momento_dosis`;

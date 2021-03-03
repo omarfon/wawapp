@@ -20,16 +20,16 @@
   <ion-card-header>
         Detalles de vacuna aplicada
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content >
       <ion-list class="contenedorEfectuadas">
           <ion-item *ngFor="let vac of vacuna">
             <div *ngIf="vac.estado == 1">
               <ion-row >
                 <ion-col >
-                 <p class="nombreVacunaHecho"> {{vac.nom_vacuna}} :</p>
+                 <p class="nombreVacunaHecho"> {{vac.nom_vacuna2}} :</p>
                 </ion-col>
                 <ion-col>
-                  aplicada el: {{vac.info_paciente.fecha_aplicacion_dosis | date}}
+                  <p> aplicada el: {{vac.info_paciente.fecha_aplicacion_dosis | date}}</p>
                 </ion-col>
               </ion-row>
             </div>
@@ -45,7 +45,7 @@
 
 <div padding>
 
-  <mat-accordion >
+  <mat-accordion *ngIf="vacunas">
     <mat-expansion-panel *ngFor="let e of vacunas">
         <mat-expansion-panel-header>
             <mat-panel-title>

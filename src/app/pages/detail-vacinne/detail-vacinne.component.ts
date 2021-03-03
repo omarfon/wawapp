@@ -29,18 +29,20 @@ export class DetailVacinneComponent implements OnInit {
     });
     await loading.present();
     this.vacuna = this.vacinneSrv.vacuna;
-    console.log('this.vacuna:', this.vacuna);
-    /* this.fecha = this.vacuna[0].momento_dosis / 30; */
-    // this.vacunasData = this.navParams.get('vacunas');
-    console.log('lo que hay en this.vac:', this.vacuna);
-    this.fechaVacunacion = this.vacuna[0].info_paciente.fecha_aplicacion_dosis;
-    this.vacunaAviva = this.vacuna[0].info_paciente.administracion_externa;
-    this.fechaEstimada = this.vacuna[0].info_paciente.fecha_programada_dosis;
-    this.vacunaExterna = this.vacuna[0].info_paciente.estado;
-    console.log('fechaEstimada:', this.fechaEstimada);
-
-
-    let mes = this.vacuna[0].momento_dosis / 30;
+    if(this.vacuna){
+      console.log('this.vacuna:', this.vacuna);
+      /* this.fecha = this.vacuna[0].momento_dosis / 30; */
+      // this.vacunasData = this.navParams.get('vacunas');
+      console.log('lo que hay en this.vac:', this.vacuna);
+      this.fechaVacunacion = this.vacuna[0].info_paciente.fecha_aplicacion_dosis;
+      this.vacunaAviva = this.vacuna[0].info_paciente.administracion_externa;
+      this.fechaEstimada = this.vacuna[0].info_paciente.fecha_programada_dosis;
+      this.vacunaExterna = this.vacuna[0].info_paciente.estado;
+      console.log('fechaEstimada:', this.fechaEstimada);
+    }else{
+      loading.dismiss();
+    }
+    const mes = this.vacinneSrv.month;
     this.vacinneSrv.getVaccine(mes).subscribe(data =>{
         this.vacunas = data[0].enfermedades[0].vacunas;
     loading.dismiss();

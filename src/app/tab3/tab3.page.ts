@@ -57,7 +57,8 @@ export class Tab3Page {
   
     goToDetailVacuna(vacuna){
       this.vacinneSrv.vacuna = vacuna;
-      // console.log('los datos del vac:', key, v);
+      this.vacinneSrv.month = vacuna[0].momento_dosis/ 30;
+      console.log('los datos del vac:', vacuna)
       this.router.navigate(['detail',{
         vacuna:vacuna, 
         vacunas: this.vacunas

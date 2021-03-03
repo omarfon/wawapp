@@ -23,7 +23,7 @@ export class Tab1Page {
     slidesPerView: 5.2,
     virtualTranslate: false,
     spaceBetween: 0, 
-    initialSlide:12
+    initialSlide:0
   }
   public slidOptions = {
     slidesPerView: 1.4,
@@ -54,6 +54,7 @@ export class Tab1Page {
               public loadingCtrl: LoadingController) {}
 
  ngOnInit(){
+   this.slideOpts.initialSlide = 8;
   this.getNotes();
   let role = localStorage.getItem('role');
     if (role == 'user') {
@@ -87,7 +88,7 @@ getDependents() {
       return dependend;
     });
     // console.log('los dependientes:', this.dependends);
-    const listaMenores = this.dependends.filter(d => d.edad <= 5);
+    const listaMenores = this.dependends.filter(d => d.edad <= 3);
    this.filtrados = listaMenores;
     console.log('this.listaMenores:', this.filtrados);
   });

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title size='small' class="ion-text-center">
+    <ion-title size='small'>
      Desarrollo
     </ion-title>
 <!--     <ion-buttons slot="end">
@@ -102,7 +102,7 @@
           <h5>{{nota.titulo}}</h5>
           <ion-row>
             <ion-col size="2">
-              <img class="iconType" src="assets/img/icons/nutricion.png">
+              <img class="iconType" src="assets/img/icons/hogar.png">
             </ion-col>
             <ion-col size="8" class="textoCategoria">
               Familia
@@ -113,26 +113,52 @@
           </ion-row>
         </ion-card>
 
-        <ion-card id="cuidado" *ngIf="nota.type == 'bebehitos'">
-          <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="" style="width:fit-content;">
-          <ion-card-header>
-            {{nota.type}}
-          <ion-card-title>
+        <ion-card id="hitos" *ngIf="nota.type == 'bebehitos'">
+          <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="">
             <h5>{{nota.titulo}}</h5>
-          </ion-card-title>
-        </ion-card-header>
+            <ion-row>
+              <ion-col size="2">
+                <img class="iconType" src="assets/img/icons/hitos.png">
+              </ion-col>
+              <ion-col size="8" class="textoCategoria">
+                Hitos de desarrollo
+              </ion-col>
+              <ion-col>
+                <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+              </ion-col>
+            </ion-row>
       </ion-card>
 
       <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'">
         <img src="https://i.ytimg.com/vi/uV0VwCCkRSc/maxresdefault.jpg" alt="">
-        {{nota.type}}
         <h5>{{nota.titulo}}</h5>
+        <ion-row>
+          <ion-col size="2">
+            <img class="iconType" src="assets/img/icons/nutricion.png">
+          </ion-col>
+          <ion-col size="8" class="textoCategoria">
+            Hitos de tu bebé
+          </ion-col>
+          <ion-col>
+            <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+          </ion-col>
+        </ion-row>
       </ion-card>
 
       <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'">
         <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/18/14478583344315.jpg" alt="">
-        {{nota.type}}
         <h5>{{nota.titulo}}</h5>
+        <ion-row>
+          <ion-col size="2">
+            <img class="iconType" src="assets/img/icons/vacuna.png">
+          </ion-col>
+          <ion-col size="8" class="textoCategoria">
+            Vacunas
+          </ion-col>
+          <ion-col>
+            <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+          </ion-col>
+        </ion-row>
       </ion-card>
       
         </ion-slide>

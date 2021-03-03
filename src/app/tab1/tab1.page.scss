@@ -387,7 +387,139 @@ ion-avatar{
     text-align: left;
     color:#A7A9AC;
     margin-top:5px;
+    color:#47ACDE;
+  }
+  .iconMore{
+    margin-top:10px;
+    color:#50504F;
+    font-size:1.2em;
+  }
+  .mesInicioNutri{
+    font-size:2em!important;
+    font-weight: 600;
+    text-align: right;
+    color:#f1f1f1!important;
+    margin-right:10px;
+    margin-top:10px;
+  }
+}
+#estimulacion{
+  border-radius: 15px!important;
+  img{
+    width:92%;
+    margin-top:-15px;
+    z-index: 50;
+    border-radius: 15px !important;
+    margin-top: 10px;
+  }
+  h5{
+    color:#79a3b1;
+    font-size: 1.1em;
+    font-weight: 400;
+    text-align: left;
+    width:90%;
+    margin-left:5%;
+  }
+  .iconType{
+    margin-left:10px;
+    text-align: right;
+    width:30px;
+    height: 30px;
+    margin-top:0!important;
+  }
+  .textoCategoria{
+    text-align: left;
+    color:#A7A9AC;
+    margin-top:5px;
     color:#FFC839;
+  }
+  .iconMore{
+    margin-top:10px;
+    color:#50504F;
+    font-size:1.2em;
+  }
+  .mesInicioNutri{
+    font-size:2em!important;
+    font-weight: 600;
+    text-align: right;
+    color:#f1f1f1!important;
+    margin-right:10px;
+    margin-top:10px;
+  }
+}
+#hitos{
+  border-radius: 15px!important;
+  img{
+    width:92%;
+    margin-top:-15px;
+    z-index: 50;
+    border-radius: 15px !important;
+    margin-top: 10px;
+  }
+  h5{
+    color:#79a3b1;
+    font-size: 1.1em;
+    font-weight: 400;
+    text-align: left;
+    width:90%;
+    margin-left:5%;
+  }
+  .iconType{
+    margin-left:10px;
+    text-align: right;
+    width:30px;
+    height: 30px;
+    margin-top:0!important;
+  }
+  .textoCategoria{
+    text-align: left;
+    color:#A7A9AC;
+    margin-top:5px;
+    color:#FF634C;
+  }
+  .iconMore{
+    margin-top:10px;
+    color:#50504F;
+    font-size:1.2em;
+  }
+  .mesInicioNutri{
+    font-size:2em!important;
+    font-weight: 600;
+    text-align: right;
+    color:#f1f1f1!important;
+    margin-right:10px;
+    margin-top:10px;
+  }
+}
+#vacunas{
+  border-radius: 15px!important;
+  img{
+    width:92%;
+    margin-top:-15px;
+    z-index: 50;
+    border-radius: 15px !important;
+    margin-top: 10px;
+  }
+  h5{
+    color:#79a3b1;
+    font-size: 1.1em;
+    font-weight: 400;
+    text-align: left;
+    width:90%;
+    margin-left:5%;
+  }
+  .iconType{
+    margin-left:10px;
+    text-align: right;
+    width:30px;
+    height: 30px;
+    margin-top:0!important;
+  }
+  .textoCategoria{
+    text-align: left;
+    color:#A7A9AC;
+    margin-top:5px;
+    color:#e32185;
   }
   .iconMore{
     margin-top:10px;
@@ -431,7 +563,7 @@ ion-avatar{
 .addParent{
   ion-icon{
     margin-top:35px;
-    text-align:left;
+    text-align:right;
     color:#47ACDE;
     cursor: pointer;
     font-size:3em;
