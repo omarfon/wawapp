@@ -10,7 +10,7 @@
   }
 
   ion-content {
-    --background: #1BABA0 !important;
+    --background: #f4f9f9 !important;
   }
 
   ion-item {
@@ -29,7 +29,7 @@
   }
 
   .contenedorTextoInicial {
-    background: #061175;
+    background: #00bcd4;
     height: 80px;
     color: #fff;
     border-bottom-right-radius: 45px;
@@ -72,8 +72,8 @@
   }
 
   ion-input {
-    color: #061175 !important;
-    --placeholder-color: #061175;
+    color: #322f3d !important;
+    --placeholder-color: #322f3d;
     --placeholder-margin-left: 10px;
     --placeholder-font-style: .8em;
   }
@@ -83,16 +83,15 @@
     min-width: 100%;
     background: #fff;
     border-radius: 5px;
-    font-size: .8em;
-    color: #061175 !important;
+    font-size: 1em;
     height: 50px;
-    --placeholder-color: #061175;
   }
 
   .datetime-text {
-    padding-left: -15px !important;
-    --placeholder-color: #061175 !important;
-    --placeholder-font-style: .9em;
+    padding-left: -5px !important;
+    font-size: 1em;
+    --placeholder-color: #322f3d!important;
+    --placeholder-font-style: 1em;
   }
 
   ion-select::placeholder {
@@ -106,17 +105,17 @@
   }
 
   ion-datetime {
-    font-size: .8em;
+    font-size: 1em;
     background: #fff;
     width: 100%;
     height: 50px;
-    --placeholder-color: #061175 !important;
+ /*    --placeholder-color: #322f3d !important; */
 
   }
 
   .error {
     font-size: .7em;
-    color: red;
+    color: #e22a77;
     margin-top: 2px;
     margin-left: 20px;
     width: 90%;
@@ -141,9 +140,9 @@
   }
 
   .datetime-md .datetime-placeholder {
-    margin-left: -15px;
-    font-size: .9em;
-    color: #061175;
+    margin-left: -5px;
+    font-size: 1em;
+    color: #322f3d;
   }
 
   .select-text {

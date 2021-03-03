@@ -26,6 +26,7 @@ export class DatesComponent implements OnInit {
   dias: any;
   selectedDay: any;
   hora: any;
+  public doctores;
 
   public available;
   public complete: boolean = false;
@@ -79,7 +80,7 @@ export class DatesComponent implements OnInit {
       }
       this.doctors = doctors;
       for (let doctor of doctors) {
-        this.citasSrv.getAvailablesPerDoctor(doctor.id, this.escogido, doctor.service.id, this.fromDate, this.toDate).subscribe((availables: any) => {
+        this.doctores = this.citasSrv.getAvailablesPerDoctor(doctor.id, this.escogido, doctor.service.id, this.fromDate, this.toDate).subscribe((availables: any) => {
           if (availables && availables.length > 0) {
             doctor.availables = availables;
             doctor.isAvailable = true;
@@ -89,7 +90,7 @@ export class DatesComponent implements OnInit {
       }
       this.doctorsF = this.doctors;
       console.log(this.doctorsF);
-      loading.dismiss();
+      /* loading.dismiss(); */
       console.log('cerrando el loading')
     }, err => {
       console.log('err', err)
@@ -97,7 +98,7 @@ export class DatesComponent implements OnInit {
       () => {
         console.log('llamada finalizada')
       });
-
+      this.doctores.complete(loading.dismiss());
 
   }
 
