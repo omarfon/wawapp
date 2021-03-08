@@ -10,6 +10,7 @@ export class FinancerService {
   private SERVER = apiUrl;
   public dataDoctorFInancer;
   public patientId;
+  public dataPago;
   constructor(public http: HttpClient) { }
 
   getFinancers(){
@@ -45,5 +46,29 @@ getPlanesPaciente(centerId, servicio_id, prestacion_id, medico_id, proposed_date
                     })
     )
 }
+
+getplanesContacto(paciente_id, servicio_id, prestacion_id, medico_id, proposed_date ){
+  const authorization = localStorage.getItem('authorization');
+  let headers = new HttpHeaders({"Authorization":authorization});
+
+  return this.http.get(this.SERVER + `ebooking/planes-paciente-contacto-precio-prestacion?paciente_id=${paciente_id}&servicio_id=${servicio_id}&prestacion_id=${prestacion_id}&medico_id=${medico_id}&fecha=${proposed_date}`, {headers}).pipe(
+              map(data=>{
+                return data
+              })
+          )
+  }
+
+  getProvisions(centerId, basicServiceId){
+    const authorization = localStorage.getItem('authorization');
+    let headers = new HttpHeaders({"Authorization":authorization});
+
+    return this.http.get(this.SERVER + `ebooking/centers/${centerId}/basicservices/${basicServiceId}/provisions`, {headers}).pipe(
+                    map(data=>{
+                      return data
+                    })
+              )
+  }
+
+
 
 }

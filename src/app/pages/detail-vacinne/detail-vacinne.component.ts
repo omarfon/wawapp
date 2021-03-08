@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { VaccinesService } from 'src/app/services/vaccines.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class DetailVacinneComponent implements OnInit {
   public fecha;
   constructor(public vacinneSrv: VaccinesService,
               public loadingCtrl: LoadingController,
+              public nav: NavController,
               public alrtCtrl: AlertController) { }
 
   async ngOnInit() {
@@ -63,6 +64,9 @@ export class DetailVacinneComponent implements OnInit {
 
   updateVacuna(){
     console.log('nuevo estado de vacuna:' + this.vacuna);
+  }
+  back(){
+    this.nav.back();
   }
 
 }

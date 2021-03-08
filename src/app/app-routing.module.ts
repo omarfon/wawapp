@@ -9,6 +9,7 @@ import { GraficasComponent } from './pages/graficas/graficas.component';
 import { HitosComponent } from './pages/hitos/hitos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ParametersComponent } from './pages/parameters/parameters.component';
+import { PayComponent } from './pages/pay/pay.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -34,7 +35,7 @@ const routes: Routes = [
     component:  GraficasComponent
   },
   {
-    path: 'detail',
+    path: 'detail-vaccine',
     component:  DetailVacinneComponent
   },
   {
@@ -72,6 +73,10 @@ const routes: Routes = [
   {
     path: 'detail-recipe',
     component:  DetailRecipeComponent
+  },
+  {
+    path: 'pay',
+    component:  PayComponent
   }
 ];
 @NgModule({

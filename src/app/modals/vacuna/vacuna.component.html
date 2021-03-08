@@ -1,0 +1,25 @@
+<ion-content>
+  <h3>{{nota.titulo}}</h3>
+  <img src="https://deposeguro.com/wp-content/uploads/2018/12/casa-segura-para-ni%C3%B1os.jpg" alt="">
+  <p class="resumen">{{nota.resumen}}</p>
+  <p class="desarrollo">{{nota.desarrolloContenido}}</p>
+  <h5>{{nota.tituloLista1}}</h5>
+  <ul>
+    <li *ngFor="let h of nota.lista1">
+      {{h}}
+    </li>
+  </ul>
+  <h5>Ten cuidado con</h5>
+  <ul>
+    <li *ngFor="let h of nota.lista2">
+      {{h}}
+    </li>
+  </ul>
+  <h5 class="signos" *ngIf="nota.signosDeAlerta">Signos de Alerta</h5>
+  <ul class="contenedorAlarmas">
+    <li *ngFor="let h of nota.signosDeAlerta">
+      <p class="textoAlarma">{{h}}</p>
+    </li>
+  </ul>
+  
+</ion-content>

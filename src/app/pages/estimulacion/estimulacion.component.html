@@ -11,26 +11,28 @@
 
 <ion-content>
   <div *ngIf="estimulos">
-    <ion-slides class="contendedorSlidesEstimulos" >
+    <ion-slides class="contendedorSlidesEstimulos" [options]="slideOpts">
       <ion-slide *ngFor="let estimulo of estimulos; let i = index">
-        <div class="containerEstimulos" >
-          <h3 class="tituloMesEstimulo">estimulación para el mes {{estimulo.mes}}</h3>
-          <div>
-            <img class="imagenEstimulo" src="assets/imgs/estimulos/estimulos.png" alt="">
+        <ion-card>
+          <div class="containerEstimulos" >
+            <h3 class="tituloMesEstimulo">estimulación para el mes {{estimulo.mes}}</h3>
+            <div>
+              <img class="imagenEstimulo" src="assets/imgs/estimulos/estimulos.png" alt="">
+            </div>
+            <div class="containerEstimulosTexto">
+              <ion-item *ngFor="let e of estimulo.items ; let i = index">
+                <ion-row>
+                  <ion-col  size="1" class="containerNumeroSemana">
+                    <div class="numeroEstimulo">{{i+1}}</div>
+                  </ion-col>
+                  <ion-col size="11">
+                    <p class="contenidoMesEstimulo">{{e.actividad}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+            </div>
           </div>
-          <div class="containerEstimulosTexto">
-            <ion-item *ngFor="let e of estimulo.items ; let i = index">
-              <ion-row>
-                <ion-col  size="1" class="containerNumeroSemana">
-                  <div class="numeroEstimulo">{{i+1}}</div>
-                </ion-col>
-                <ion-col size="11">
-                  <p class="contenidoMesEstimulo">{{e.actividad}}</p>
-                </ion-col>
-              </ion-row>
-            </ion-item>
-          </div>
-        </div>
+        </ion-card>
       </ion-slide>
     </ion-slides>
   </div>

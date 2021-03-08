@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { CrudparentService } from 'src/app/services/crudparent.service';
+import { DependentsService } from 'src/app/services/dependents.service';
 
 @Component({
   selector: 'app-create-parent',
@@ -29,6 +30,7 @@ export class CreateParentComponent implements OnInit {
     public crudPvr: CrudparentService,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
+    public dependentsPvr: DependentsService,
     public modalCtrl: ModalController) { }
 
   ngOnInit() {
@@ -84,23 +86,15 @@ export class CreateParentComponent implements OnInit {
         });
         this.createParents = data;
         await loading.present();
-        /* this.dependentsPvr.getDependens().subscribe(dat => {
+        this.dependentsPvr.getDependens().subscribe(dat => {
           this._parents = dat;
-          let datos =
-          {
-            parents: this._parents,
-            doctor: this.doctor,
-            available: this.available,
-            proposedate: this.available,
-            hora: this.hora,
-            depe: this.depe,
-            price: this.price
-          }*/
-          /* let dataArmada = JSON.stringify(datos)  */
+          console.log('dependens', dat);
           this.modalCtrl.dismiss();
           loading.dismiss();
-          this.router.navigate(['tabs'])
+          this.dependentsPvr.dependens = this._parents;
+          this.router.navigate(['tabs']);
         });
+      })
     } else {
       this.errorForm();
       this.desabilitadobutton = true;

@@ -10,6 +10,10 @@ import { EstimulosService } from 'src/app/services/estimulos.service';
 })
 export class EstimulacionComponent implements OnInit {
   public estimulos;
+  slideOpts = {
+    pager: true,
+    slidesPerView: 1.08
+  }
   constructor(public nav: NavController,
               public loading: LoadingController,
               public estimuloSrv: EstimulosService) { }

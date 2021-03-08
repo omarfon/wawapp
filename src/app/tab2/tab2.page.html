@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title size='small' class="ion-text-center">
+    <ion-title size='small'>
      Controles
     </ion-title>
   </ion-toolbar>
@@ -17,12 +17,12 @@
           <ion-row>
             <ion-col *ngIf="dep.edad < 1">
               <ion-avatar (click)="getDataParent(dep)">
-                <img src="https://www.shareicon.net/data/2016/08/05/807214_people_512x512.png" alt="">
+                <img src="assets/img/icons/bebeicon.png" alt="">
               </ion-avatar>
             </ion-col>
             <ion-col *ngIf="dep.edad > 0">
               <ion-avatar (click)="getDataParent(dep)">
-                <img class="nino" src="../../assets/img/icons/nino.png" alt="">
+                <img class="nino" src="assets/img/icons/nino.png" alt="">
               </ion-avatar>
             </ion-col>
             <ion-col class="containerNombreDepe">
@@ -130,8 +130,8 @@
 
   </ion-row>
 </ion-grid>
-<ion-fab horizontal="end" vertical="bottom" slot="fixed" (click)="getDates()" >
-  <ion-fab-button >
+<ion-fab horizontal="end" vertical="bottom" slot="fixed"  (click)="getDates()" >
+  <ion-fab-button color="warning">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

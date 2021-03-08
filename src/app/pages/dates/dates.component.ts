@@ -89,6 +89,7 @@ export class DatesComponent implements OnInit {
         })
       }
       this.doctorsF = this.doctors;
+      loading.dismiss();
       console.log(this.doctorsF);
       /* loading.dismiss(); */
       console.log('cerrando el loading')
@@ -98,8 +99,6 @@ export class DatesComponent implements OnInit {
       () => {
         console.log('llamada finalizada')
       });
-      this.doctores.complete(loading.dismiss());
-
   }
 
   expandedItem(doctor, available) {
@@ -193,8 +192,6 @@ export class DatesComponent implements OnInit {
       }
     }
     this.citasSrv.dataDate = datos;
-    /* const datosObj = JSON.stringify(datos); */
-    /* console.log('data armada', datosObj); */
     const user = localStorage.getItem('role')
     if (user === 'public') {
       this.router.navigate(['/register'])

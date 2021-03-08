@@ -1,0 +1,31 @@
+<ion-content>
+  <h3>{{nota.titulo}}</h3>
+  <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="">
+  <p class="resumen">{{nota.resumen}}</p>
+  <p class="desarrollo">{{nota.desarrolloContenido}}</p>
+  <h5>{{nota.tituloLista1}}</h5>
+  <ul>
+    <li *ngFor="let h of nota.lista1">
+      {{h}}
+    </li>
+  </ul>
+  <h5>Área social y emocional</h5>
+  <ul>
+    <li *ngFor="let s of nota.areaSocialYEmocional">
+      {{s}}
+    </li>
+  </ul>
+  <h5>Área de habla y comunicación</h5>
+  <ul>
+    <li *ngFor="let a of nota.areaHablaComunicacion">
+      {{a}}
+    </li>
+  </ul>
+  <h5 class="signos" *ngIf="nota.signosDeAlerta">Signos de Alerta</h5>
+  <ul class="contenedorAlarmas">
+    <li *ngFor="let h of nota.signosDeAlerta">
+      <p class="textoAlarma">{{h}}</p>
+    </li>
+  </ul>
+  
+</ion-content>

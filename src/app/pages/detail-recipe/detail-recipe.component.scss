@@ -1,3 +1,6 @@
+ion-content{
+  --background:#f4f9f9!important;
+}
 .cuadrados{
     height: 60px;
     background:#F5F5F5;
@@ -57,13 +60,13 @@
   }
   .especialidad{
     margin-right: 20px;
-    color:#BABCC2;
+    color:#444D4D;
     font-weight: 600;
     font-size:1.1em;
     margin-left:10px;
   }
   .resultado{
-    color:#BABCC2;
+    color:#444D4D;
     font-weight: 200;
     font-size:1em;
     margin-top:-5px;
@@ -87,10 +90,10 @@
     margin-top:20px;
     font-size:3.5em;
     font-weight: 600;
-    color:#BABCC2;
+    color:#00B6A3;
   }
   .mes{
-    color:#BABCC2;
+    color:#00B6A3;
     font-size:1.1em;
   }
   .cantidadDeDias{
@@ -122,6 +125,9 @@
     text-align: right;
     margin-top:10px;
     margin-right: 10px;
+  }
+  ion-card{
+    border-top-right-radius: 25px;
   }
   ion-card-header{
     padding:0 16px!important;

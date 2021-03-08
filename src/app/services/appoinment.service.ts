@@ -82,5 +82,54 @@ destroyAppointmentContact(appointment) {
                   })
   )
 }
+chekstatusAppointment(appointmentId) {
+
+  const authorization = localStorage.getItem('authorization');
+  let headers = new HttpHeaders({ "Authorization": authorization });
+
+  return this.http.get(this.apiUrl + `ebboking/appointments/${appointmentId}/status`, { headers }).pipe(
+    map(resp => {
+      return resp
+    })
+  )
+}
+
+
+chekstatusAppointmentParent(patientId, appointmentId) {
+  const authorization = localStorage.getItem('authorization');
+  let headers = new HttpHeaders({ "Authorization": authorization });
+
+  return this.http.get(this.apiUrl + `ebboking/appointments-contact/${patientId}/${appointmentId}/status`, { headers }).pipe(
+    map(resp => {
+      return resp
+    })
+  )
+}
+
+
+confirmDate(appointmentId) {
+  console.log(appointmentId);
+  const authorization = localStorage.getItem('authorization');
+  let headers = new HttpHeaders({ "Authorization": authorization });
+  let params = "";
+
+  return this.http.post(this.apiUrl + `ebboking/appointments/${appointmentId}/confirm`, params, { headers }).pipe(
+    map(resp => {
+      return resp
+    })
+  )
+  }
+  
+confirmDateParent(patientId, appointmentId) {
+  const authorization = localStorage.getItem('authorization');
+  let headers = new HttpHeaders({ "Authorization": authorization });
+  let params = "";
+
+  return this.http.post(this.apiUrl + `ebboking/appointments-contact/${patientId}/${appointmentId}/confirm`, params, { headers }).pipe(
+    map(resp => {
+      return resp
+    })
+  )
+}
 
 }

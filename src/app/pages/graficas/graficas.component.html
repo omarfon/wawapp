@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="back()"></ion-back-button>
     </ion-buttons>
-    <ion-title size='small' class="ion-text-center">
+    <ion-title size='small'>
      Gráficas de desarrollo
     </ion-title>
   </ion-toolbar>
@@ -23,12 +23,9 @@
               [colors]="barChartColorsPeso"
               [chartType]="lineChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-    </div>
-<!--       <button ion-button
-            (click)="randomize()"
-            class="boton"
-            color="primary">cambiar vista</button> -->
+              (chartClick)="chartClicked($event)">
+        </canvas>
+  </div>
   </div>
 
   <div class="containerGraficaPeso">
@@ -43,16 +40,13 @@
               [colors]="barChartColorsTalla"
               [chartType]="lineChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)">
+        </canvas>
     </div>
-   <!--  <button ion-button
-            (click)="randomize()"
-            class="boton"
-            color="primary">cambiar vista</button> -->
   </div>
-<!-- 
+
   <div class="containerGraficaPeso">
-    <h3 class="center">Evolución Perimetro Cefálico</h3>
+    <h3 class="center top">Evolución Perimetro Cefálico</h3>
     <div style="display: block">
       <canvas baseChart
               width="350" height="320"
@@ -63,7 +57,8 @@
               [colors]="barChartColorsPc"
               [chartType]="lineChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)">
+        </canvas>
     </div>
-  </div> -->
+  </div>
 </ion-content>

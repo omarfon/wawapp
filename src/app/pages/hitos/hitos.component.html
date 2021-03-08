@@ -12,7 +12,7 @@
 <ion-content>
   <div class="containerPendientes">
     <h4 class="tituloContenedorPendientes">Lista de hitos pendientes</h4>
-    <ion-slides [options]="slideOpts">
+    <ion-slides [options]="slideOptions">
       <ion-slide *ngFor="let hito of porhacer">
         <app-flash >
           <div [ngClass]="{'zebraUno': hito.mes =='1' || hito.mes == '3' || hito.mes == '5' || hito.mes == '7' || hito.mes == 9 || hito.mes == '11', 'zebraDos': hito.mes == '2' || hito.mes == '4' || hito.mes == '6' || hito.mes == '8' || hito.mes == '10' || hito.mes == '12'}" class="flash-card-front animated bounce" >

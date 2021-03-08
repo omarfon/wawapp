@@ -26,18 +26,24 @@ import { registerLocaleData } from '@angular/common';
 import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
 import { NutricionComponent } from './modals/nutricion/nutricion.component';
 import { HitosComponent } from './pages/hitos/hitos.component';
+
 import { FlashComponent } from './components/flash/flash.component';
 import { BebefamiliaComponent } from './modals/bebefamilia/bebefamilia.component';
 import { CreateParentComponent } from './modals/create-parent/create-parent.component';
 import { DetailVacinneComponent } from './pages/detail-vacinne/detail-vacinne.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { HitosOneComponent } from './modals/hitos/hitos.component';
+import { VacunaComponent } from './modals/vacuna/vacuna.component';
+import { FinancerComponent } from './pages/financer/financer.component';
+import { PayComponent } from './pages/pay/pay.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 registerLocaleData(localeEs);
 
 
 @NgModule({
-  declarations: [AppComponent, ParametersComponent,EstimulacionComponent,DatesComponent,DatesComponent, DetailRecipeComponent, DetailRecipeComponent,NutricionComponent,HitosComponent,FlashComponent,BebefamiliaComponent,CreateParentComponent,DetailVacinneComponent,RegisterComponent,
+  declarations: [AppComponent, ParametersComponent,EstimulacionComponent,DatesComponent,DatesComponent, DetailRecipeComponent, DetailRecipeComponent,NutricionComponent,HitosComponent,FlashComponent,BebefamiliaComponent,CreateParentComponent,DetailVacinneComponent,RegisterComponent,HitosOneComponent,VacunaComponent,FinancerComponent,DatesComponent,PayComponent,DatesComponent,LoginComponent,
   GraficasComponent,CuidadobebeComponent],
   entryComponents: [ CreateParentComponent],
   imports: [

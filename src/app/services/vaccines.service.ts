@@ -30,10 +30,9 @@ export class VaccinesService {
        }
        
   getAllVaccinesPerUser(id){
-    console.log("el id que me llega", id);
     const authorization = localStorage.getItem('authorization');
     let headers = new HttpHeaders({"Authorization": authorization});
-    return this.http.get(this.apiVaccine + `/1803/2?groupby=momento_dosis` , {headers}).pipe(
+    return this.http.get(this.apiVaccine + `/${id}/2?groupby=momento_dosis` , {headers}).pipe(
                   map(data =>{
                     return data
                   })

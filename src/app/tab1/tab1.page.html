@@ -72,7 +72,7 @@
                 Cuidado y salud
               </ion-col>
               <ion-col size="2">
-                <p class="mesInicio">{{nota.mesInicio}}</p> 
+                <p class="mesInicio">{{mesActual}}</p> 
                 <!-- <ion-icon class="iconMore" name="newspaper"></ion-icon> -->
               </ion-col> 
             </ion-row>
@@ -91,7 +91,7 @@
                   Nutrición
                 </ion-col>
                 <ion-col>
-                  <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+                  <p class="mesInicioNutri">{{mesActual}}</p> 
                 </ion-col>
               </ion-row>
             <p></p>
@@ -108,12 +108,12 @@
               Familia
             </ion-col>
             <ion-col>
-              <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+              <p class="mesInicioNutri">{{mesActual}}</p> 
             </ion-col>
           </ion-row>
         </ion-card>
 
-        <ion-card id="hitos" *ngIf="nota.type == 'bebehitos'">
+        <ion-card id="hitos" *ngIf="nota.type == 'bebehitos'"  (click)="openModalHitos(nota)">
           <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="">
             <h5>{{nota.titulo}}</h5>
             <ion-row>
@@ -124,12 +124,12 @@
                 Hitos de desarrollo
               </ion-col>
               <ion-col>
-                <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+                <p class="mesInicioNutri">{{mesActual}}</p> 
               </ion-col>
             </ion-row>
       </ion-card>
 
-      <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'">
+      <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'" (click)="openModalEstimulacion(nota)">
         <img src="https://i.ytimg.com/vi/uV0VwCCkRSc/maxresdefault.jpg" alt="">
         <h5>{{nota.titulo}}</h5>
         <ion-row>
@@ -140,12 +140,12 @@
             Hitos de tu bebé
           </ion-col>
           <ion-col>
-            <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+            <p class="mesInicioNutri">{{mesActual}}</p> 
           </ion-col>
         </ion-row>
       </ion-card>
 
-      <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'">
+      <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'" (click)="openModalVacuna(nota)">
         <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/18/14478583344315.jpg" alt="">
         <h5>{{nota.titulo}}</h5>
         <ion-row>
@@ -156,7 +156,7 @@
             Vacunas
           </ion-col>
           <ion-col>
-            <p class="mesInicioNutri">{{nota.mesInicio}}</p> 
+            <p class="mesInicioNutri">{{mesActual}}</p> 
           </ion-col>
         </ion-row>
       </ion-card>

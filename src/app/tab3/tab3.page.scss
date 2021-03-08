@@ -1,3 +1,4 @@
+
 #box{
     background: #F5F5F5;
     margin-bottom:10px;
@@ -63,7 +64,8 @@ ion-icon{
   margin:0!important;
   text-shadow:none!important;
   color:#0AD641!important;
-  margin-top: 5px;
+  margin-right: 5px;
+ /*  margin-top: 5px; */
 }
 .label-md p{
   font-size: .8em!important;
@@ -81,27 +83,52 @@ ion-label{
 }
 .vacunaContainer{
   margin-bottom:-8px;
+  --background:transparent;
 }
 .textVaccine{
   color:#B6BFBF!important;
   font-weight: 400;
   font-size: 1em;
   text-align: center;
-  padding-bottom:1em;
-  padding-top:1em;
+  padding-bottom:.5em;
   width: 90%;
   margin-left:5%;
 }
 .nombreVacuna{
   font-size:.9em;
   color:#9B9B9B;
+  margin-bottom:0!important;
+  margin-left:5px;
 }
 ion-list{
-  background: #F5F5F5!important;
+  background: transparent!important;
 }
 ion-item{
-  background:#B6BFBF!important;
+  background:transparent!important;
+  height: 38px!important;
+  .item-native{
+    background:transparent!important;
+  }
 }
-.item-native{
-  background:#B6BFBF!important;
+ion-avatar{
+  img{
+    height: 35px;
+    width: 35px;
+    margin-top:15px;
+    margin-left:10px;
+  }
 }
+.containerNombreDepe{
+  p{
+    margin-left:10px;
+    font-size:.9em;
+    color:#9B9B9B;
+    margin-top:-10px;
+    text-transform: capitalize;
+  } 
+}
+.centrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}                                                                                                   
