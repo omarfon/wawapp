@@ -12,8 +12,8 @@ export class FlashComponent implements OnInit {
   ngOnInit() {}
 
   flip(){
-    this.flipped = !this.flipped;
-    console.log('moviendo flip');
+    /* this.flipped = !this.flipped; */
+    this.flipped = true;
   }
 
 

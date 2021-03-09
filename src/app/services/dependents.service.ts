@@ -13,6 +13,8 @@ export class DependentsService {
   private apiOldDates = `${this.SERVER}ebooking/encuentrosPaciente`;
   private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`;
   public dependens;
+  public appointment;
+  public id;
   constructor(public http: HttpClient) { }
 
   getDependens(){

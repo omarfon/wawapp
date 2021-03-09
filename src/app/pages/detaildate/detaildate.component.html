@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar hideBackButton="true" persistent="true">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title size='small'>
+     Detalle cita
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <img id="profile-image" src="{{API_IMAGES}}{{appointment.professional.id}}.png">
+
+    <h3 class="nombreDoctor" text-center>
+        {{ appointment.professional.fullName }}
+    </h3>
+
+    <ion-item>
+        <ion-label bold>Sede:</ion-label>
+        <ion-label class="blue" type="text" disabled="true">
+            Mendiola
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>Especialidad:</ion-label>
+        <ion-label item-end class="blue" disabled="true">
+            {{ appointment.service.basicService.description }}
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>Fecha:</ion-label>
+        <ion-label item-end class="blue" disabled="true">
+            {{ appointment.appointmentDateTime | date:'EEEE d , MMMM ' : 'es' }}
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>Hora:</ion-label>
+        <ion-label class="blue" type="text" disabled="true">
+            {{  appointment.appointmentDateTime | date:'shortTime'}}
+        </ion-label>
+    </ion-item>
+    <!-- <ion-item *ngIf="appointment.financing.description">
+        <ion-label>Cita con Seguro:</ion-label>
+        <ion-label class="blue" disabled="true">
+            {{appointment.financing.description | lowercase}}
+        </ion-label>
+    </ion-item> -->
+
+    <ion-item>
+        <ion-label>Tipo de pago:</ion-label>
+        <ion-label class="blue" disabled="true">
+            {{appointment.payer.financing.description | lowercase }}
+        </ion-label>
+    </ion-item>
+
+    <!-- <ion-item *ngIf="isCard">
+        <ion-label>Titular de la tarjeta:</ion-label>
+        <ion-label class="blue" disabled="true">
+            {{name | lowercase }}
+        </ion-label>
+    </ion-item> -->
+
+    <!-- <div *ngIf="isCard">
+        <ion-item>
+            <ion-label class="blue" type="text" maxlength="16" clearInput disabled="true">
+                {{numMasCard}}
+            </ion-label>
+            <ion-icon item-end name="card"></ion-icon>
+        </ion-item>
+    </div> -->
+
+    <!-- <ion-item>
+        <ion-label>Costo:</ion-label>
+        <ion-label class="blue" item-end type="text" disabled="true">
+            {{ 'S/. ' + price }}.00
+        </ion-label>
+    </ion-item> -->
+
+    <!-- <div padding>
+        <button ion-button (click)="gotosave()" block color="secondary" class="heighButton">OK</button>
+    </div> -->
+    <ion-row>
+        <ion-col size="6">
+            <ion-button size="full" color="warning" (click)='desactivateTask(appointment)'>ANULAR CITA</ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button size="full" color="secondary" (click)="dismiss()">VOLVER</ion-button>
+        </ion-col>
+    </ion-row>
+    <p class="recomenda" color="secondary">Recuerde que deberá llegar 20 minutos antes para poder cancelar en caja y estar a tiempo en el consultorio.</p>
+
+</ion-list>
+</ion-content>

@@ -22,7 +22,7 @@ export class HitosService {
   }
 
   addHito(id){
-    const userId = 2326;
+    const userId = 861;
     let fecha = moment().format('YYYY-MM-DD');
     let params = {id: id, fecha: fecha};
       return this.http.post(this.apiUrlGet, params).pipe(

@@ -8,11 +8,14 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
+  public nombre;
   constructor(public router:Router,
               public menu: MenuController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.nombre = JSON.parse(localStorage.getItem('userData'));
+    console.log(this.nombre)
+  }
 
   goToHome(){
     this.router.navigate(['home']);
@@ -20,7 +23,7 @@ export class MenuComponent implements OnInit {
   }
 
   goToMydates(){
-    this.router.navigate(['my-dates']);
+    this.router.navigate(['mydates']);
     this.menu.close();
   }
 

@@ -1,3 +1,41 @@
-<p>
-  mydates works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar hideBackButton="true" persistent="true">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()"></ion-back-button>
+    </ion-buttons>
+    <ion-title size='small'>
+     Mis citas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+  <div *ngIf="appointments ; sincitas">
+    <div *ngFor="let encuentro of appointments">
+      <ion-card *ngFor="let e of encuentro.appointments; let i = index" (click)="goToDetail(e, encuentro.user.id)">
+        <ion-row>
+          <ion-col size="4">
+            <div class="iconoReceta">
+              <p class="dia">{{e.appointmentDateTime | date:'dd' }} </p>
+              <p class="mes">{{e.appointmentDateTime | date:'MMMM'}}</p>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <p class="especialidad">Especialidad</p>
+            <p class="resultado">{{e.service.basicService.description}}</p>
+            <p class="especialidad">Doctor:</p>
+            <p class="resultado">{{e.professional.name}} {{e.professional.surname1}} {{e.professional.surname2}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+  <ng-template #name>
+   #sincitas >
+    <h3
+    class="textoCitasPendientes">Aun no tienes citas pendientes</h3>
+
+  </ng-template>
+
+</ion-content>

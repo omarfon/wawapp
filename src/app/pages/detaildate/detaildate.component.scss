@@ -1,0 +1,70 @@
+#content {
+    position: relative;
+    margin-top: 15%;
+    background-color: white;
+    // box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
+    padding-top: 2%;
+}
+#profile-info {
+    position: absolute;
+    top: -85px;
+    width: 100%;
+    z-index: 2;
+    height: auto;
+    text-align: center;
+}
+#profile-name {
+    color: #444;
+    font-size: 22px;
+}
+#profile-description {
+    font-size: 15px;
+    color: #888;
+}
+#profile-image {
+    display: block;
+    border-radius: 20px;
+    // border: 1px solid #fff;
+    width: 128px;
+    height: 128px;
+    margin: 30px auto 0;
+    box-shadow: 0px 1px 3px #9D9D9D;
+}
+.recomenda {
+    font-size: .8em;
+    color: #062F51;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 0;
+}
+.blue {
+    color: #007198!important;
+    text-align: left;
+    margin-right: 30px!important;
+    font-size: .9em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+ion-label {
+    color: #4A4A4A;
+    font-size: 1em;
+    font-weight: 200;
+    margin-left: 10px!important;
+}
+.nombreDoctor {
+    color: #00B6A3;
+    font-weight: 400;
+    width: 80%;
+    font-size: 1.4em;
+    margin-left: 10%;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.list-md .item-block .item-inner,
+.item-md.item-block .item-inner {
+    border-bottom: .2px solid #f0f0f5;
+    width: 80%;
+}
+.heighButton {
+    height: 50px;
+}

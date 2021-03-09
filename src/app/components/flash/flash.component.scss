@@ -7,7 +7,7 @@
       }
       .flip-container, .front, .back{
         width:60vw !important;
-        height: 40vh;
+        height: 300px;
         margin: 10px auto;
       }
       .flipper{
@@ -29,7 +29,7 @@
       }
   
       .front {
-        z-index: 2;
+     /*    z-index: 2; */
         transform : rotateY(0deg);
       }
   

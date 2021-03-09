@@ -5,12 +5,14 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+    <p class="nombre" *ngIf="nombre">{{nombre.name}} {{nombre.surname1}} {{nombre.surname2}}</p> 
+    <p class="email" *ngIf="nombre">{{nombre.userEmail}}</p>
     <ion-list lines="none">
    <!--    <ion-item button (click)="goToGraficas()">
         <ion-icon name="reader-outline" slot="start"></ion-icon>
         Gráficas de crecimiento
       </ion-item> -->
-      <ion-item button (click)="goToMyparents()">
+      <ion-item button (click)="goToMydates()">
         <ion-icon name="people-outline" slot="start"></ion-icon>
         Mis citas
       </ion-item>

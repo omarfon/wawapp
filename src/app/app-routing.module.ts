@@ -3,11 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DatesComponent } from './pages/dates/dates.component';
 import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
 import { DetailVacinneComponent } from './pages/detail-vacinne/detail-vacinne.component';
+import { DetaildateComponent } from './pages/detaildate/detaildate.component';
 import { EstimulacionComponent } from './pages/estimulacion/estimulacion.component';
 import { FinancerComponent } from './pages/financer/financer.component';
 import { GraficasComponent } from './pages/graficas/graficas.component';
 import { HitosComponent } from './pages/hitos/hitos.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MydatesComponent } from './pages/mydates/mydates.component';
 import { ParametersComponent } from './pages/parameters/parameters.component';
 import { PayComponent } from './pages/pay/pay.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
@@ -77,6 +79,14 @@ const routes: Routes = [
   {
     path: 'pay',
     component:  PayComponent
+  },
+  {
+    path: 'mydates',
+    component:  MydatesComponent
+  },
+  {
+    path: 'detail-date',
+    component:  DetaildateComponent
   }
 ];
 @NgModule({

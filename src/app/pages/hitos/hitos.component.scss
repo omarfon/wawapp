@@ -1,3 +1,6 @@
+ion-content{
+  --background:#f4f9f9!important;
+}
 .swiper-slide{
     height: 250px!important;
   }
@@ -25,7 +28,7 @@
     height: 120px;
   }
   .hechas{
-    height: 180px;
+    height: 220px;
   }
   .descripcionHechas{
     color:#A7A9AC;
@@ -56,12 +59,12 @@
     font-weight: 400;
   }
   .containerHechas{
-    background: #D6DBDB;
+    background: #019FE0;
     width:100%!important;
+    height: 50vh;
   }
   .containerPendientes{
-    background:#F1F6F6;
-    height: 300px;
+   height: 45vh;
   }
   .imagenTarjeta{
     width:100%!important; 
@@ -73,7 +76,7 @@
     height: 200px;
   }
   .hitoPendienteDescripcion{
-    font-size:.8em;
+    font-size:.9em;
     text-align: left;
     color:#A7A9AC;
   }
@@ -81,6 +84,7 @@
     text-transform: lowercase;
     text-align: right;
     float: right;
+    margin-top:-10px;
   }
   .tarjeta{
     background:#fff;
@@ -89,22 +93,21 @@
     border-radius:20px!important;
   }
   .tituloPendietes{
-    font-size:1em;
     color:#66CBEC;
     text-align: left;
     font-size:1.2em;
-    margin-top: 10px;
+    margin-top:-20px;
   }
   .descripcionBack{
       width:90%;
       margin-left:5%;
-      color:#66CBEC;
+      color:#79a3b1;
       font-size:.8em;
       font-weight: 200;
   }
   .tituloContenedorPendientes{
     text-align: center;
-    color:#A7A9AC;
+    color:#79a3b1;
     margin-top:15px;
     font-size:1.2em;
     font-weight: 400;
@@ -132,10 +135,10 @@
     font-size:.6em!important;
   }
   .containerSlidesHechas{
-    height: 220px!important;
+    height: 240px!important;
     padding:1em;
       .swiper-slide{
-        height: 200px!important;
+        height: 240px!important;
       }
   }
   .flip-container{
@@ -146,8 +149,8 @@
     background:#fff!important;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top:10px;
+    margin-top:70px;
+    z-index: 50;
   }
   .disclaimerMarcar{
     background:#fff!important;
@@ -167,7 +170,7 @@
     margin-left:10%;
   }
   .cardContendorSinHechas{
-    height: 180px;
+    height: 220px;
     background:#019FE0;
 
   }
@@ -185,12 +188,12 @@
     position: relative;
     color:#FAA61A;
   }
-  .zebraUno{
+  /* .zebraUno{
     border: 12px solid #66CBEC!important;
   }
   .zebraDos{
     border: 12px solid #9483C8!important;
-  }
+  } */
   .backCard{
     border:13px solid #fff;
     height: 240px!important;
@@ -203,4 +206,7 @@
   }
   .card-content{
     padding:0px!important;
+  }
+  ion-slide{
+    height: 320px;
   }

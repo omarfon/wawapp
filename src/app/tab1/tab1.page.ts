@@ -56,17 +56,18 @@ export class Tab1Page {
               public dependentSrv: DependentsService,
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController) {
+               
               }
 
  ngOnInit(){
   this.getDependents()
-   this.slideOpts.initialSlide = 8;
-  this.getNotes();
-  let role = localStorage.getItem('role');
-    if (role == 'user') {
-    } else {
-      console.log('no es usuario no carga los dependientes');
-    }
+  this.slideOpts.initialSlide = 8;
+ /* this.getNotes(); */
+ let role = localStorage.getItem('role');
+   if (role == 'user') {
+   } else {
+     console.log('no es usuario no carga los dependientes');
+   }
 }
 
 async getNotes(){
@@ -105,6 +106,7 @@ getDependents() {
       console.log('mes primer menor:', mesesActual);
       this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
         this.notas = data
+        console.log(this.notas);
         const newNotas = this.notas.filter(n => n.mes <= mesesActual);
         this.notas = newNotas;
         const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas');
