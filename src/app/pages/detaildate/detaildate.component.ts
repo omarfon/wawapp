@@ -55,4 +55,7 @@ export class DetaildateComponent implements OnInit {
         this.nav.back();
       }
 
+      dismiss(){
+        this.nav.back();
+      }
 }

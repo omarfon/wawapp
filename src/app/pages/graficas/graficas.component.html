@@ -134,4 +134,36 @@
         </canvas>
     </div>
   </div>
+  <div class="containerGraficaPeso" *ngIf="sex === 'HOMBRE'">
+    <h3 class="center top">Evolución Peso/talla</h3>
+    <div style="display: block">
+      <canvas baseChart
+              width="350" height="320"
+              [datasets]="pesoTalla"
+              [labels]="barChartLabelsTwo"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColorsPc"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+        </canvas>
+    </div>
+  </div>
+  <div class="containerGraficaPesoWomen" *ngIf="sex === 'MUJER'">
+    <h3 class="center top">Evolución Peso/talla</h3>
+    <div style="display: block">
+      <canvas baseChart
+              width="350" height="320"
+              [datasets]="pesoTalla"
+              [labels]="barChartLabelsTwo"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [colors]="barChartColorsPc"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+        </canvas>
+    </div>
+  </div>
 </ion-content>

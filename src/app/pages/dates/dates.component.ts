@@ -103,14 +103,14 @@ export class DatesComponent implements OnInit {
 
   expandedItem(doctor, available) {
     if (!this.hora) {
-      console.log('doctor y available:', doctor, available);
+      /* console.log('doctor y available:', doctor, available); */
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, this.escogido, serviceId, fromDate, toDate).subscribe(hoy => {
-        console.log('hoy', hoy);
+        /* console.log('hoy', hoy); */
         const dates = hoy[0].hours;
         if (this.escogido === 44) {
           this.consultaExterna = dates.filter(x => x.params.provisionId[0] === 44);
@@ -119,7 +119,7 @@ export class DatesComponent implements OnInit {
         } else {
           this.teleconsulta = dates.filter(x => x.params.provisionId[0] === 845337);
           this.dias = this.teleconsulta
-          console.log('this.teleconsulta:', this.teleconsulta);
+          /* console.log('this.teleconsulta:', this.teleconsulta); */
         }
         // console.log('this.dias:',this.dias);
         this.doctors.map((listDoctor) => {
@@ -136,7 +136,7 @@ export class DatesComponent implements OnInit {
         // console.log('dias', this.dias);
       })
     } else {
-      console.log('doctor:', doctor, available);
+      /* console.log('doctor:', doctor, available); */
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;

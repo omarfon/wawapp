@@ -32,8 +32,8 @@ async ngOnInit() {
       if(this.dependentsAppointments){
          this.appointments = this.dependentsAppointments.filter(x => x.appointments) ;
          loading.dismiss();
-         console.log('con citas:', this.dependentsAppointments);   
-         console.log('this.appointnments:', this.appointments);              
+       /*   console.log('con citas:', this.dependentsAppointments);   
+         console.log('this.appointnments:', this.appointments);       */        
       }/* else{
         this.appointments == 0;
       } */
@@ -47,7 +47,7 @@ async ngOnInit() {
     this.dependetsSrv.appointment = e;
     this.dependetsSrv.id = id;
     this.router.navigate(['detail-date']);
-     console.log('e:' ,e, id);
+     /* console.log('e:' ,e, id); */
    }
 
    back(){

@@ -18,7 +18,7 @@
   <!-- fin de marcador para la vacuna     -->
 <ion-card>
   <ion-card-header>
-        Detalles de vacuna aplicada
+        Detalle de vacuna aplicada
   </ion-card-header>
   <ion-card-content >
       <ion-list class="contenedorEfectuadas">
@@ -45,11 +45,11 @@
   </ion-card-content>
 </ion-card>
 
-<div class="padding">
-
+<div class="padding" >
+  <h3 class="tituloConoceMas">Conoce algo más sobre las vacunas administradas en este mes</h3>
   <mat-accordion *ngIf="vacunas">
     <mat-expansion-panel *ngFor="let e of vacunas">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header *ngIf="e.enfermedades">
             <mat-panel-title>
               <ion-row>
                 <ion-col col-12>
@@ -70,7 +70,7 @@
               </ul>
           </div>
 
-          <div class="contenedorAlertas">
+          <div class="contenedorAlertas" *ngIf="e.enfermedades">
             <h4>Los signos de alarma</h4>
             <ul>
               <li *ngFor="let s of e.signosAlerta">
@@ -79,7 +79,7 @@
             </ul>
           </div>
 
-          <div class="contenedorRestricciones">
+          <div class="contenedorRestricciones" *ngIf="e.enfermedades">
             <h4>Algunas restricciones:</h4>
             <ul>
               <li *ngFor="let r of e.restricciones">

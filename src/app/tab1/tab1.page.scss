@@ -27,6 +27,10 @@ ion-content{
 }
 
 // estilos nutricion
+.tituloNutricion{
+  font-size:.9em;
+  margin-top:-10px;
+}
 .categoriaAlimentacion{
   color:#A7A9AC;
   font-size:1.2em;
@@ -173,10 +177,20 @@ mat-panel-title h2{
 }
 ion-avatar{
   img{
-    height: auto;
-    margin-top:10px;
+    height: 35px;
+    width: 35px;
+    margin-top:15px;
+    margin-left:10px;
     margin-left: calc(50% - 22.5px);
   }
+  img:hover{
+    width:55px!important;
+    height: 55px;
+  }
+}
+ion-avatar:hover{
+  width:50px;
+  height: 60px;
 }
 .nino{
   width: 55px!important;
@@ -186,16 +200,17 @@ ion-avatar{
 .containerNombreDepe{
   color:#50504F;
   text-transform: lowercase;
-  text-align: center;
+  text-align: left;
   padding-bottom:0!important;
 }
 .containerNombreDepe{
   p{
-    margin-left:10px;
+margin-left:10px; 
     font-size:.9em;
     color:#79a3b1;
+    margin-top:-5px;
   } 
-}
+} 
 .centrar{
   display: flex;
   justify-content: center;
@@ -228,6 +243,21 @@ ion-avatar{
     }
   }
 }
+/* .containerMesSlide:hover{
+  background: #e32185!important;
+  border-radius: 50%;
+  height: 52px!important; 
+  width: 52px!important;
+  font-size:.9em!important;
+  border: 1px dashed #e32185;
+  p{
+    color:#fff!important;
+    font-size:.9em!important;
+    font-weight: 500;
+    margin-top:14px!important;
+
+  }
+} */
 
 .containerCardsSlider{
   ion-slider{
@@ -236,7 +266,7 @@ ion-avatar{
   ion-slide{
     width:100%;
   }
-  #bebenutricion{
+  #nutricion{
     ion-card-title{
       text-align: left;
       color:#FFC839;
@@ -248,6 +278,9 @@ ion-avatar{
       font-size:.9em;
       width: 95%;
       margin-left:2.5%;
+    }
+    ion-card-content{
+      margin-top:-20px;
     }
   }
   ion-card{
@@ -288,10 +321,9 @@ ion-avatar{
   }
   h5{
     color:#79a3b1;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 400;
     text-align: left;
-    margin-top:-10px;
     margin-bottom:5px;
   }
   .iconType{
@@ -299,7 +331,7 @@ ion-avatar{
     text-align: right;
     width:30px;
     height: 30px;
-    margin-top:0!important;
+    margin-top:-3px!important;
   }
   .textoCategoria{
     text-align: left;
@@ -368,7 +400,6 @@ ion-avatar{
     text-align: right;
     color:#f1f1f1!important;
     margin-right:10px;
-    margin-top:10px;
   }
 }
 #familia{
@@ -387,6 +418,7 @@ ion-avatar{
     text-align: left;
     width:90%;
     margin-left:5%;
+    margin-top:-10px;
   }
   .iconType{
     margin-left:10px;
@@ -412,7 +444,6 @@ ion-avatar{
     text-align: right;
     color:#f1f1f1!important;
     margin-right:10px;
-    margin-top:10px;
   }
 }
 #estimulacion{
@@ -518,7 +549,6 @@ ion-avatar{
     font-weight: 400;
     text-align: left;
     width:90%;
-    margin-left:5%;
   }
   .iconType{
     margin-left:10px;
@@ -529,12 +559,9 @@ ion-avatar{
   }
   .textoCategoria{
     text-align: left;
-    color:#A7A9AC;
-    margin-top:5px;
     color:#e32185;
   }
   .iconMore{
-    margin-top:10px;
     color:#50504F;
     font-size:1.2em;
   }
@@ -544,7 +571,6 @@ ion-avatar{
     text-align: right;
     color:#f1f1f1!important;
     margin-right:10px;
-    margin-top:10px;
   }
 }
 .containerHitosyEstimulacion{
@@ -574,16 +600,51 @@ ion-avatar{
 }
 .addParent{
   ion-icon{
-    margin-top:35px;
+    margin-top:20px;
     text-align:right;
-    color:#47ACDE;
+    color:#c3c5c7;
     cursor: pointer;
-    font-size:3em;
+    font-size:2.2em;
   }
   .agregarDepeTexto{
-    font-size:.9em!important;
+    font-size:.8em!important;
     text-align: left;
-    color:#47ACDE;
-    margin-top:-10px;
+    margin-left:-6px;
+    color:#A7A9AC;
+    margin-top:-5px;
   }
+}
+
+.activeIndex{
+  background: #e32185!important;
+  border-radius: 50%;
+  height: 52px!important; 
+  width: 52px!important;
+  font-size:.9em!important;
+  border: 1px dashed #e32185;
+  p{
+    color:#fff!important;
+    font-size:.9em!important;
+    font-weight: 500;
+    margin-top:14px!important;
+
+  }
+}
+.containerPersonas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-slides{
+  --bullet-background: red;
+  --scroll-bar-background-active: red!important;
+}
+
+
+.imagenCard{
+  height: 160px;
+}
+.tituloCard{
+  height: 50px;
 }

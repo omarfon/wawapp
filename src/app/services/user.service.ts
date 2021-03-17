@@ -16,6 +16,7 @@ export class UserService {
   public userId;
   public patientId;
   public content;
+  public recovery;
   constructor(public http: HttpClient) { }
 
 

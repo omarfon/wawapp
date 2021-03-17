@@ -216,14 +216,10 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('token', data.firebaseToken);
       localStorage.setItem('uid', data.userId);
       localStorage.setItem('sigIn', 'completo');
-      if (this.tipoConsulta) {
-        const data = JSON.stringify(this.tipoConsulta);
-        this.router.navigate(['financer', data])
-      } else {
         this.router.navigate(['/login']);
-      }
-      console.log("pasó!!!");
-      console.log('pasó logeado', this.createOk);
+    
+      /* console.log("pasó!!!"); */
+     /*  console.log('pasó logeado', this.createOk); */
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
       }

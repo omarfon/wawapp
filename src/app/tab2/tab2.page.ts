@@ -55,14 +55,13 @@ async ngOnInit(){
         this.filtrados = this.dependends.filter(x => x.edad < 5)
         this.id = this.filtrados[0].patientId;
       }
-      console.log('lista de dependientes:', this.dependends, this.filtrados);
-     /*  this.id = 1803; */
+      /* console.log('lista de dependientes:', this.dependends, this.filtrados); */
       this.fechaInicio = this.dependends.birthdate;
       this.constrolSrv.getAllControlPerContact(this.id).subscribe((data:any) => {
         this._items = data
-        console.log('los encuentros del paciente:', this._items);
+       /*  console.log('los encuentros del paciente:', this._items); */
         this.control = this._items[0].encuentros;
-        console.log('this.control:', this.control);
+        /* console.log('this.control:', this.control); */
   
         const ordenados = this.control.sort((a, b) => {
           if ((a.fecha) > (b.fecha_registro)) {
@@ -77,9 +76,9 @@ async ngOnInit(){
         });
         this.appoinmentSrv.getAppoinmentsPerUserControl(this.id).subscribe(data => {
           this._dates = data;
-          console.log(this._dates);
+          /* console.log(this._dates); */
        /*    this.dates = this._dates[0].appointments[0]; */
-          console.log('this.dates:', this._dates);
+          /* console.log('this.dates:', this._dates); */
         });
     });
 }
@@ -90,18 +89,18 @@ async getDataParent(dependend) {
     message: 'cargando controles...'
   });
   await loading.present();
-  console.log('dependend:', dependend);
+  /* console.log('dependend:', dependend); */
   this.dependend = dependend;
   this._id = this.dependend.patientId;
   this.id = this._id;
-  console.log('this.id', this.id);
+  /* console.log('this.id', this.id); */
   const controles = this.constrolSrv.getAllControlPerContact(this.id).subscribe((data: any) => {
     this._items = data
     this._control = this._items[0].encuentros;
     this.control = this._control;
-    console.log('los encuentros del paciente:', this._items, this.control);
+    /* console.log('los encuentros del paciente:', this._items, this.control); */
   }, err => {
-    console.log(err);
+    /* console.log(err); */
   });
   loading.dismiss();
   

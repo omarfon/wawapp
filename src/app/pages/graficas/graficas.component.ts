@@ -20,6 +20,8 @@ export class GraficasComponent implements OnInit {
          fill: false
   };
   public barChartLabels:string[] = ['mes 0','mes 1', 'mes 2', 'mes 3', 'mes 4', 'mes 5', 'mes 6', 'mes 7', 'mes 8', 'mes 9', 'mes 10', 'mes 11', 'mes 12', 'mes 13', 'mes 14', 'mes 15','mes 16', 'mes 17'];
+  public barChartLabelsTwo:string[] = ['45.0', '45.5', '46.0', '46.5', '47.0', '47.5', '48.0', '48.5', '49.0', '49.5', '50.0', '50.5', '51.0', '51.5', '52.0', '52.5', '53.0', '53.5', '54.0', '54.5', '55.0', '55.5', '56.0', '56.5', '57.0'
+];
   public lineChartType:any = 'line';
   public barChartLegend:boolean = true; 
 
@@ -34,6 +36,10 @@ export class GraficasComponent implements OnInit {
   public barChartDataPc:any[] = [];
 
   public barChartDataPcWomen:any[] = [];
+
+  public pesoTalla:any[] = [];
+
+  public pesoTallaWomen:any[] = [];
 
   public barChartColorsPeso
    = [
@@ -205,14 +211,14 @@ export class GraficasComponent implements OnInit {
     this.dependendentSrv.getDependens().subscribe((dependientes:any) =>{
       this.dependens = dependientes.map(dependend =>{
         dependend.edad = moment().diff(dependend.birthdate, 'years');
-        console.log('dependend:', dependend);
+        /* console.log('dependend:', dependend); */
         return dependend;
       });
       if(this.dependens){
         this.filtrados = this.dependens.filter(x => x.edad < 5)
         this.id = this.filtrados[0].patientId;
         this.sex = this.filtrados[0].sex
-        console.log(this.id)
+        /* console.log(this.id) */
       }
       this.getData();
     /*     this.vacinneSrv.getAllVaccines().subscribe(data => {
@@ -294,8 +300,26 @@ export class GraficasComponent implements OnInit {
           {data: [36.10, 38.80, 40.50, 41.90, 43.00, 43.90, 44.60, 45.30, 45.90, 46.30, 47.40, 47.70, 47.50, 47.70, 48.00, 48.20, 48.50, 48.70], label: 'percentil 97'},
           {data: [...perimetros], label: 'Perimetro cefalico'}
         ]
+
+        this.pesoTalla = [
+          {data: [2.1, 2.1, 2.2, 2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4], label: 'percentil 3'},
+          {data: [2.2, 2.3, 2.4, 2.5, 2.5, 2.6, 2.7, 2.8, 2.9, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7], label: 'percentil 15'},
+          {data: [2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1], label: 'percentil 50'},
+          {data: [2.7, 2.8, 2.9, 3.0, 3.1, 3.1, 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1, 5.3, 5.4, 5.6], label: 'percentil 85'},
+          {data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.0, 4.1, 4.2, 4.3, 4.5, 4.6, 4.7, 4.9, 5.0, 5.2, 5.4, 5.5, 5.7, 5.9, 6.0], label: 'percentil 97'},
+          {data: [...pesos], label: 'Peso/talla'}
+        ]
+
+        this.pesoTallaWomen = [
+          {data: [2.1, 2.2, 2.2, 2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.8, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0, 4.1, 4.2, 4.3], label: 'percentil 3'},
+          {data: [2.2, 2.3, 2.4, 2.5, 2.6, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.2, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.6], label: 'percentil 15'},
+          {data: [2.5, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1], label: 'percentil 50'},
+          {data: [2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7, 4.9, 5.0, 5.2, 5.3, 5.5, 5.6], label: 'percentil 85'},
+          {data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1, 5.3, 5.4, 5.6, 5.8, 5.9, 6.1], label: 'percentil 97'},
+          {data: [...pesos], label: 'Peso/talla'}
+        ]
   
-        console.log('this.parametros:', this.parametros, parametros,{pesos, tallas, perimetros});
+        /* console.log('this.parametros:', this.parametros, parametros,{pesos, tallas, perimetros}); */
       })
     loading.dismiss();
   }
@@ -303,7 +327,7 @@ export class GraficasComponent implements OnInit {
   async getDataForPatient(depe){
     this.id = depe.patientId;
     this.sex = depe.sex;
-    console.log(this.id);
+    /* console.log(this.id); */
     this.getData();
   }
 

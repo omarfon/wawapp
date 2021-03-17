@@ -15,6 +15,9 @@
     <div *ngFor="let encuentro of appointments">
       <ion-card *ngFor="let e of encuentro.appointments; let i = index" (click)="goToDetail(e, encuentro.user.id)">
         <ion-row>
+          <ion-col offset="4" size="7" class="containerNombre">
+            <p class="nombreDepeConsulta">{{encuentro.user.patientName}}</p>
+          </ion-col>
           <ion-col size="4">
             <div class="iconoReceta">
               <p class="dia">{{e.appointmentDateTime | date:'dd' }} </p>

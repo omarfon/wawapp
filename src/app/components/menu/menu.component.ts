@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.nombre = JSON.parse(localStorage.getItem('userData'));
-    console.log(this.nombre)
+    /* console.log(this.nombre) */
   }
 
   goToHome(){

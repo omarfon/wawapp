@@ -39,13 +39,15 @@ import { PayComponent } from './pages/pay/pay.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MydatesComponent } from './pages/mydates/mydates.component';
 import { DetaildateComponent } from './pages/detaildate/detaildate.component';
+import { RecoveryComponent } from './pages/recovery/recovery.component';
+
 
 
 registerLocaleData(localeEs);
 
 
 @NgModule({
-  declarations: [AppComponent, ParametersComponent,EstimulacionComponent,DatesComponent,DatesComponent, DetailRecipeComponent, DetailRecipeComponent,NutricionComponent,HitosComponent,FlashComponent,BebefamiliaComponent,CreateParentComponent,DetailVacinneComponent,RegisterComponent,HitosOneComponent,VacunaComponent,FinancerComponent,DatesComponent,PayComponent,DatesComponent,LoginComponent,MydatesComponent,DetaildateComponent,
+  declarations: [AppComponent, ParametersComponent,EstimulacionComponent,DatesComponent,DatesComponent, DetailRecipeComponent, DetailRecipeComponent,NutricionComponent,HitosComponent,FlashComponent,BebefamiliaComponent,CreateParentComponent,DetailVacinneComponent,RegisterComponent,HitosOneComponent,VacunaComponent,FinancerComponent,DatesComponent,PayComponent,DatesComponent,LoginComponent,MydatesComponent,DetaildateComponent,RecoveryComponent,
   GraficasComponent,CuidadobebeComponent],
   entryComponents: [ CreateParentComponent],
   imports: [

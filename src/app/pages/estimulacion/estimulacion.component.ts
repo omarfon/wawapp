@@ -34,7 +34,7 @@ export class EstimulacionComponent implements OnInit {
     this.estimuloSrv.getDataEstimulation().subscribe(data => {
       this.estimulos = data;
       loading.dismiss();
-      console.log(this.estimulos);
+      /* console.log(this.estimulos); */
     })
   }
 }

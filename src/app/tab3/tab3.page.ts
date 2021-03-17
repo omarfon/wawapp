@@ -46,7 +46,7 @@ export class Tab3Page {
       this.dependentsSrv.getDependens().subscribe((dependientes:any) =>{
         this.dependens = dependientes.map(dependend =>{
           dependend.edad = moment().diff(dependend.birthdate, 'years');
-          console.log('dependend:', dependend);
+          /* console.log('dependend:', dependend); */
           return dependend;
         });
         if(this.dependens){
@@ -63,7 +63,7 @@ export class Tab3Page {
 
     getAllVacine(){
       this.vacinneSrv.getAllVaccines().subscribe(data => {
-        console.log('todas las vacunas',data);
+        /* console.log('todas las vacunas',data); */
       })
     }
   
@@ -71,8 +71,8 @@ export class Tab3Page {
       const id = this.vaccine;
       this.vacinneSrv.getAllVaccinesPerUser(this.id).subscribe(data => {
         this.vacunas = data;
-      this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540];
-      console.log('vacunas', this.vacunas);
+      this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540, 720, 1440];
+      /* console.log('vacunas', this.vacunas); */
       
     });
     }
@@ -80,7 +80,7 @@ export class Tab3Page {
     goToDetailVacuna(vacuna){
       this.vacinneSrv.vacuna = vacuna;
       this.vacinneSrv.month = vacuna[0].momento_dosis/ 30;
-      console.log('los datos del vac:', vacuna)
+      /* console.log('los datos del vac:', vacuna) */
       this.router.navigate(['detail-vaccine']);
     }
 
@@ -89,13 +89,13 @@ export class Tab3Page {
         message: 'cargando controles...'
       });
       await loading.present();
-      console.log(dependend);
+      /* console.log(dependend); */
       this.vaccine = dependend.patientId;
       const id = this.vaccine;
       this.vacinneSrv.getAllVaccinesPerUser(this.vaccine).subscribe(data => {
         this.vacunas = data;
-      this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540];
-      console.log('vacunas', this.vacunas);
+      this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540,  720, 1440];
+      /* console.log('vacunas', this.vacunas); */
       loading.dismiss();
     });
     }

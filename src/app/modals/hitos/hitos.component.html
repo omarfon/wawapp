@@ -1,8 +1,8 @@
 <ion-content>
   <h3>{{nota.titulo}}</h3>
-  <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="">
+  <img src="{{nota.imagenUrl}}" alt="">
   <p class="resumen">{{nota.resumen}}</p>
-  <p class="desarrollo">{{nota.desarrolloContenido}}</p>
+  <p class="desarrollo">{{nota.texto}}</p>
   <h5>{{nota.tituloLista1}}</h5>
   <ul>
     <li *ngFor="let h of nota.lista1">
@@ -15,7 +15,7 @@
       {{s}}
     </li>
   </ul>
-  <h5>Área de habla y comunicación</h5>
+  <h5 *ngIf="nota.areaHablaComunicacion">Área de habla y comunicación</h5>
   <ul>
     <li *ngFor="let a of nota.areaHablaComunicacion">
       {{a}}

@@ -13,7 +13,7 @@ export class NutricionComponent implements OnInit {
 
   ngOnInit() {
     this.nota = this.notaSrv.dataNota;
-    console.log(this.nota);
+    /* console.log(this.nota); */
   }
 
 }

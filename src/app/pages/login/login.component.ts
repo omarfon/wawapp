@@ -89,8 +89,8 @@ export class LoginComponent implements OnInit {
             this.userSrv.sendValidation(email).subscribe((data:any) => {
               this.datos = data;
               if(this.datos.result = 'ok'){
-                let dataObj = JSON.stringify(this.datos);
-                this.router.navigate(['recovery', dataObj])
+                this.userSrv.recovery = this.datos;
+                this.router.navigate(['recovery'])
               }else{
                 this.message = this.datos.error.message;
               }

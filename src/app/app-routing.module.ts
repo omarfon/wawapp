@@ -87,6 +87,9 @@ const routes: Routes = [
   {
     path: 'detail-date',
     component:  DetaildateComponent
+  },{
+    path: 'recovery',
+    component:  RecoveryComponent
   }
 ];
 @NgModule({

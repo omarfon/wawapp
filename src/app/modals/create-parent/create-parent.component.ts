@@ -49,12 +49,12 @@ export class CreateParentComponent implements OnInit {
       // password        : [ String(Math.floor(Math.random() * 9e15)) ]
     });
 
-    console.log('la data de formulario:', this.formFamily);
+    /* console.log('la data de formulario:', this.formFamily); */
   }
 
   closeModal() {
     this.modalCtrl.dismiss();
-    console.log('modal controler dismiss');
+    /* console.log('modal controler dismiss'); */
   }
 
   async saveData() {

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { IonSlide, IonSlides, LoadingController, ModalController } from '@ionic/angular';
 import { DependentsService } from '../services/dependents.service';
 import { NotasService } from '../services/notas.service';
 import * as moment from 'moment'
@@ -18,10 +18,14 @@ import { VacunaComponent } from '../modals/vacuna/vacuna.component';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  public currentIndex;
+  @ViewChild('slideWithNav') slides: IonSlides;
+  @ViewChild('status') slide: IonSlide;
   public notas;
   public hitos;
   public dependends;
   public filtrados;
+  public dep:boolean = false;
   public slideOpts = {
     slidesPerView: 5.2,
     virtualTranslate: false,
@@ -33,6 +37,7 @@ export class Tab1Page {
     virtualTranslate: false,
   }
   public meses = [
+    {mes:0,de:0,a: 4},
     {mes:1,de:0,a: 4},
     {mes:2,de:4,a: 8},
     {mes:3,de:8,a: 12},
@@ -48,7 +53,8 @@ export class Tab1Page {
     {mes:15,de:24,a: 28},
     {mes:18,de:24,a: 28},
     {mes:24,de:24,a: 28},
-    {mes:48,de:24,a: 28},
+    {mes:36,de:36,a: 40},
+    {mes:48,de:40,a: 48},
   ]
   public mesActual;
   constructor(public router:Router,
@@ -61,12 +67,12 @@ export class Tab1Page {
 
  ngOnInit(){
   this.getDependents()
-  this.slideOpts.initialSlide = 8;
+  
  /* this.getNotes(); */
  let role = localStorage.getItem('role');
    if (role == 'user') {
    } else {
-     console.log('no es usuario no carga los dependientes');
+     /* console.log('no es usuario no carga los dependientes'); */
    }
 }
 
@@ -77,14 +83,19 @@ async getNotes(){
   await loading.present();
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos');
+    console.log(this.notas);
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
     this.notas = filtradasOne;
-    console.log(this.notas, this.hitos);
+    console.log(this.notas);
     loading.dismiss();
   })
 }
 
-getDependents() {
+async getDependents() {
+  const loading = await this.loadingCtrl.create({
+    message: 'Cargando categorías...'
+  });
+  await loading.present();
   this.dependentSrv.getDependens().subscribe((dependientes: any) => {
     this.dependends = dependientes.map(dependend => {
       dependend.edad = moment().diff(dependend.birthdate, 'years');
@@ -92,7 +103,7 @@ getDependents() {
       return dependend;
     });
     // console.log('los dependientes:', this.dependends);
-    const listaMenores = this.dependends.filter(d => d.edad <= 3);
+    const listaMenores = this.dependends.filter(d => d.edad < 3);
    this.filtrados = listaMenores;
    if(this.filtrados){
      const diaActual = moment();
@@ -103,21 +114,23 @@ getDependents() {
       const mesesActual = diaActual.diff(meses, 'months');
       this.mesActual = mesesActual;
       this.slideOpts.initialSlide = this.mesActual;
-      console.log('mes primer menor:', mesesActual);
+      /* console.log('mes primer menor:', mesesActual); */
       this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
         this.notas = data
         console.log(this.notas);
         const newNotas = this.notas.filter(n => n.mes <= mesesActual);
         this.notas = newNotas;
-        const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas');
+        const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado' || x.type === 'estimulacion');
         this.notas = filtradasOne;
-
+        loading.dismiss();
       });
    }
   });
 }
 
-async renderizarInfoPorHijo(dep) {
+async renderizarInfoPorHijo(dep, index) {
+  this.dep = true;
+  console.log(this.dep, index);
   const loading = await this.loadingCtrl.create({
     message: 'Cargando información...'
   });
@@ -128,25 +141,26 @@ async renderizarInfoPorHijo(dep) {
   const nombre = dep.name;
   // console.log(diaActual);
   const mesesActual = diaActual.diff(meses, 'months');
-      this.mesActual = mesesActual;
+  this.mesActual = mesesActual;
   this.slideOpts.initialSlide = mesesActual;
-  console.log('mesesActual:', mesesActual);
+  this.currentIndex = mesesActual;
+  /* console.log('mesesActual:', mesesActual); */
   this.notasSrv.getNotesPerMonth(mesesActual).subscribe(data => {
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= mesesActual);
     this.notas = newNotas;
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas');
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
     this.notas = filtradasOne;
-    console.log(this.notas);
+    /* console.log(this.notas);
     console.log('todas las notas:', this.notas);
-    console.log('this.htos', this.hitos);
+    console.log('this.htos', this.hitos); */
     loading.dismiss();
   });
 }
 
 onChangeDependent(dep: any): void {
   this.getDependents()
-  console.log('el dependiente que me trae', dep);
+  /* console.log('el dependiente que me trae', dep); */
 }
 
 goToHitos(){
@@ -157,26 +171,34 @@ goToEstimulation(){
 }
 
 async mesSelect(m){
+  this.currentIndex = m.mes;
   this.mesActual = m.mes;
   const loading = await this.loadingCtrl.create({
     message: 'Cargando información...'
   });
   await loading.present();
-  console.log(m, m.mes);
+  /* console.log(m, m.mes); */
   this.notasSrv.getNotesPerMonth(m.mes).subscribe(data => {
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= m.mes);
     this.notas = newNotas;
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas');
-    const filtradasTwo = this.notas.filter(x => x.type === 'bebehitos' )
+    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos');
     this.notas = filtradasOne;
-    this.hitos = filtradasTwo;
-    console.log(this.notas);
+/*   console.log(this.notas);
     console.log('todas las notas:', this.notas);
-    console.log('this.htos', this.hitos);
+    console.log('this.htos', this.hitos); */
     loading.dismiss();
   });
 
+}
+
+change(e){
+  this.slides.getActiveIndex().then(
+    (index) => {
+      this.currentIndex = index ;
+      console.log(this.currentIndex);
+    }
+  )
 }
 
 async openModalbebeCuidadoySalud(nota){
@@ -241,17 +263,22 @@ async openModalVacuna(nota){
 
 openHitos(){
   this.router.navigate(['hitos']);
-  console.log('abriendo hitos, guardar la fecha de y el sujeto para mandar los datos');
+  /* console.log('abriendo hitos, guardar la fecha de y el sujeto para mandar los datos'); */
 }
 
 async addParent(){
   console.log('abrir Modal');
-  const loading = await this.modalCtrl.create({
+  const modal = await this.modalCtrl.create({
     component: CreateParentComponent,
     cssClass: 'modalCreateParent',
     showBackdrop: true
   });
-  await loading.present();
+
+  modal.onDidDismiss().then(()=>{
+    this.getDependents();
+  })
+  await modal.present();
+
 }
 
 }

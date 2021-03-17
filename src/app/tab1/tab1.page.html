@@ -6,14 +6,6 @@
     <ion-title size='small'>
      Desarrollo
     </ion-title>
-<!--     <ion-buttons slot="end">
-      <ion-button  (click)="goToHitos()">
-        <ion-icon name="bar-chart"></ion-icon>
-      </ion-button>
-      <ion-button  (click)="goToEstimulation()">
-        <ion-icon name="accessibility"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -21,35 +13,40 @@
   <ion-row>
     <ion-col size="12" class="fondoDepes">
       <ion-row *ngIf="filtrados">
-        <ion-col size="3" *ngFor="let dep of filtrados" >  
-          <ion-row>
-            <ion-col *ngIf="dep.edad < 1">
-              <ion-avatar (click)="renderizarInfoPorHijo(dep)">
-                <img src="https://www.shareicon.net/data/2016/08/05/807214_people_512x512.png" alt="">
+        <ion-col size="3" *ngFor="let dep of filtrados; let item = index" >  
+            <ion-col class="containerPersonas" *ngIf="dep.edad < 2">
+              <div>
+                <ion-avatar (click)="renderizarInfoPorHijo(dep, item)">
+                  <img src="assets/img/icons/bebeicon.png">
+                  <ion-col class="containerNombreDepe">
+                    <p>{{dep.name}}</p> 
+                </ion-col>
               </ion-avatar>
+            </div>
             </ion-col>
-            <ion-col *ngIf="dep.edad > 0">
-              <ion-avatar (click)="renderizarInfoPorHijo(dep)">
-                <img class="nino" src="../../assets/img/icons/nino.png" alt="">
-              </ion-avatar>
+            <ion-col class="containerPersonas" *ngIf="dep.edad > 1">
+              <div>
+                <ion-avatar (click)="renderizarInfoPorHijo(dep, item)" >
+                  <img  src="assets/img/icons/nino.png">
+                  <ion-col class="containerNombreDepe">
+                      <p>{{dep.name}}</p> 
+                  </ion-col>
+                </ion-avatar>
+              </div>
             </ion-col>
-            <ion-col class="containerNombreDepe">
-                <p>{{dep.name}}</p> 
-            </ion-col>
-          </ion-row>  
         </ion-col>
         <ion-col size="3" class="addParent" (click)="addParent()">
           <ion-icon name="add-circle"></ion-icon>
-          <p class="agregarDepeTexto">Agregar</p>
+          <p class="agregarDepeTexto">agregar</p>
         </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>
  <div class="containerMeses" *ngIf="filtrados">
    <!-- <h5 class="tituloMes">Omar está en este mes</h5> -->
-   <ion-slides [options]="slideOpts">
-     <ion-slide *ngFor="let m of meses">
-       <div class="containerMesSlide" (click)="mesSelect(m)">
+   <ion-slides [options]="slideOpts" (ionSlideDidChange)="change($event)"  #slideWithNav>
+     <ion-slide #status *ngFor="let m of meses; let i = index;">
+       <div class="containerMesSlide" (click)="mesSelect(m)" [ngClass]="{'activeIndex': currentIndex === i}">
         <p class="mesSlide">{{m.mes}}</p>
        </div>
      </ion-slide>
@@ -60,46 +57,48 @@
         <ion-slide *ngFor="let nota of notas">
           <!-- card bebecuidadoysalud  -->
           <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'" (click)="openModalbebeCuidadoySalud(nota)">
-            <img src="https://www.britishbubbles.es/blogs/wp-content/uploads/2014/06/bebe-banandose.jpg" alt="">
-            <ion-card-header>
-              <h5>{{nota.titulo}}</h5>
-            </ion-card-header>
-            <ion-row>
-              <ion-col size="2">
-                <img class="iconType" src="./assets/img/icons/cuidado.png" alt="">
-              </ion-col>
-              <ion-col size="8" class="textoCategoria">
-                Cuidado y salud
-              </ion-col>
-              <ion-col size="2">
-                <p class="mesInicio">{{mesActual}}</p> 
-                <!-- <ion-icon class="iconMore" name="newspaper"></ion-icon> -->
-              </ion-col> 
-            </ion-row>
+            <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+            <ion-card-content>
+                <h5 class="tituloCard">{{nota.titulo | slice:0:70}}</h5>
+              </ion-card-content>
+              <ion-row>
+                <ion-col size="2">
+                  <img class="iconType" src="./assets/img/icons/cuidado.png" alt="">
+                </ion-col>
+                <ion-col size="8" class="textoCategoria">
+                  Cuidado y salud
+                </ion-col>
+                <ion-col size="2">
+                  <p class="mesInicio">{{mesActual}}</p> 
+                  <!-- <ion-icon class="iconMore" name="newspaper"></ion-icon> -->
+                </ion-col> 
+              </ion-row>
           </ion-card>
 
           <ion-card id="nutricion" *ngIf="nota.type == 'bebenutricion'" (click)="openModalnutricion(nota)">
-            <ion-card-header>
-              <h5> {{nota.titulo}}</h5>
-            </ion-card-header>
-            <img src="https://cdn.www.gob.pe/uploads/document/file/433992/standard_lactancia_para_a_web_2.jpg" alt="">
-              <ion-row>
-                <ion-col size="2">
-                  <img class="iconType" src="assets/img/icons/nutricion.png">
-                </ion-col>
-                <ion-col size="8" class="textoCategoria">
-                  Nutrición
-                </ion-col>
-                <ion-col>
-                  <p class="mesInicioNutri">{{mesActual}}</p> 
-                </ion-col>
-              </ion-row>
-            <p></p>
+            <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+            <ion-card-content>
+              <h5  class="tituloCard"> {{nota.titulo | slice:0:70}}</h5>
+            </ion-card-content>
+            <ion-row>
+              <ion-col size="2">
+                <img class="iconType" src="assets/img/icons/nutricion.png">
+              </ion-col>
+              <ion-col size="8" class="textoCategoria">
+                Nutrición
+              </ion-col>
+              <ion-col>
+                <p class="mesInicioNutri">{{mesActual}}</p> 
+              </ion-col>
+            </ion-row>
+
         </ion-card>
 
         <ion-card id="familia" *ngIf="nota.type == 'bebefamilia'" (click)="openBebeyFamilia(nota)">
-          <img src="https://deposeguro.com/wp-content/uploads/2018/12/casa-segura-para-ni%C3%B1os.jpg" alt="">
-          <h5>{{nota.titulo}}</h5>
+          <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+          <ion-card-content>
+            <h5 class="tituloCard">{{nota.titulo | slice:0:65}}</h5>
+          </ion-card-content>
           <ion-row>
             <ion-col size="2">
               <img class="iconType" src="assets/img/icons/hogar.png">
@@ -114,8 +113,8 @@
         </ion-card>
 
         <ion-card id="hitos" *ngIf="nota.type == 'bebehitos'"  (click)="openModalHitos(nota)">
-          <img src="https://i2.bssl.es/unomasenlafamilia/2012/07/bebe-gateando.jpg" alt="">
-            <h5>{{nota.titulo}}</h5>
+          <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+            <h5 class="tituloCard">{{nota.titulo}}</h5>
             <ion-row>
               <ion-col size="2">
                 <img class="iconType" src="assets/img/icons/hitos.png">
@@ -130,8 +129,10 @@
       </ion-card>
 
       <ion-card id="estimulacion" *ngIf="nota.type == 'bebeestimulacion'" (click)="openModalEstimulacion(nota)">
-        <img src="https://i.ytimg.com/vi/uV0VwCCkRSc/maxresdefault.jpg" alt="">
-        <h5>{{nota.titulo}}</h5>
+        <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+        <ion-card-content>
+          <h5 class="tituloCard">{{nota.titulo | slice:0:65}}</h5>
+        </ion-card-content>
         <ion-row>
           <ion-col size="2">
             <img class="iconType" src="assets/img/icons/nutricion.png">
@@ -146,8 +147,10 @@
       </ion-card>
 
       <ion-card id="vacunas" *ngIf="nota.type == 'bebevacunas'" (click)="openModalVacuna(nota)">
-        <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/11/18/14478583344315.jpg" alt="">
-        <h5>{{nota.titulo}}</h5>
+        <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+        <ion-card-content>
+          <h5 class="tituloCard">{{nota.titulo | slice:0:65}}</h5>
+        </ion-card-content>
         <ion-row>
           <ion-col size="2">
             <img class="iconType" src="assets/img/icons/vacuna.png">
