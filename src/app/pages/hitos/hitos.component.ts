@@ -27,8 +27,8 @@ export class HitosComponent implements OnInit {
       this.hitos = data;
       this.porhacer = this.hitos.filter(h => !h.fecha);
       this.hechas = this.hitos.filter(f => f.fecha);
-  /*     console.log('trayendo hitos:', this.hitos);
-      console.log('hitos sin fecha:', this.porhacer); */
+  console.log('trayendo hitos:', this.hitos);
+      /*     console.log('hitos sin fecha:', this.porhacer); */
       this.sinLograr = this.hitos.length;
     });
   }

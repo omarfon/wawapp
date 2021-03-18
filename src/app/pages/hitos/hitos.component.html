@@ -17,7 +17,7 @@
         <app-flash >
           <div [ngClass]="{'zebraUno': hito.mes =='1' || hito.mes == '3' || hito.mes == '5' || hito.mes == '7' || hito.mes == 9 || hito.mes == '11', 'zebraDos': hito.mes == '2' || hito.mes == '4' || hito.mes == '6' || hito.mes == '8' || hito.mes == '10' || hito.mes == '12'}" class="flash-card-front animated bounce" >
             <ion-card class="tarjeta">
-              <img class="imagenTarjeta" src="assets/imgs/hitos/coorvi.jpg" alt="">
+              <img class="imagenTarjeta" src="{{hito.imagenUrl}}" alt="">
               <!-- <p class="hitoMes">{{hito.mes}}</p> -->
               <ion-card-content>
                 <ion-row>
@@ -68,7 +68,7 @@
       </ion-slide>
       <ion-slide *ngFor="let hito of hechas">
         <ion-card class="hechas animated bounce">
-          <img class="imagenHechas" src="assets/imgs/hitos/coorvi.jpg">
+          <img class="imagenHechas" src="{{hito.imagenUrl}}">
           <ion-card-content>
             <ion-card-title>
               <h2 class="tituloHechas">{{hito.titulo | slice:0:20}}</h2>
