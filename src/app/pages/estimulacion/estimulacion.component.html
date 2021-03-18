@@ -17,7 +17,7 @@
           <div class="containerEstimulos" >
             <h3 class="tituloMesEstimulo">estimulación para el mes {{estimulo.mes}}</h3>
             <div>
-              <img class="imagenEstimulo" src="assets/imgs/estimulos/estimulos.png" alt="">
+              <img class="imagenEstimulo" src="{{estimulo.items[0].imagenUrl}}" alt="">
             </div>
             <div class="containerEstimulosTexto">
               <ion-item *ngFor="let e of estimulo.items ; let i = index">

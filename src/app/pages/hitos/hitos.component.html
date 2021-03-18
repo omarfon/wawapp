@@ -11,7 +11,7 @@
 
 <ion-content>
   <div class="containerPendientes">
-    <h4 class="tituloContenedorPendientes">Lista de hitos pendientes</h4>
+    <h4 class="tituloContenedorPendientes">Marca las tarjetas que tu bebé haya cumplido...</h4>
     <ion-slides [options]="slideOptions">
       <ion-slide *ngFor="let hito of porhacer">
         <app-flash >
@@ -25,7 +25,7 @@
                     <h2 class="tituloPendietes">{{hito.titulo | slice:0:30}}</h2>
                   </ion-col>
                   <ion-col size="12" class="containerContenidoTexto">
-                    <p class="hitoPendienteDescripcion">{{hito.descripcion | slice:0:30}}...</p>
+                    <p class="hitoPendienteDescripcion">{{hito.descripcion | slice:0:45}}...</p>
                   </ion-col>
                 </ion-row>
                 <ion-col size="12" class="verMas">
@@ -82,7 +82,7 @@
                 <p class="descripcionHechas">{{hito.descripcion | slice:0:35}}</p>
               </ion-col>
               <ion-col size="2">
-                <ion-icon name="checkbox-outline" class="subir" (click)="uncheckHito(hito)"> </ion-icon>
+                <ion-icon name="close-circle-outline" class="subir" (click)="uncheckHito(hito)"> </ion-icon>
               </ion-col>
             </ion-row>
           </ion-card-content>

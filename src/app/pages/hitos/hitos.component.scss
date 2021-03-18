@@ -59,7 +59,7 @@ ion-content{
     font-weight: 400;
   }
   .containerHechas{
-    background: #019FE0;
+    background: #FAA61A;
     width:100%!important;
     height: 50vh;
   }
@@ -76,9 +76,9 @@ ion-content{
     height: 200px;
   }
   .hitoPendienteDescripcion{
-    font-size:.9em;
     text-align: left;
     color:#A7A9AC;
+    margin-top:-15px;
   }
   .botonLogrado{
     text-transform: lowercase;
@@ -97,6 +97,7 @@ ion-content{
     text-align: left;
     font-size:1.2em;
     margin-top:-20px;
+    font-weight: 600;
   }
   .descripcionBack{
       width:90%;
@@ -122,17 +123,17 @@ ion-content{
     margin-top:-50px;
   }
   .imagenHechas{
-    height: 100px;
-    width: 100%;
-    margin-top: -10px;
+    height: 120px;
+    width: 90%;
+    margin-top:5px;
   }
   .tituloHechas{
-    font-weight: 400;
+    font-weight: 600;
     text-align: left;
     color:#A7A9AC;
     margin-left:16px;
-    margin-top:0px;
-    font-size:.6em!important;
+    margin-top:-15px;
+    font-size:.9em!important;
   }
   .containerSlidesHechas{
     height: 240px!important;
@@ -176,7 +177,7 @@ ion-content{
   }
   .verMas{
     text-align: right;
-    color:#019FE0;
+    color:#66CBEC;
     float: right;
     font-size:.8em;
     margin-top:-5px;
@@ -187,6 +188,7 @@ ion-content{
     z-index:100;
     position: relative;
     color:#FAA61A;
+    font-size:1.4em;
   }
   /* .zebraUno{
     border: 12px solid #66CBEC!important;
