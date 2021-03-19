@@ -11,7 +11,7 @@
 
 
 <ion-content >
-  <div *ngIf="appointments ; sincitas">
+  <div *ngIf="appointments">
     <div *ngFor="let encuentro of appointments">
       <ion-card *ngFor="let e of encuentro.appointments; let i = index" (click)="goToDetail(e, encuentro.user.id)">
         <ion-row>
@@ -34,11 +34,10 @@
       </ion-card>
     </div>
   </div>
-  <ng-template #name>
-   #sincitas >
+  <ng-template *ngIf="appointments === 0">
     <h3
-    class="textoCitasPendientes">Aun no tienes citas pendientes</h3>
-
+    class="textoCitasPendientes">Aun no tienes citas pendientes
+  </h3>
   </ng-template>
 
 </ion-content>

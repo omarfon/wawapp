@@ -36,7 +36,8 @@
                           class="containerIconAndDays">
                         <img src="assets/imgs/recipes/{{recipe.formasfar_pk}}.png" alt="">
                         <p class="cantidadDeDias">{{recipe.dias_duracion_prescripcion}}</p>
-                        <p class="dias">días</p>
+                        <p class="dias" *ngIf="recipe.dias_duracion_prescripcion === 1">día</p>
+                        <p class="dias" *ngIf="recipe.dias_duracion_prescripcion > 1" >días</p>
                     </ion-col>
                     <ion-col size="9"
                              class="containerDatosPastilla">

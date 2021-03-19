@@ -209,12 +209,19 @@ ion-avatar{
     margin-left:10px;
   }
 }
+ion-avatar:hover{
+  img{
+    height: 50px;
+    width: 50px;
+    margin-left:0px;
+  }
+}
 .containerNombreDepe{
   p{
     margin-left:10px;
     font-size:.9em;
     color:#79a3b1;
-    margin-top:-15px;
+    margin-top:-5px;
   } 
 }
 .centrar{

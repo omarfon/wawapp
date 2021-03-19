@@ -1,5 +1,5 @@
 ion-content{
-  --background:#f4f9f9!important;
+  --background:#1A8FC9!important;
 }
 .cuadrados{
     height: 60px;
@@ -26,7 +26,7 @@ ion-content{
     }
     .nombrePastilla{
     color:#007198;
-    font-size:.9em;
+    font-size:1em;
     font-weight: 400;
     margin-top:10px;
     margin-bottom:5px;
@@ -34,12 +34,12 @@ ion-content{
     margin-right:10px;
     }
   .cantidadDeDias, .inicio{
-    color:#444D4D;
+    color:#007198;
   }
   .tituloDeLasTomas{
-    color:#00B6A3;
+    color:#444D4D;
     font-size:1.1em!important;
-    font-weight:400;
+    font-weight:600;
     text-align: center;
     margin-bottom:0;
     margin-top:0;
@@ -60,13 +60,13 @@ ion-content{
   }
   .especialidad{
     margin-right: 20px;
-    color:#444D4D;
+    color:#fff;
     font-weight: 600;
     font-size:1.1em;
     margin-left:10px;
   }
   .resultado{
-    color:#444D4D;
+    color:#fff;
     font-weight: 200;
     font-size:1em;
     margin-top:-5px;
@@ -74,10 +74,10 @@ ion-content{
   }
   .iconoReceta{
     text-align: center;
-    border-right: .2px solid #444D4D;
+    border-right: .2px solid #fff;
     height: 100px;
     h4{
-      color:grey;
+      color:#fff;
       text-align: center;
       margin-top:10px;
     }
@@ -90,17 +90,17 @@ ion-content{
     margin-top:20px;
     font-size:3.5em;
     font-weight: 600;
-    color:#00B6A3;
+    color:#fff;
   }
   .mes{
-    color:#00B6A3;
+    color:#fff;
     font-size:1.1em;
   }
   .cantidadDeDias{
     margin-top:20px;
     font-size:2.5em;
     font-weight: 600;
-    color:#BABCC2;
+    color:#00B972;
     margin-top:0;
     margin-bottom:0;
   }
@@ -117,7 +117,7 @@ ion-content{
       text-align: center;
   }
   .dias{
-    color:#BABCC2;
+    color:#00B972;
     margin-top:5px;
   }
   .inicio{

@@ -31,6 +31,7 @@ public _dates;
 public dependend;
 public $dependend;
 public filtrados;
+public title: boolean = false;
   constructor(public dependentsSrv: DependentsService,
               public userSrv: UserService,
               public loading: LoadingController,
@@ -74,6 +75,9 @@ async ngOnInit(){
         });
         console.log('ordenados:', ordenados );
         });
+        if(!this.control){
+          this.title = true;
+        }
         this.appoinmentSrv.getAppoinmentsPerUserControl(this.id).subscribe(data => {
           this._dates = data;
           /* console.log(this._dates); */
@@ -97,8 +101,21 @@ async getDataParent(dependend) {
   const controles = this.constrolSrv.getAllControlPerContact(this.id).subscribe((data: any) => {
     this._items = data
     this._control = this._items[0].encuentros;
-    this.control = this._control;
-    /* console.log('los encuentros del paciente:', this._items, this.control); */
+    const ordenados = this._control.sort((a, b) => {
+          if ((a.fecha) > (b.fecha_registro)) {
+            return 1;
+          } else if ((a.fecha) < (b.fecha)) {
+            return -1
+          } else {
+            return 0;
+          }
+        });
+        console.log('ordenados:', ordenados );
+    this.control = ordenados;
+    if(!this.control){
+      this.title = true;
+    }
+    console.log('los encuentros del paciente:', this._items, this.control);
   }, err => {
     /* console.log(err); */
   });

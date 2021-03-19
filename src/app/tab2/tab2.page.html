@@ -34,32 +34,10 @@
     </ion-col>
   </ion-row>
 <ion-grid>
-  <ion-row>
-      <ion-col size="6"
-      class="boxControlsHecho"
-   *ngIf="dates">
-   <div padding>
-   <ion-row>
-     <ion-col size="6"
-                class="contenedorImagen">
-       <img id="profile-image" src="http://dappapache02.eastus.cloudapp.azure.com:4200/img/professionals/{{dates.professional.id}}.png" alt="">
-       <p class="nombreDoctor">{{dates.professional.name}}{{dates.professional.surname1}}</p>
-       <p class="servicioCita">{{dates.service.basicService.description }}</p>
-     </ion-col>
-     <ion-col size="6">
-        <p class="elDia">El día:</p>
-        <p class="diaCita">{{dates.appointmentDateTime | date}}</p>
-        <p class="hora">Hora:</p>
-        <p class="horaCita">{{dates.appointmentDateTime | date:'shortTime'}}</p>
-        <p class="cita">En el centro:</p>
-        <p class="centroCita">{{dates.medicalCenter.centro.name}}</p>
-     </ion-col>
-   </ion-row>
-   </div>
-</ion-col>
-    <ion-col size="6" *ngFor="let c of control ; let i = index ">
+  <ion-row *ngIf="control">
+    <ion-col size="6" *ngFor="let c of control ; let i = index">
       <div
-            [ngClass]="c.cod_centro == 1 ? 'boxControls' : 'boxControlsHecho'">
+            [ngClass]="c.cod_centro == 1 ? 'boxControls' : 'boxControlsHecho'" >
             <!-- (click)="goToDetailControl(c)" -->
             <div class="containerData">
               <ion-row>
@@ -69,16 +47,6 @@
             <ion-col size="8">
               <p class="when">{{c.servicio_basico}}</p>
             </ion-col>
-            <!-- <ion-col col-2>
-              <button ion-button
-                      item-end
-                      clear
-                      class="buttonOptions"
-                      (click)="presentPopover(c)"
-                      *ngIf="c.efectuado === false">
-                <ion-icon name="more"></ion-icon>
-              </button> -->
-            <!-- </ion-col> -->
             <ion-col size="12">
                 <p  *ngIf="!c.diarealizado"
                     class="fecha">{{c.date  | date}}</p>
@@ -127,7 +95,6 @@
         </div>
       </div>
     </ion-col>
-
   </ion-row>
 </ion-grid>
 <ion-fab horizontal="end" vertical="bottom" slot="fixed"  (click)="getDates()" >
@@ -135,8 +102,5 @@
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-<!-- <div *ngFor="let item of items">
-    {{item.}}
-</div> -->
   
 </ion-content>

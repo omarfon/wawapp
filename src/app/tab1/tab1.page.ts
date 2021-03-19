@@ -26,6 +26,7 @@ export class Tab1Page {
   public dependends;
   public filtrados;
   public dep:boolean = false;
+  public activo: boolean = false;
   public slideOpts = {
     slidesPerView: 5.2,
     virtualTranslate: false,
@@ -83,10 +84,10 @@ async getNotes(){
   await loading.present();
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
-    console.log(this.notas);
+    /* console.log(this.notas); */
     const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
     this.notas = filtradasOne;
-    console.log(this.notas);
+ /*    console.log(this.notas); */
     loading.dismiss();
   })
 }
@@ -117,7 +118,7 @@ async getDependents() {
       /* console.log('mes primer menor:', mesesActual); */
       this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
         this.notas = data
-        console.log(this.notas);
+     /*    console.log(this.notas); */
         const newNotas = this.notas.filter(n => n.mes <= mesesActual);
         this.notas = newNotas;
         const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado' || x.type === 'estimulacion');
@@ -196,7 +197,7 @@ change(e){
   this.slides.getActiveIndex().then(
     (index) => {
       this.currentIndex = index ;
-      console.log(this.currentIndex);
+      /* console.log(this.currentIndex); */
     }
   )
 }

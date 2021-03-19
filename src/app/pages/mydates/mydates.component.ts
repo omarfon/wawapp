@@ -34,9 +34,9 @@ async ngOnInit() {
          loading.dismiss();
        /*   console.log('con citas:', this.dependentsAppointments);   
          console.log('this.appointnments:', this.appointments);       */        
-      }/* else{
-        this.appointments == 0;
-      } */
+      }else{
+        this.appointments = 0;
+      } 
     });
     
   }

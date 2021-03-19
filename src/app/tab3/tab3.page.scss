@@ -118,6 +118,13 @@ ion-avatar{
     margin-left:10px;
   }
 }
+ion-avatar:hover{
+  img{
+    height: 50px;
+    width: 50px;
+    margin-left:0px;
+  }
+}
 .containerNombreDepe{
   p{
     margin-left:10px;
