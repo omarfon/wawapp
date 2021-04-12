@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { DependentsService } from 'src/app/services/dependents.service';
 import { ParematersService } from 'src/app/services/parematers.service';
 import * as moment from 'moment';
@@ -194,6 +194,7 @@ export class GraficasComponent implements OnInit {
               public router: Router,
               public loadingCtrl: LoadingController,
               public dependendentSrv: DependentsService,
+              public alert: AlertController,
               public parametersSrv: ParematersService) {
                 this.getAllDependens();
                 
@@ -215,7 +216,7 @@ export class GraficasComponent implements OnInit {
         return dependend;
       });
       if(this.dependens){
-        this.filtrados = this.dependens.filter(x => x.edad < 5)
+        this.filtrados = this.dependens.filter(x => x.edad < 3)
         this.id = this.filtrados[0].patientId;
         this.sex = this.filtrados[0].sex
         /* console.log(this.id) */
@@ -224,6 +225,17 @@ export class GraficasComponent implements OnInit {
     /*     this.vacinneSrv.getAllVaccines().subscribe(data => {
           this.vacunas = data; */
     loading.dismiss();
+    }, async err => {
+      loading.dismiss();
+      console.log(err);
+      const alert = await this.alert.create({
+        header:'No se puede cargar',
+        subHeader:'Necesitas crear un dependiente para poder ver las fechas',
+        buttons:[{
+          text:'Entiendo'
+        }]
+      });
+      alert.present();
     });
   }
 
@@ -248,11 +260,11 @@ export class GraficasComponent implements OnInit {
         const tallas = parametros.filter(item => item.descripcion == 'Talla').map(item => item.valor);
         const perimetros = parametros.filter(item => item.descripcion == 'Perímetro cefálico').map(item => item.valor);
         this.barChartDataPeso = [
-          {data: [2.5, 3.4, 4.4, 5.1, 5.6, 6.1, 6.4, 6.7, 7.0, 7.2, 7.7, 7.9, 7.8, 8.0, 8.2, 8.4, 8.5, 8.7], label: 'percentil 3'},
-          {data: [2.9, 3.9, 4.9, 5.6, 6.2, 6.7, 7.1, 7.4, 7.7, 7.9, 8.5, 8.7, 8.6, 8.8, 9.0, 9.2, 9.4, 9.6], label: 'percentil 15'},
-          {data: [3.3, 4.5, 5.6, 6.4, 7.0, 7.5, 7.9, 8.3, 8.6, 8.9, 9.9, 10.1, 9.6, 9.9, 10.1, 10.3, 10.5, 10.7], label: 'percentil 50'},
-          {data: [3.9, 5.1, 6.3, 7.2, 7.9, 8.4, 8.9, 9.3, 9.6, 10, 10.9, 11.2, 10.8, 11.1, 11.3, 11.6, 11.8, 12.0], label: 'percentil 85'},
-          {data: [4.3, 5.7, 7.0, 7.9, 8.6, 9.2, 9.7, 10.2, 10.5, 10.9, 11.8, 12.1, 11.8, 12.1, 12.4, 12.8, 12.9, 13.2], label: 'percentil 97'},
+          {data: [2.5, 3.4, 4.4, 5.1, 5.6, 6.1, 6.4, 6.7, 7.0, 7.2, 7.5, 7.7, 7.8, 8.0, 8.2, 8.4, 8.5, 8.7], label: 'percentil 3'},
+          {data: [2.9, 3.9, 4.9, 5.6, 6.2, 6.7, 7.1, 7.4, 7.7, 7.9, 8.2, 8.4, 8.6, 8.8, 9.0, 9.2, 9.4, 9.6], label: 'percentil 15'},
+          {data: [3.3, 4.5, 5.6, 6.4, 7.0, 7.5, 7.9, 8.3, 8.6, 8.9, 9.2, 9.4, 9.6, 9.9, 10.1, 10.3, 10,5, 10,7], label: 'percentil 50'},
+          {data: [3.9, 5.1, 6.3, 7.2, 7.9, 8.4, 8.9, 9.3, 9.6, 10.0, 10.3, 10.5, 10.8, 11.1, 11.3, 11.6, 11.8, 12.0], label: 'percentil 85'},
+          {data: [4.3, 5.7, 7.0, 7.9, 8.6, 9.2, 9.7, 10.2, 10.5, 10.9, 11.2, 11.5, 11.8, 12.1, 12.4, 12.7, 12.9, 13.2], label: 'percentil 97'},
           {data: [...pesos], label: 'Peso'}
         ]
 
@@ -284,11 +296,11 @@ export class GraficasComponent implements OnInit {
         ]
   
         this.barChartDataPc = [
-          {data: [32.10, 35.10, 36.90, 38.30, 39.40, 40.30, 41.00, 41.70, 42.20, 42.60, 43.30, 43.70, 43.60, 43.90, 44.10, 44.30, 44.50, 44.70], label: 'percentil 3'},
-          {data: [33.10, 36.10, 37.9, 39.30, 40.40, 41.30, 42.10, 42.70, 43.20, 43.70, 44.60, 44.90, 44.70, 45.00, 45.20, 45.50, 45.60, 45.80], label: 'percentil 15'},
-          {data: [34.50, 37.30, 39.10, 40.50, 41.60, 42.60, 43.30, 44.00, 44.50, 45.00, 46.30, 46.60, 46.10, 46.30, 46.60, 46.80, 47.00, 47.20], label: 'percentil 50'},
-          {data: [35.80, 38.50, 40.30, 41.70, 42.90, 43.80, 44.60, 45.30, 45.80, 46.30, 47.50, 47.90, 47.40, 47.70, 47.90, 48.20, 48.40, 48.60], label: 'percentil 85'},
-          {data: [36.90, 39.50, 41.30, 42.70, 43.90, 44.80, 45.60, 46.30, 46.90, 47.40, 48.40, 48.70, 48.50, 48.80, 49.00, 49.30, 49.50, 49.70], label: 'percentil 97'},
+          {data: [32.10, 35.10, 36.90, 38.30, 39.40, 40.30, 41.00, 41.70, 42.20, 42.60, 43.00, 43.40, 43.60, 43.90, 44.10, 44.30, 44.50, 44.70], label: 'percentil 3'},
+          {data: [33.10, 36.10, 37.90, 39.30, 40.40, 41.30, 42.10, 42.70, 43.20, 43.70, 44.10, 44.40, 44.70, 45.00, 45.20, 45.50, 45.60, 45.80], label: 'percentil 15'},
+          {data: [34.50, 37.30, 39.10, 40.50, 41.60, 42.60, 43.30, 44.00, 44.50, 45.00, 45.40, 45.80, 46.10, 46.30, 46.60, 46.80, 47.00, 47.20], label: 'percentil 50'},
+          {data: [35.80, 38.50, 40.30, 41.70, 42.90, 43.80, 44.60, 45.30, 45.80, 46.30, 46.70, 47.10, 47.40, 47.70, 47.90, 48.20, 48.40, 48.60], label: 'percentil 85'},
+          {data: [36.90, 39.50, 41.30, 42.70, 43.90, 44.80, 45.60, 46.30, 46.90, 47.40, 47.80, 48.20, 48.50, 48.80, 49.00, 49.30, 49.50, 49.70], label: 'percentil 97'},
           {data: [...perimetros], label: 'Perimetro cefalico'}
         ]
 
@@ -311,11 +323,11 @@ export class GraficasComponent implements OnInit {
         ]
 
         this.pesoTallaWomen = [
-          {data: [2.1, 2.2, 2.2, 2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.8, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 4.0, 4.1, 4.2, 4.3], label: 'percentil 3'},
-          {data: [2.2, 2.3, 2.4, 2.5, 2.6, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.2, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.6], label: 'percentil 15'},
-          {data: [2.5, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1], label: 'percentil 50'},
-          {data: [2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7, 4.9, 5.0, 5.2, 5.3, 5.5, 5.6], label: 'percentil 85'},
-          {data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1, 5.3, 5.4, 5.6, 5.8, 5.9, 6.1], label: 'percentil 97'},
+          {data: [2.1, 2.1, 2.2, 2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4], label: 'percentil 3'},
+          {data: [2.2, 2.3, 2.4, 2.5, 2.5, 2.6, 2.7, 2.8, 2.9, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.6, 3.7, 3.8, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7], label: 'percentil 15'},
+          {data: [2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1], label: 'percentil 50'},
+          {data: [2.7, 2.8, 2.9, 3.0, 3.1, 3.1, 3.2, 3.3, 3.4, 3.5, 3.7, 3.8, 3.9, 4.0, 4.1, 4.3, 4.4, 4.5, 4.7, 4.8, 5.0, 5.1, 5.3, 5.4, 5.6], label: 'percentil 85'},
+          {data: [2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.0, 4.1, 4.2, 4.3, 4.5, 4.6, 4.7, 4.9, 5.0, 5.2, 5.4, 5.5, 5.7, 5.9, 6.0], label: 'percentil 97'},
           {data: [...pesos], label: 'Peso/talla'}
         ]
   

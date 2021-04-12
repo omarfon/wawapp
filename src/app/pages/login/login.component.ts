@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { NotasService } from 'src/app/services/notas.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -19,9 +20,13 @@ export class LoginComponent implements OnInit {
   constructor(public router:Router,
               public alert: AlertController,
               public userSrv: UserService,
-              public loadingCtrl: LoadingController) { }
-
+              public notasSrv: NotasService,
+              public loadingCtrl: LoadingController) { 
+                
+              }
+          
   ngOnInit() {
+    
     const authorization = localStorage.getItem('authorization');
                 if(!authorization){
                   this.userSrv.getKey().subscribe(data =>{
@@ -30,11 +35,19 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('role', this.authPublic.role);
                   });
                 }
+    const notas = localStorage.getItem('notas');
+    if(!notas){
+      this.getAllNotes();
+    }
   }
 
-  /* signIn(){
-    this.router.navigate(['tabs'])
-  } */
+  getAllNotes(){
+    this.notasSrv.getAllNotes().subscribe((data:any) => {
+      console.log(data);
+      const notasNoFilter = data.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado')
+      localStorage.setItem('notas', JSON.stringify(notasNoFilter));
+    })
+  }
 
   async signIn(email, password){
     const loading = await this.loadingCtrl.create({
@@ -54,10 +67,11 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('patientName', this.logeo.patientName);
         localStorage.setItem('imagenPaciente' , this.logeo.photoUrl); */
         /* this.events.publish('user:logged', 'logged'); */
-        this.router.navigate(['tabs'])
+        this.router.navigate(['tabs/tab1'])
         /* this.navCtrl.setRoot(TabsPage); */
     },
   async err =>{
+    loading.dismiss();
     const alert = await this.alert.create({
       header: '',
       message: "Email o Password incorrecto",

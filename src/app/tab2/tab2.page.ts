@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { DatesComponent } from '../pages/dates/dates.component';
 import { UserService } from '../services/user.service';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { ControlsService } from '../services/controls.service';
 import { AppoinmentService } from '../services/appoinment.service';
 import { ParametersComponent } from '../pages/parameters/parameters.component';
@@ -38,6 +38,7 @@ public title: boolean = false;
               public constrolSrv: ControlsService,
               public appoinmentSrv: AppoinmentService,
               public financerSrv: FinancerService,
+              public alert: AlertController,
               public router: Router) {}
 
 
@@ -48,15 +49,15 @@ async ngOnInit(){
     await loading.present();
     this.dependentsSrv.getDependens().subscribe((dependientes:any) =>{
       this.dependends = dependientes.map(dependend =>{
-        dependend.edad = moment().diff(dependend.birthdate, 'years');
+        dependend.edad = moment().diff(dependend.birthdate, 'months');
         loading.dismiss();
         return dependend
       });
       if(this.dependends){
-        this.filtrados = this.dependends.filter(x => x.edad < 5)
+        this.filtrados = this.dependends.filter(x => x.edad <= 24)
         this.id = this.filtrados[0].patientId;
+
       }
-      /* console.log('lista de dependientes:', this.dependends, this.filtrados); */
       this.fechaInicio = this.dependends.birthdate;
       this.constrolSrv.getAllControlPerContact(this.id).subscribe((data:any) => {
         this._items = data
@@ -84,6 +85,18 @@ async ngOnInit(){
        /*    this.dates = this._dates[0].appointments[0]; */
           /* console.log('this.dates:', this._dates); */
         });
+    }, async err => {
+      loading.dismiss();
+      console.log(err);
+      const alert = await this.alert.create({
+        header:'No se puede cargar',
+        subHeader:'Necesitas crear un dependiente para poder ver las fechas',
+        buttons:[{
+          text:'Entiendo'
+        }]
+      });
+      alert.present();
+      
     });
 }
 

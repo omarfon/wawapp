@@ -57,7 +57,7 @@ export class UserService {
       let params = {code: datos.code, email: datos.email, id: datos.id, password: datos.password, app: 'wawa'};
       const authorization = localStorage.getItem('authorization');
       let headers = new HttpHeaders({"Authorization": authorization});
-      return this.http.post(this.apiUrl + 'login-recovery', params, {headers}).pipe(
+      return this.http.post(this.SERVER + 'users/login-recovery', params, {headers}).pipe(
                       map(data => {
                         return data
                       })

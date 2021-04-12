@@ -3,7 +3,7 @@ import { DependentsService } from '../services/dependents.service';
 import { VaccinesService } from '../services/vaccines.service';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -22,6 +22,7 @@ export class Tab3Page {
   constructor(public dependentsSrv: DependentsService,
               public vacinneSrv: VaccinesService,
               public loadingCtrl: LoadingController,
+              public alert: AlertController,
               public router: Router) {}
 
     async ngOnInit(){
@@ -50,14 +51,26 @@ export class Tab3Page {
           return dependend;
         });
         if(this.dependens){
-          this.filtrados = this.dependens.filter(x => x.edad < 5)
+          this.filtrados = this.dependens.filter(x => x.edad < 3)
           this.id = this.filtrados[0].patientId;
         }
+        console.log('lista de dependientes:', this.dependends, this.filtrados, this.id);
           this.vaccine = this.dependens[0].patientId;
       /*     this.vacinneSrv.getAllVaccines().subscribe(data => {
             this.vacunas = data; */
       this.getAllVaccinePerUser();
       loading.dismiss();
+      }, async err => {
+        loading.dismiss();
+        console.log(err);
+        const alert = await this.alert.create({
+          header:'No se puede cargar',
+          subHeader:'Necesitas crear un dependiente para poder ver las fechas',
+          buttons:[{
+            text:'Entiendo'
+          }]
+        });
+        alert.present();
       });
     }
 
@@ -69,12 +82,14 @@ export class Tab3Page {
   
     getAllVaccinePerUser(){
       const id = this.vaccine;
-      this.vacinneSrv.getAllVaccinesPerUser(this.id).subscribe(data => {
-        this.vacunas = data;
-      this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540, 720, 1440];
-      /* console.log('vacunas', this.vacunas); */
-      
-    });
+      if(this.id){
+        this.vacinneSrv.getAllVaccinesPerUser(this.id).subscribe(data => {
+          this.vacunas = data;
+        this.vacunasKeys = [0, 60, 120, 180, 210, 240, 360, 450, 540, 720, 1440];
+        /* console.log('vacunas', this.vacunas); */
+        
+      });
+      }
     }
   
     goToDetailVacuna(vacuna){

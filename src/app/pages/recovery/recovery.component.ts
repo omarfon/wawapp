@@ -50,14 +50,18 @@ export class RecoveryComponent implements OnInit {
     }
   }
 
-  saveData(data){
+  async saveData(data){
+    const loading = await  this.loadingCtrl.create({
+      message: 'cambiando contraseña'
+    });
+    await loading.present();
     let codigo = this.formCode.value;
     // console.log('codigo:', codigo);
     let uno = codigo.primero;
     let dos = codigo.segundo;
     let tres = codigo.tercero;
     let cuatro = codigo.cuarto;
-    let code = uno + dos + tres + cuatro;
+    const code = uno + dos + tres + cuatro;
     // console.log(code);
     this.datos.code = code;
     this.datos.password = this.formCode.value.password;
@@ -66,7 +70,9 @@ export class RecoveryComponent implements OnInit {
     // console.log('data armada:', this.datos);
 
   this.userSrv.recoveryLogin(this.datos).subscribe(data => {
+
         this.logeo = data;
+        console.log(data);
         if(data){
           localStorage.setItem('usuario', this.logeo.userEmail);
            localStorage.setItem('email', this.logeo.userEmail);
@@ -80,9 +86,16 @@ export class RecoveryComponent implements OnInit {
               this.router.navigate(['login']);
         }
             /* this.navCtrl.setRoot(LoginPage); */
-      },err =>{
-        console.log('el logeo:', this.logeo);
-          this.erroCode();
+          loading.dismiss();
+      },async err =>{
+        loading.dismiss();
+        console.log('err:', err);
+        const alert = await this.alertCtrl.create({
+          header:`Error en la recuperación`,
+          message:`${err.error.message}`,
+          buttons: ['volver a intentar']
+        });
+        await alert.present();
       });
 }
 

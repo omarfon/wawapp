@@ -43,6 +43,7 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 
 
 
+
 registerLocaleData(localeEs);
 
 

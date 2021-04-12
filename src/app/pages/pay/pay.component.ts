@@ -88,8 +88,8 @@ export class PayComponent implements OnInit {
     console.log('la hora', this.plan, this.plan);
 
 
-    /* window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
-    window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z';
+    window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb';
+   /*  window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z'; */
   }
 
   errorHandler(event) {

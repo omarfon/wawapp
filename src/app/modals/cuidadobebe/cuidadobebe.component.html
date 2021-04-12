@@ -2,13 +2,13 @@
   <h3>{{nota.titulo}}</h3>
   <img src="{{nota.imagenUrl}}" alt="">
   <p class="desarrollo">{{nota.texto}}</p>
-  <h5 *ngIf="nota.lista1">Lo que deberías hacer</h5>
+  <h5 *ngIf="nota.tituloLista2">Lo que deberías hacer</h5>
   <ul>
     <li *ngFor="let h of nota.lista1">
       {{h}}
     </li>
   </ul>
-  <h5 *ngIf="nota.lista2">Ten cuidado con</h5>
+  <h5 *ngIf="nota.tituloLista2">Ten cuidado con</h5>
   <ul>
     <li *ngFor="let h of nota.lista2">
       {{h}}

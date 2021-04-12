@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { LoginGuard } from './login.guard';
 import { DatesComponent } from './pages/dates/dates.component';
 import { DetailRecipeComponent } from './pages/detail-recipe/detail-recipe.component';
 import { DetailVacinneComponent } from './pages/detail-vacinne/detail-vacinne.component';
@@ -15,15 +17,36 @@ import { PayComponent } from './pages/pay/pay.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { Tab1Page } from './tab1/tab1.page';
 import { TabsPageModule } from './tabs/tabs.module';
 import { TabsPage } from './tabs/tabs.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
+{
+  path: '',
+  component:  LoginComponent , canActivate: [AuthGuard]
+},
+{
+  path: 'tabs',
+  component: TabsPage,
+  children: [
+    {
+      path: 'tab1',
+      loadChildren: () => import('../app/tab1/tab1.module').then(m => m.Tab1PageModule), canActivate: [LoginGuard]
+    },
+    {
+      path: 'tab2',
+      loadChildren: () => import('../app/tab2/tab2.module').then(m => m.Tab2PageModule)
+    },
+    {
+      path: 'tab3',
+      loadChildren: () => import('../app/tab3/tab3.module').then(m => m.Tab3PageModule)
+    },
+    {
+      path: 'graficas',
+      component:GraficasComponent
+    },
+  ]
+}, 
   {
     path: 'login',
     component:  LoginComponent

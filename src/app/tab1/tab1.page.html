@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
   <ion-row>
     <ion-col size="12" class="fondoDepes">
-      <ion-row *ngIf="filtrados">
+      <ion-row>
         <ion-col size="3" *ngFor="let dep of filtrados; let item = index" >  
             <ion-col class="containerPersonas" *ngIf="dep.edad < 2">
               <div>
@@ -42,7 +42,7 @@
       </ion-row>
     </ion-col>
   </ion-row>
- <div class="containerMeses" *ngIf="filtrados">
+ <div class="containerMeses" >
    <!-- <h5 class="tituloMes">Omar está en este mes</h5> -->
    <ion-slides [options]="slideOpts" (ionSlideDidChange)="change($event)"  #slideWithNav>
      <ion-slide #status *ngFor="let m of meses; let i = index;">
@@ -56,8 +56,8 @@
       <ion-slides [options]="slidOptions">
         <ion-slide *ngFor="let nota of notas">
           <!-- card bebecuidadoysalud  -->
-          <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'" (click)="openModalbebeCuidadoySalud(nota)">
-            <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+          <ion-card id="cuidado" *ngIf="nota.type == 'bebecuidadoysalud'" (click)="openModalbebeCuidadoySalud(nota)" >
+            <img class="imagenCard" src="{{nota.imagenUrl }}" alt="">
             <ion-card-content>
                 <h5 class="tituloCard">{{nota.titulo | slice:0:70}}</h5>
               </ion-card-content>

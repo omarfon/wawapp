@@ -531,8 +531,7 @@ export class FinancerComponent implements OnInit {
   }
 
   goToBack(){
-    this.nav.back();
+    this.router.navigate(['tabs/tab2']);
   }
-
 
 }

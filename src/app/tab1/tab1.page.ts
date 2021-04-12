@@ -51,7 +51,11 @@ export class Tab1Page {
     {mes:10,de:24,a: 28},
     {mes:11,de:24,a: 28},
     {mes:12,de:24,a: 28},
+    {mes:13,de:24,a: 28},
+    {mes:14,de:24,a: 28},
     {mes:15,de:24,a: 28},
+    {mes:16,de:24,a: 28},
+    {mes:17,de:24,a: 28},
     {mes:18,de:24,a: 28},
     {mes:24,de:24,a: 28},
     {mes:36,de:36,a: 40},
@@ -85,7 +89,8 @@ async getNotes(){
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
     /* console.log(this.notas); */
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
+    const filtradasOne = 
+    this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
     this.notas = filtradasOne;
  /*    console.log(this.notas); */
     loading.dismiss();
@@ -99,34 +104,54 @@ async getDependents() {
   await loading.present();
   this.dependentSrv.getDependens().subscribe((dependientes: any) => {
     this.dependends = dependientes.map(dependend => {
-      dependend.edad = moment().diff(dependend.birthdate, 'years');
-      // console.log('dependend:', dependend);
+      dependend.edad = moment().diff(dependend.birthdate, 'months');
+      console.log('dependend:', dependend);
       return dependend;
+    },err =>{
+      loading.dismiss();
+      this.slideOpts.initialSlide = 1;
+      const mes = {mes:1,de:0,a: 4};
+      this.mesSelect(mes);
     });
     // console.log('los dependientes:', this.dependends);
-    const listaMenores = this.dependends.filter(d => d.edad < 3);
-   this.filtrados = listaMenores;
-   if(this.filtrados){
-     const diaActual = moment();
+      const listaMenores = this.dependends.filter(d => d.edad <= 24);
+      this.filtrados = listaMenores;
+      if(this.filtrados){
+      const diaActual = moment();
       const mes = this.filtrados[0].edad;
       const nombre = this.filtrados[0].name;
       const meses = this.filtrados[0].birthdate;
     // console.log(diaActual);
       const mesesActual = diaActual.diff(meses, 'months');
       this.mesActual = mesesActual;
-      this.slideOpts.initialSlide = this.mesActual;
-      /* console.log('mes primer menor:', mesesActual); */
+      this.slideOpts.initialSlide = mes;
+      
+      
+      console.log('mes primer menor:', mesesActual); 
       this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
         this.notas = data
      /*    console.log(this.notas); */
         const newNotas = this.notas.filter(n => n.mes <= mesesActual);
         this.notas = newNotas;
-        const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado' || x.type === 'estimulacion');
-        this.notas = filtradasOne;
+        const filtradasOne = this.notas 
+        this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado' || x.type === 'estimulacion'); 
+        this.notas = filtradasOne; 
         loading.dismiss();
       });
    }
+  },err => {
+    loading.dismiss();
+    this.slideOpts.initialSlide = 1;
+    const mes = {mes:1,de:0,a: 4};
+    this.mesSelect(mes);
   });
+}
+
+
+getAllNotes(){
+  this.notasSrv.getAllNotes().subscribe(data => {
+    this.notas = data
+  })
 }
 
 async renderizarInfoPorHijo(dep, index) {
@@ -150,7 +175,8 @@ async renderizarInfoPorHijo(dep, index) {
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= mesesActual);
     this.notas = newNotas;
-    const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
+    const filtradasOne 
+    = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
     this.notas = filtradasOne;
     /* console.log(this.notas);
     console.log('todas las notas:', this.notas);
@@ -182,10 +208,12 @@ async mesSelect(m){
   this.notasSrv.getNotesPerMonth(m.mes).subscribe(data => {
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= m.mes);
-    this.notas = newNotas;
+     this.notas = newNotas;
+     localStorage.setItem('notas', this.notas)
+     console.log(this.notas);
     const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos');
-    this.notas = filtradasOne;
-/*   console.log(this.notas);
+    this.notas = filtradasOne; 
+/*   
     console.log('todas las notas:', this.notas);
     console.log('this.htos', this.hitos); */
     loading.dismiss();
@@ -275,8 +303,12 @@ async addParent(){
     showBackdrop: true
   });
 
-  modal.onDidDismiss().then(()=>{
-    this.getDependents();
+  modal.onDidDismiss().then((data)=>{
+    if(data){
+      this.getDependents();
+    }else{
+      return
+    }
   })
   await modal.present();
 
