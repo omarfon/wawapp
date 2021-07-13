@@ -202,7 +202,16 @@ export class RegisterComponent implements OnInit {
     this.userProvider.createNewUser(data).subscribe(async (data: any) => {
       this.createOk = data;
       console.log('la vuelta de this.createOK:', this.createOk);
-
+      const alert = await this.alertctrl.create({
+        header:'Creación de cuenta',
+        message:'la creación ha sido exitosa, ingresa tus credenciales',
+        buttons: [
+          {
+            text:'Ok'
+          }
+        ]
+      });
+      await alert.present();
       /* this.createOk = data; */
       console.log('datos que vienen del logueo: por registro:', this.createOk);
       localStorage.setItem('idTokenUser', this.createOk.patientId);
@@ -220,11 +229,12 @@ export class RegisterComponent implements OnInit {
     
       /* console.log("pasó!!!"); */
      /*  console.log('pasó logeado', this.createOk); */
+
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
       }
     }, async err => {
-      console.log('err', err);
+      /* console.log('err', err); */
       const alert = await this.alertctrl.create({
         header: 'Error en el envio del código',
         message: `${err.error.message}`,

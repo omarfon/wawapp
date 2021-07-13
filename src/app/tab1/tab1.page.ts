@@ -124,7 +124,10 @@ async getDependents() {
     // console.log(diaActual);
       const mesesActual = diaActual.diff(meses, 'months');
       this.mesActual = mesesActual;
-      this.slideOpts.initialSlide = mes;
+      if(mesesActual){
+        this.slideOpts.initialSlide = mesesActual;
+        console.log(this.slideOpts.initialSlide);
+      }
       
       
       console.log('mes primer menor:', mesesActual); 
@@ -209,7 +212,7 @@ async mesSelect(m){
     this.notas = data
     const newNotas = this.notas.filter(n => n.mes <= m.mes);
      this.notas = newNotas;
-     localStorage.setItem('notas', this.notas)
+     localStorage.setItem('notas', JSON.stringify(this.notas))
      console.log(this.notas);
     const filtradasOne = this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos');
     this.notas = filtradasOne; 
