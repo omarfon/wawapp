@@ -12,8 +12,8 @@ export class ControlsService {
   constructor(public http: HttpClient) { }
 
   getAllControlPerContact(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.SERVER + 'ebooking/encuentros-paciente-contacto/' + `${id}`, {headers}).pipe(
                     map((data:any)=>{
                         return data

@@ -12,8 +12,8 @@ export class ParematersService {
   constructor(public http: HttpClient) { }
 
   getParametersPerId(patientId, id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiParameters + `${patientId}?encuentroid=${id}`, {headers}).pipe(
               map((data: any) => {
@@ -23,8 +23,8 @@ export class ParematersService {
   }
 
   getAllParametersPerId(patientId){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiParameters + `${patientId}`, {headers}).pipe(
                     map((data: any) => {

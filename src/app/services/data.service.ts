@@ -13,8 +13,8 @@ export class DataService {
   constructor(public http: HttpClient) { }
 
   getGenders(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl + 'genders', {headers}).pipe(
                      map(data =>{
@@ -25,8 +25,8 @@ export class DataService {
   }
 
   getDocuments(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl + 'documenttypes', {headers}).pipe(
                   map(data =>{
@@ -34,4 +34,5 @@ export class DataService {
                   })
              )
           }
+          
 }

@@ -10,11 +10,11 @@
 <ion-content >
   <h4 class="center textDoctores">Doctores disponibles pediatría</h4>
 <div *ngFor="let item of doctorsF; let itemDoctor = index">
-        <div class="box-main-content" [ngStyle]="{'display': item.isAvailable ? 'block' : 'none'}">
+        <div class="box-main-content" >
             <div class="datosDoctor">
                 <ion-row>
                     <ion-col size="4" class="imageDoctor">
-                        <img src="{{apiEndpoint}}{{item.id}}.png" (error)="errorHandler($event)" alt="">
+                        <img src="{{SERVERImage}}{{item.id}}.png" (error)="errorHandler($event)" alt="">
                     </ion-col>
                     <ion-col size="8" right>
                         <p class="doctor">{{ item.fullName | lowercase}}</p>

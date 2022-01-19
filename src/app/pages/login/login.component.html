@@ -11,16 +11,32 @@
 <ion-content class="ion-padding">
   <h5 class="bajar textoBlanco" text-center> Bienvenido a Wawapp!!!.. para continuar ingresa tu email y contraseña y si aun no tienes una registrate es super facil</h5>
   <div class="contenedorInputs">
-    <ion-item >
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="emal" #email></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" #password></ion-input>
-    </ion-item>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label position="floating">Tipo documento</ion-label>
+            <ion-select placeholder="Selecciona una opción" (ionChange)="selectDocument($event)">
+              <ion-select-option *ngFor="let d of documents" [value]="d">{{d.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+            <ion-label position="floating">Nº documento</ion-label>
+            <ion-input type="document"
+                        #document></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password"
+                       #password></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
  
-  <ion-button class="inicioSesion" color="warning" expand="block" (click)="signIn(email.value , password.value)">
+  <ion-button class="inicioSesion" color="warning" expand="block" (click)="signIn(document.value , password.value)">
    Login
   </ion-button>
   </div>

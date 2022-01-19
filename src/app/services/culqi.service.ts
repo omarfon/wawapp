@@ -13,8 +13,8 @@ export class CulqiService {
   constructor(public http: HttpClient) { }
 
   charges(data ){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = data;
     return this.http.post(this.apiUrlCulqi , params, {headers}).pipe(
                     map(data =>{

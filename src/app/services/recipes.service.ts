@@ -13,8 +13,8 @@ export class RecipesService {
   private SERVER = apiUrl;
   private apiUrl = `${this.SERVER}ebooking/prescripciones-encuentro-contacto/`;
   getRecipes(patientId, id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl + `${patientId}?encuentroid=${id}`, {headers}).pipe(
                 map((data: any) => {

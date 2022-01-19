@@ -18,8 +18,8 @@ export class DependentsService {
   constructor(public http: HttpClient) { }
 
   getDependens(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiUrl, {headers}).pipe(
                     map(data =>{
@@ -29,8 +29,8 @@ export class DependentsService {
   }
 
   getOldDependetsDay(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiOldDates, {headers}).pipe(
                 map(data =>{
@@ -40,8 +40,8 @@ export class DependentsService {
         }
 
   getdependesDay(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.apiDatesParents, {headers}).pipe(
                 map(data =>{

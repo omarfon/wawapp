@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import * as moment from 'moment';
 /* import * as shajs from 'sha.js'; */
@@ -32,28 +32,46 @@ export class RegisterComponent implements OnInit {
   public genders;
   public documents;
 
+  public name;
+  public email;
+  public password;
+  public phone;
+  public surname1;
+  public surname2;
+  public sexo;
+  public birthdate;
   cambio: boolean = false;
   aprobed: boolean = false;
-
+  public documentNumber;
+  public documentDigit;
+  public registerFormu:boolean = false;
+  public dniInvalid = false;
+  public dataReniec: any = [];
+  activateDocumentNumber: boolean;
+  public document;
+  documentId: any;
   public gender = {
     id: 0,
     name: ""
   };
   public _gender;
-
-  public document = {
-    id: 0,
-    name: ""
-  };
   public _documenType;
   createOk: any;
   tipoConsulta: any;
   escogido: any;
+  hideBox: boolean = false;
+  digitoVa: boolean = true;
+  selectSexo: any;
+  sexoValidate: boolean = false;
+  public idgender;
+  public namegender;
+  public datos;
   constructor(public router: Router, 
               public userProvider: UserService,
               public alertctrl: AlertController,
               public navCtrl: NavController,
               public crudPrv: ValidateService,
+              public loadingCtrl:LoadingController,
               public fb: FormBuilder,
               public dataPvr: DataService,
               public nav: NavController) { }
@@ -84,8 +102,7 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(8)]],
-      aprobed: ['', [Validators.required]]
+      documentDigit: ['']
     });
 
   }
@@ -94,12 +111,20 @@ export class RegisterComponent implements OnInit {
     this.nav.back();
   }
 
-  validacion() {
-
-    const valid = this.registerForm.value;
-    if (valid.password == valid.password_confirmation && valid.aprobed == true) {
-      return true;
+  selecGender(event) {
+    this.selectSexo = event.target.selectedOptions[0].textContent;
+    this.sexo = event.target.value;
+    if (this.sexo != this.selectSexo) {
+      this.sexoValidate = true;
     } else {
+      this.sexoValidate = false;
+    }
+  }
+
+  validacion(){
+    if(this.password && this.aprobed == true && this.name && this.surname1 && this.surname2 &&  this.email && this.phone ){
+      return true;
+    }else{
       return false;
     }
   }
@@ -109,13 +134,41 @@ export class RegisterComponent implements OnInit {
     console.log('this.gender:', this._gender);
 
   }
-  cambioDocumento($event) {
-    this._documenType = this.document;
-    console.log('this.document', this._documenType);
+
+  aceptaCondiciones(aprobed){
+    console.log('aprobed cambia a true:', aprobed);
+    this.aprobed = true;
   }
 
-  aceptaCondiciones(aprobed) {
-    console.log('aprobed', aprobed);
+  async reniecValidateDatos(){
+    const loading = await this.loadingCtrl.create({
+      message:'estamos buscando los datos...'
+    });
+    await loading.present();
+    console.log(this.documentNumber, this.documentDigit , this.document);
+    this.userProvider.getPublicKey(this.documentNumber).subscribe((data:any) => {
+      this.dataReniec = data.data;
+      console.log('this.dataReniec:',this.dataReniec);
+      this.name = this.dataReniec.nombres;
+      this.surname1 = this.dataReniec.apellido_paterno;
+      this.surname2 = this.dataReniec.apellido_materno;
+      this.sexo = this.dataReniec.sexo;
+      this.birthdate = moment(this.dataReniec.fecha_nacimiento).format('DD/MM/yyyy');
+      this.registerFormu = true;
+        if(this.documentNumber == this.dataReniec.numero  && this.documentDigit == this.dataReniec.codigo_verificacion){
+          this.registerFormu = true;
+        loading.dismiss();  
+        }else{
+          loading.dismiss();
+          this.dniInvalid = true;
+          this.registerFormu = false;
+        }
+  }, err => {
+    loading.dismiss();
+    this.dniInvalid = true;
+    this.registerFormu = true;
+    console.log(err)
+  })
   }
 
   async seeConditions() {
@@ -131,46 +184,69 @@ export class RegisterComponent implements OnInit {
     this.cambio = true;
   }
 
+validacionButton(){
+  if(this.document && this.documentNumber && this.documentDigit){
+    return true
+  }else{
+    return false
+  }
+}
 
-  /*   registerNewUser(){
-      let data = this.registerForm.value;
-      let datos:any ={
-        email          : data.email,
-        password       : data.password,
-        name           : data.name,
-        surname1       : data.surname1,
-        surname2       : data.surname2,
-        birthdate      : data.birthdate,
-        gender         :{
-            id         : this._gender.id,
-            name       :this._gender.name
-        },
-        documentType   :{
-            id         : this._documenType.id,
-            name       : this._documenType.name
-        },
-        documentNumber : data.documentNumber,
-        phone          : data.phone
-        // code           : "123"
-      }
+cambioDocument(event){
+    this._documenType = this.document;
+    console.log('this.document', this._documenType, this.document);
+    const documentType = event.target.value;
+    if (documentType === 'No Tiene') {
+      this.hideBox = true;
+    } else if(documentType.name === 'D.N.I'){
+      this.registerFormu = false;
+      this.dataReniec = null;
+      this.digitoVa = true;
+        this.hideBox = false;
+        this.documentNumber = '';
+        this.selectDocument = event.target.value;
+        this.activateDocumentNumber = false;
+        this.documentId = event.target.value;
+    }else if(documentType.name === 'C.E.'){
+      this.dataReniec = null;
+      this.registerFormu = true;
+      this.digitoVa = false;
+      this.hideBox = false;
+      this.documentNumber = '';
+      this.selectDocument = event.target.value;
+      this.activateDocumentNumber = false;
+      this.documentId = 3;
 
-      let email = {email:datos.email}
-      this.crudPvr.validateEmail(email).subscribe(data =>{
-        this.resolve = data;
-        console.log(this.resolve);
-        if(this.resolve.result == "ok"){
-          let data = {
-            datos: datos , hora : this.hora , available: this.available , doctor: this.doctor, resolve: this.resolve
-          }
-          let datosObj = JSON.stringify(data);
-          this.router.navigate(['code', datosObj])
-        }else {
-            this.mailExisting();
-        }
-      });
-    } */
+      console.log(this.documentId);
+    }else if(documentType.name === 'Pasaporte.'){
+     this.dataReniec = null;
+      this.registerFormu = true;
+      this.digitoVa = false;
+      this.hideBox = false;
+      this.documentNumber = '';
+      this.selectDocument = event.target.value;
+      this.activateDocumentNumber = false;
+      this.documentId = 2;
+ 
+      console.log(this.documentId);
+    }else{
+     this.dataReniec = null;
+      this.registerFormu = true;
+      this.digitoVa = false;
+      this.hideBox = false;
+      this.documentNumber = '';
+      this.selectDocument = event.target.value;
+      this.activateDocumentNumber = false;
+ 
+      this.documentId = event.target.value;
+    }
+   }
 
-  registerNewUser() {
+
+   selectDocument(event) {
+  }
+
+/*   registerNewUser() {
     let data = this.registerForm.value;
     console.log('data de formulario:', data);
     let datos: any = {
@@ -190,7 +266,6 @@ export class RegisterComponent implements OnInit {
       },
       documentNumber: data.documentNumber,
       phone: data.phone
-      // code           : "123"
     }
     data.code = 1234;
     data.id = "sendbooking";
@@ -212,7 +287,6 @@ export class RegisterComponent implements OnInit {
         ]
       });
       await alert.present();
-      /* this.createOk = data; */
       console.log('datos que vienen del logueo: por registro:', this.createOk);
       localStorage.setItem('idTokenUser', this.createOk.patientId);
       localStorage.setItem('emailUser', this.createOk.userEmail);
@@ -226,15 +300,10 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('uid', data.userId);
       localStorage.setItem('sigIn', 'completo');
         this.router.navigate(['/login']);
-    
-      /* console.log("pasó!!!"); */
-     /*  console.log('pasó logeado', this.createOk); */
-
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
       }
     }, async err => {
-      /* console.log('err', err); */
       const alert = await this.alertctrl.create({
         header: 'Error en el envio del código',
         message: `${err.error.message}`,
@@ -246,7 +315,103 @@ export class RegisterComponent implements OnInit {
       await alert.present();
     });
   }
+ */
 
+  registerNewUser(){
+    this.userProvider.sendValidationRegister(this.email,this.documentNumber, this.document.id, this.document.name).subscribe((resp:any)=>{
+      if(resp.result == 'ok'){
+        let data = this.registerForm.value;
+        if(this.dataReniec){
+          if(this.sexo === 'MASCULINO'){
+            this.idgender = 2;
+            this.namegender = 'HOMBRE';
+          }else if(this.sexo === 'FEMENINO'){
+            this.idgender = 3;
+            this.namegender = 'MUJER';
+          }else{
+            this.idgender= 1;
+            this.namegender = 'INDISTINTO';
+          }
+        }else{
+          this.datos.gender.id = this._gender.id;
+          this.datos.gender.name = this._gender.name;
+        }
+        this.datos ={
+          email          : this.email,
+          password       : this.password,
+          name           : this.name,
+          surname1       : this.surname1,
+          surname2       : this.surname2,
+          birthdate      : this.birthdate,
+          gender         :{
+              id         : this.idgender,
+              name       : this.namegender
+          },
+          documentType   :{
+              id         : this.document.id,
+              name       : this.document.name
+          },
+          documentNumber : this.documentNumber,
+          phone          : this.phone
+        }
+         this.datos.code = 1234;
+         this.datos.id = resp.id ;
+        this.datos.birthdate = moment(this.birthdate).format('YYYY-MM-DD');
+        console.log('this.data: ',this.birthdate);
+        console.log('this.data: ',this.datos);
+        this.userProvider.createNewUser(this.datos).subscribe(data =>{
+          this.createOk = data;
+          console.log('la vuelta de this.createOK:', this.createOk);
+               console.log('datos que vienen del logueo: por registro:', this.createOk);
+                 localStorage.setItem('authorization', JSON.stringify(this.createOk));
+                 this.router.navigate(['/login']);
+                 console.log("pasó!!!");
+                 console.log('pasó logeado', this.createOk);
+                 if(localStorage.getItem('authorization')){
+                  const token = localStorage.getItem('authorization.authorization');
+                }
+        }, err => {
+          console.log('error de creación');
+        })
+      }
+    }, async err=>{
+        console.log('err',err);
+        this.registerForm.reset();
+        if(err.error.result === 'error'){
+          if(err.error.message == 'Ya tienes historia y usuario web'){
+            const alert = await this.alertctrl.create({
+              header:'Error de login',
+              subHeader:'Ya tienes una cuenta',
+              backdropDismiss:false,
+              buttons:[
+                {
+                  text:'Recuperar o loguear',
+                  handler:() =>{
+                    this.router.navigate(['login']);
+                  }
+                }
+              ]
+            });
+            await alert.present();
+          }else{
+            const alert = await this.alertctrl.create({
+              header:'Error de login',
+              subHeader:'Ya tienes una cuenta',
+              backdropDismiss:false,
+              buttons:[
+                {
+                  text:'Recuperar o loguear',
+                  handler:() =>{
+                    this.router.navigate(['login']);
+                  }
+                }
+              ]
+            });
+            await alert.present();
+          }
+        }
+    });
+  }
 
   async mailExisting() {
     const alert = await this.alertctrl.create({
@@ -261,6 +426,7 @@ export class RegisterComponent implements OnInit {
     });
     await alert.present();
   }
+
 
 
   goToLogin() {

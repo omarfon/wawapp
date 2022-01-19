@@ -15,8 +15,8 @@ export class CitasService {
   constructor(public http: HttpClient) { }
 
   getServicios( ){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     const center_id = 1;
     return this.http.get(this.SERVER + `ebooking/fmt-centers/${center_id}/services`, {headers}).pipe(
                         map((resp:any)=>{
@@ -42,8 +42,8 @@ export class CitasService {
   }
 
   getDoctorsPerIdFilter(id, provision){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     const center_id = 1;
 
     return this.http.get(this.SERVER + `ebooking/fmt-centers/${center_id}/basicservices/${id}/provision/${provision}/professionals` ,  {headers}).pipe(
@@ -56,10 +56,17 @@ export class CitasService {
     )
   }
 
+  getDoctorsSpecialty(id, date1: any, date2: any) {
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
+    return this.http
+      .get(this.SERVER + 'ebooking/fmt-centers/1/services/' + id + '/professionals/all/availables?from_date=' + date1 + '&to_date=' + date2, {headers});
+  }
+
 
   getAvailablesPerDoctor(id, escogido, serviceId, fromDate, toDate, ){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     const center_id = 1;
     return this.http.get(this.SERVER + `ebooking/fmt-centers/${center_id}/basicservices/${serviceId}/professionals/${id}/provision/${escogido}/availables?from_date=${fromDate}&to_date=${toDate}`,  {headers}).pipe(

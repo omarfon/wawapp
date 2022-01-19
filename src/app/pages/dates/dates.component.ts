@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { CitasService } from 'src/app/services/citas.service';
 import { FinancerService } from 'src/app/services/financer.service';
 import { UserService } from 'src/app/services/user.service';
+import { API_IMAGES } from 'src/environments/environment';
 
 
 @Component({
@@ -42,7 +43,9 @@ export class DatesComponent implements OnInit {
   public panelOpenState: boolean;
   public boxID: any;
   public boxCaID: any;
-
+  public manyBoxes;
+  public datesCalendar;
+  public SERVERImage = API_IMAGES;
   constructor(public router: Router,
               public nav: NavController,
               public loadingCtrl: LoadingController,
@@ -62,16 +65,11 @@ export class DatesComponent implements OnInit {
     this.nav.back();
   }
 
-  async getDoctors() {
+/*   async getDoctors() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando doctores...'
     });
     await loading.present();
-    /*  this.citasSrv.getServicios().subscribe( servicios =>{
-     this.servicios = servicios;
-   });
-    */
-
     this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
       this.disponibles = false;
       if (doctors.length == 0) {
@@ -91,7 +89,6 @@ export class DatesComponent implements OnInit {
       this.doctorsF = this.doctors;
       loading.dismiss();
       console.log(this.doctorsF);
-      /* loading.dismiss(); */
       console.log('cerrando el loading')
     }, err => {
       console.log('err', err)
@@ -99,7 +96,28 @@ export class DatesComponent implements OnInit {
       () => {
         console.log('llamada finalizada')
       });
-  }
+  } */
+
+  async getDoctors(){
+    this.doctorsF = [];
+    const loading = await this.loadingCtrl.create({
+      message:"cargando especialistas"
+    });
+    await loading.present();
+    this.citasSrv.getDoctorsSpecialty(this.id,this.fromDate, this.toDate).subscribe((doctors:any) => {
+      const docts = doctors.centers[0].services[0].professionals.filter((element) => {
+        return element.availables.length > 0;
+      })
+      this.manyBoxes = docts.length;
+      docts.forEach(element => {
+        const fech = element.availables;
+        this.datesCalendar = fech;
+      });
+      this.doctorsF = docts;
+      loading.dismiss();
+      console.table(this.doctorsF);
+    })
+  } 
 
   expandedItem(doctor, available) {
     if (!this.hora) {

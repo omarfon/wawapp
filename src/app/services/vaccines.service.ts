@@ -19,8 +19,8 @@ export class VaccinesService {
   constructor(public http: HttpClient) { }
 
   getAllVaccines(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     // console.log('params:', params);
     return this.http.get(this.SERVER + 'wawa/data?type=bebevacuna&order=asc' , {headers}).pipe(
                       map(data =>{
@@ -30,8 +30,8 @@ export class VaccinesService {
        }
        
   getAllVaccinesPerUser(id){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     return this.http.get(this.apiVaccine + `/${id}/2?groupby=momento_dosis` , {headers}).pipe(
                   map(data =>{
                     return data

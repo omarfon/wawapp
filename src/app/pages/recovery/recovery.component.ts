@@ -20,6 +20,8 @@ export class RecoveryComponent implements OnInit {
   public segundo;
   public tercero;
   public cuarto;
+  public recoveryData;
+  public dataSend;
   constructor(public crudSrv: CrudparentService,
               public router: Router,
               public alertCtrl: AlertController,
@@ -38,6 +40,9 @@ export class RecoveryComponent implements OnInit {
       password   : ['', [Validators.required]],
       passwordRepeat   : ['', [Validators.required]]
   });
+  this.recoveryData = this.userSrv.recoveryData;
+    this.dataSend = this.userSrv.dataSend;
+    console.log(this.recoveryData, this.dataSend);
    
   }
 
@@ -55,54 +60,37 @@ export class RecoveryComponent implements OnInit {
       message: 'cambiando contraseña'
     });
     await loading.present();
-    let codigo = this.formCode.value;
-    // console.log('codigo:', codigo);
-    let uno = codigo.primero;
-    let dos = codigo.segundo;
-    let tres = codigo.tercero;
-    let cuatro = codigo.cuarto;
-    const code = uno + dos + tres + cuatro;
-    // console.log(code);
-    this.datos.code = code;
-    this.datos.password = this.formCode.value.password;
-    console.log('datos.code:', this.datos);
-    // this.datos.id = this.code.id;
-    // console.log('data armada:', this.datos);
-
-  this.userSrv.recoveryLogin(this.datos).subscribe(data => {
+    let datos = {
+      code:`${this.primero}${this.segundo}${this.tercero}${this.cuarto}`,
+      documentType: this.dataSend.documentType,
+      dni:this.dataSend.documentNumber,
+      id:this.recoveryData.id,
+      password:this.formCode.value.password
+    }
+    console.log(datos);
+  this.userSrv.loginRecovery(datos).subscribe(data => {
 
         this.logeo = data;
         console.log(data);
+        this.logeo = data;
         if(data){
-          localStorage.setItem('usuario', this.logeo.userEmail);
-           localStorage.setItem('email', this.logeo.userEmail);
-           localStorage.setItem('authorization', this.logeo.authorization);
-           localStorage.setItem('id', this.logeo.patientId);
-           localStorage.setItem('role', this.logeo.role);
-           localStorage.setItem('photoUrl', this.logeo.photoUrl);
-           localStorage.setItem('patientName', this.logeo.patientName);
               console.log('this.logeo:', this.logeo);
+              this.loadingCtrl.dismiss();
               this.recoverySuccess();
               this.router.navigate(['login']);
         }
-            /* this.navCtrl.setRoot(LoginPage); */
-          loading.dismiss();
-      },async err =>{
-        loading.dismiss();
-        console.log('err:', err);
-        const alert = await this.alertCtrl.create({
-          header:`Error en la recuperación`,
-          message:`${err.error.message}`,
-          buttons: ['volver a intentar']
-        });
-        await alert.present();
+      },err =>{
+        console.log('el logeo:', this.logeo, err);
+        this.logeo = err;
+        this.loadingCtrl.dismiss();
+          this.erroCode();
       });
 }
 
 async recoverySuccess(){
   const alert = await this.alertCtrl.create({
     header:"Cuenta recuperada",
-    message:"su cuenta se ha recuperado exitosamente",
+    message:"su cuenta se ha recuperado exitosamente, ahora haga login",
     buttons: [
       {
         text:'ok'

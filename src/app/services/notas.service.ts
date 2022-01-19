@@ -12,8 +12,8 @@ export class NotasService {
   constructor(public http: HttpClient) { }
 
   getAllNotes(){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({'Authorization': authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.SERVER + 'wawa/data', {headers}).pipe(
       map(res => {
@@ -23,8 +23,8 @@ export class NotasService {
   }
 
   getNotesPerMonth(mes){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({'Authorization': authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
 
     return this.http.get(this.SERVER + `wawa/data?mes=${mes}`, {headers}).pipe(
       map(res => {

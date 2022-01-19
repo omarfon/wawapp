@@ -28,8 +28,8 @@ export class CrudparentService {
   }
 
   createParent(data) {
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({ "Authorization": authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = data;
 
     return this.http.post(this.api, params, { headers }).pipe(
@@ -41,8 +41,8 @@ export class CrudparentService {
 
   createNewUser(datos) {
 
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({ "Authorization": authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = datos;
 
     return this.http.post(this.apiCreate, params, { headers }).pipe(
@@ -53,8 +53,8 @@ export class CrudparentService {
   }
 
   validateEmail(email) {
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({ "Authorization": authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = email;
 
     return this.http.post(this.apiValidate, params, { headers }).pipe(

@@ -14,8 +14,8 @@ private apiValidate = `${this.SERVER}users/validateemail`;
 
   createNewUser(datos){
     // console.log('los datos de register:', datos)
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = datos;
     // console.log('los datos de register:', datos)
     // params.provisions = [{"tipoPrestacion":"CONSULTA", "instructions":"", "name":"CONSULTA AMBULATORIA POR MEDICO ESPECIALISTA", "default":false, "id":44}]
@@ -28,8 +28,8 @@ private apiValidate = `${this.SERVER}users/validateemail`;
   }
 
   validateEmail(email){
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({"Authorization": authorization});
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = email;
 
     return this.http.post(this.apiValidate , params , {headers}).pipe(

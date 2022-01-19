@@ -37,6 +37,9 @@ async ngOnInit() {
       }else{
         this.appointments = 0;
       } 
+    }, err => {
+      this.loading.dismiss();
+      this.appointments = 0;
     });
     
   }
