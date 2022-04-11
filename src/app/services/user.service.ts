@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
-import { apiUrl } from 'src/environments/environment';
+import { apiUrl, REGISTERMICRO } from 'src/environments/environment';
 
 
 @Injectable({
@@ -14,6 +14,7 @@ export class UserService {
   private apiCreate = `${this.SERVER}users/register/`;
   private newLogin = this.SERVER + 'users/newLogin';
   private reniec = 'https://apiperu.dev/api/dni/';
+  public urlRegisterMicro = REGISTERMICRO;
   
   public userId;
   public patientId;
@@ -140,7 +141,7 @@ export class UserService {
                        )
       }
       
-      createNewUser(datos) {
+   /*    createNewUser(datos) {
         // console.log('los datos de register:', datos)
         const authorization = JSON.parse(localStorage.getItem('authorization'));
     let headers = new HttpHeaders({"Authorization": authorization.authorization});
@@ -152,6 +153,34 @@ export class UserService {
             return resp;
           })
         )
+      } */
+
+      registerNewUser(codeValida: any) {
+        const authorization = JSON.parse(localStorage.getItem('authorization'));
+        let headers = new HttpHeaders({"Authorization": authorization.authorization});
+        console.log(codeValida)
+        
+        return this.http
+          .post(this.urlRegisterMicro + 'users/newRegister', {
+            "email": codeValida.email,
+            "password": codeValida.password,
+            "name": codeValida.name,
+            "surname1": codeValida.surname1,
+            "surname2": codeValida.surname2,
+            "birthdate": codeValida.birthdate,
+            "gender": {
+              "id": codeValida.gender.id,
+              "name": codeValida.gender.name,
+            },
+            "documentType": {
+              "id": codeValida.documentType.id,
+              "name": codeValida.documentType.name
+            },
+            "documentNumber": codeValida.documentNumber,
+            "phone": codeValida.phone,
+            "code": 1234,
+            "id": codeValida.id
+          }, {headers});
       }
 
       getPublicKey(dni:string){

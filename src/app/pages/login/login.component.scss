@@ -2,17 +2,17 @@ ion-content{
     --background: url(../../../assets/img/fondo/loginfondo.png)  0 0/100% 100%; 
       background-repeat: no-repeat;
       background-size: cover;
-     background:#47ACDE!important; 
+     background:#2980ac!important; 
       background-size:cover;
   }
   .textoBlanco{
     color:#fff;
-    font-weight:400;
+    font-weight:600;
     padding-top:3vh;
     width: 85%;
     margin-left:7.5%;
     text-align: center;
-    font-size:1.1em;
+    font-size:1.2em;
   }
   .contenedorInputs{
     margin-top:20vh;
@@ -34,6 +34,7 @@ ion-content{
   .inicioSesion{
     margin-top:30px;
     color:#fff;
+    font-size:1.2em;
     margin-bottom:20px;
   }
   ion-button{

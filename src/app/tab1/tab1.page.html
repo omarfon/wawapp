@@ -43,6 +43,7 @@
     </ion-col>
   </ion-row>
  <div class="containerMeses" >
+  <h5>Selecciona una mes para ver su contenido</h5>
    <!-- <h5 class="tituloMes">Omar está en este mes</h5> -->
    <ion-slides [options]="slideOpts" (ionSlideDidChange)="change($event)"  #slideWithNav>
      <ion-slide #status *ngFor="let m of meses; let i = index;">
@@ -53,6 +54,7 @@
    </ion-slides>
  </div>
     <div class="containerCardsSlider">
+      <h3>Selecciona una tarjeta para leer su contenido</h3>
       <ion-slides [options]="slidOptions">
         <ion-slide *ngFor="let nota of notas">
           <!-- card bebecuidadoysalud  -->

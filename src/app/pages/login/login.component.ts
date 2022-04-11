@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   getDocuments(){
-    this.dataSrv.getDocuments().subscribe(data => {
+    this.dataSrv.getDocuments().subscribe((data:any) => {
       this.documents = data;
       console.log(this.documents);
   });
@@ -64,36 +64,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-/*   async signIn(document, password){
-    const loading = await this.loadingCtrl.create({
-        message: 'Espere un momento por favor...'
-    });
-    await loading.present();
-    this.userSrv.doSignIn(document, password).subscribe(data=>{
-      this.logeo = data;
-      loading.dismiss();
-      console.log(this.logeo);
-        this.msg ="";
-        localStorage.setItem('userData', JSON.stringify(this.logeo));
-        localStorage.setItem('authorization', this.logeo.authorization);
-        localStorage.setItem('role', this.logeo.role);
-        this.router.navigate(['tabs/tab1'])
-    },
-  async err =>{
-    loading.dismiss();
-    const alert = await this.alert.create({
-      header: '',
-      message: "Email o Password incorrecto",
-      buttons: [{
-        text: "Volver a intentar",
-        handler: data => {
-          // console.log('intentar de nuevo');
-        }
-      }]
-    });
-    await alert.present();
-  })
-} */
 
 signIn(document, password) {
   console.log(this.tipeDocument,document, password) 
@@ -150,39 +120,6 @@ signIn(document, password) {
   register(){
     this.router.navigate(['register'])
   }
-
-/*   async recovery(){
-     const alert = await this.alert.create({
-      header:'Recuperación de password',
-      message:'Ingresa tu correo electrónico y enviaremos un mensaje con un código para la recuperación de tu cuenta',
-      buttons :[
-        {
-          text: 'Enviar',
-          cssClass: 'primary',
-          handler: data => {
-            let email = data.email;
-            this.userSrv.sendValidation(email).subscribe((data:any) => {
-              this.datos = data;
-              if(this.datos.result = 'ok'){
-                this.userSrv.recovery = this.datos;
-                this.router.navigate(['recovery'])
-              }else{
-                this.message = this.datos.error.message;
-              }
-            })
-          }
-        }
-      ],
-      inputs:[
-        {
-          name: 'email',
-          type:'text',
-          placeholder:'Ingresa tu email'
-        }
-      ]
-    })
-    await alert.present();
-  } */
 
   async recovery(){
     const alert = await this.alert.create({

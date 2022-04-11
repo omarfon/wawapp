@@ -43,8 +43,8 @@ export class MenuComponent implements OnInit {
   }
 
   closeSesion(){
-    localStorage.clear();
     this.router.navigate(['login']);
+    localStorage.clear();
     this.menu.close();
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { apiUrl } from 'src/environments/environment';
+import { apiUrl, REGISTERMICRO } from 'src/environments/environment';
 import { map } from 'rxjs/operators'
 
 @Injectable({
@@ -12,11 +12,12 @@ export class CrudparentService {
   private api = `${this.SERVER}users/register-dependent/`;
   private apiCreate = `${this.SERVER}users/register`;
   private apiValidate = `${this.SERVER}users/validate-email/register`;
+  public urlRegisterMicro = REGISTERMICRO;
   constructor(public http: HttpClient) { }
 
   createParentDate(subida, id, provisionId) {
-    const authorization = localStorage.getItem('authorization');
-    let headers = new HttpHeaders({ "Authorization": authorization });
+    const authorization = JSON.parse(localStorage.getItem('authorization'));
+    let headers = new HttpHeaders({"Authorization": authorization.authorization});
     let params = JSON.parse(subida);
     params.provisions = [{ "default": false, "id": provisionId[0] }]
 

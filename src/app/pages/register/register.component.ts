@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
   public idgender;
   public namegender;
   public datos;
+  public birthdateMostrar;
   constructor(public router: Router, 
               public userProvider: UserService,
               public alertctrl: AlertController,
@@ -79,7 +80,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.actual = moment().format('YYYY-MM-DD');
 
-    this.actual = moment().format('YYYY-MM-DD');
     // console.log('fecha actual:',this.actual);
     this.dataPvr.getGenders().subscribe(datagenders => {
       this.genders = datagenders;
@@ -153,7 +153,9 @@ export class RegisterComponent implements OnInit {
       this.surname1 = this.dataReniec.apellido_paterno;
       this.surname2 = this.dataReniec.apellido_materno;
       this.sexo = this.dataReniec.sexo;
-      this.birthdate = moment(this.dataReniec.fecha_nacimiento).format('DD/MM/yyyy');
+      this.birthdate = this.dataReniec.fecha_nacimiento;
+      this.birthdateMostrar = moment(this.dataReniec.fecha_nacimiento).format('DD/MM/YYYY');
+
       this.registerFormu = true;
         if(this.documentNumber == this.dataReniec.numero  && this.documentDigit == this.dataReniec.codigo_verificacion){
           this.registerFormu = true;
@@ -352,14 +354,15 @@ cambioDocument(event){
               name       : this.document.name
           },
           documentNumber : this.documentNumber,
-          phone          : this.phone
+          phone          : this.phone,
+          origin         : 'wawapp'
         }
          this.datos.code = 1234;
          this.datos.id = resp.id ;
         this.datos.birthdate = moment(this.birthdate).format('YYYY-MM-DD');
         console.log('this.data: ',this.birthdate);
         console.log('this.data: ',this.datos);
-        this.userProvider.createNewUser(this.datos).subscribe(data =>{
+        this.userProvider.registerNewUser(this.datos).subscribe(data =>{
           this.createOk = data;
           console.log('la vuelta de this.createOK:', this.createOk);
                console.log('datos que vienen del logueo: por registro:', this.createOk);
