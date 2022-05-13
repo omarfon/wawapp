@@ -61,7 +61,7 @@ export class Tab1Page {
     {mes:36,de:36,a: 40},
     {mes:48,de:40,a: 48},
   ]
-  public mesActual;
+  public mesActual:number = 1;
   constructor(public router:Router,
               public notasSrv: NotasService,
               public dependentSrv: DependentsService,
@@ -73,7 +73,7 @@ export class Tab1Page {
  ngOnInit(){
   this.getDependents()
   
- /* this.getNotes(); */
+ this.getNotes();
  let role = localStorage.getItem('role');
    if (role == 'user') {
    } else {
@@ -88,27 +88,26 @@ async getNotes(){
   await loading.present();
   this.notasSrv.getAllNotes().subscribe(data => {
     this.notas = data;
-    /* console.log(this.notas); */
-    const filtradasOne = 
-    this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
-    this.notas = filtradasOne;
- /*    console.log(this.notas); */
-    loading.dismiss();
-  })
+    console.log(this.notas);
+    this.notas = 
+    this.notas.filter(x => x.type == 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado');
+    console.log(this.notas);
+})
+loading.dismiss();
 }
 
 async getDependents() {
-  const loading = await this.loadingCtrl.create({
+/*   const loading = await this.loadingCtrl.create({
     message: 'Cargando categorías...'
-  });
-  await loading.present();
+  }); */
+ /*  await loading.present(); */
   this.dependentSrv.getDependens().subscribe((dependientes: any) => {
     this.dependends = dependientes.map(dependend => {
       dependend.edad = moment().diff(dependend.birthdate, 'months');
       console.log('dependend:', dependend);
       return dependend;
     },err =>{
-      loading.dismiss();
+      /* loading.dismiss(); */
       this.slideOpts.initialSlide = 1;
       const mes = {mes:1,de:0,a: 4};
       this.mesSelect(mes);
@@ -129,21 +128,18 @@ async getDependents() {
         console.log(this.slideOpts.initialSlide);
       }
       
-      
-      console.log('mes primer menor:', mesesActual); 
-      this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
+   /*    this.notasSrv.getNotesPerMonth(this.mesActual).subscribe(data => {
         this.notas = data
-     /*    console.log(this.notas); */
         const newNotas = this.notas.filter(n => n.mes <= mesesActual);
         this.notas = newNotas;
         const filtradasOne = this.notas 
         this.notas.filter(x => x.type === 'bebecuidadoysalud' || x.type === 'bebenutricion' || x.type === 'bebefamilia' || x.type === 'bebevacunas' || x.type === 'bebehitos' || x.type === 'bebecuidado' || x.type === 'estimulacion'); 
         this.notas = filtradasOne; 
         loading.dismiss();
-      });
+      }); */
    }
   },err => {
-    loading.dismiss();
+ /*    loading.dismiss(); */
     this.slideOpts.initialSlide = 1;
     const mes = {mes:1,de:0,a: 4};
     this.mesSelect(mes);

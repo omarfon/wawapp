@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="back()"></ion-back-button>
+      <ion-back-button (click)="back()" defaultHref="tabs/tab3"></ion-back-button>
     </ion-buttons>
     <ion-title size='small'>
      Detalle vacuna
@@ -20,7 +20,7 @@
   <ion-card-header>
         Detalle de vacuna aplicada
   </ion-card-header>
-  <ion-card-content >
+  <ion-card-content *ngIf="vacunas">
       <ion-list class="contenedorEfectuadas">
         <div *ngFor="let vac of vacuna">
           <ion-item *ngIf="vac.estado == 1">
@@ -80,7 +80,7 @@
           </div>
 
           <div class="contenedorRestricciones" *ngIf="e.enfermedades">
-            <h4>Algunas restricciones:</h4>
+            <h4 *ngIf="e.restricciones">Algunas restricciones:</h4>
             <ul>
               <li *ngFor="let r of e.restricciones">
                   {{r.restriccion}}

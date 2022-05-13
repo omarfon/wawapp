@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.wawapp.aviva" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.wawapp.aviva" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Wawapp</name>
     <description>Wawapp es niño sano</description>
-    <author email="omar.fonseca@aviva.pe" href="http://ionicframework.com/">app de clinica aviva</author>
+    <author email="omar.fonseca@aviva.pe" href="http://ionicframework.com/">app de clínica aviva</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

@@ -12,6 +12,10 @@
         <ion-icon name="reader-outline" slot="start"></ion-icon>
         Gráficas de crecimiento
       </ion-item> -->
+      <ion-item button (click)="goToHome()">
+        <ion-icon name="home" slot="start"></ion-icon>
+        Home
+      </ion-item>
       <ion-item button (click)="goToMydates()">
         <ion-icon name="people-outline" slot="start"></ion-icon>
         Mis citas
@@ -21,5 +25,9 @@
         Cerrar Sesión
       </ion-item>
     </ion-list>
+    <ion-col>
+      <img src="assets/imgs/login/logoWhite.svg" alt="">
+      <p class="center">versión: {{version}}</p>
+    </ion-col>
   </ion-content>
 </ion-menu>

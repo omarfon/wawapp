@@ -14,7 +14,7 @@
       {{h}}
     </li>
   </ul>
-  <h5 class="signos" *ngIf="nota.signosDeAlerta">Signos de Alerta</h5>
+  <h5 class="signos" *ngIf="nota.signosDeAlerta.length> 0">Signos de Alerta</h5>
   <ul class="contenedorAlarmas">
     <li *ngFor="let h of nota.signosDeAlerta">
       <p class="textoAlarma">{{h}}</p>

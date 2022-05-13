@@ -11,22 +11,22 @@
 
 <ion-content>
   <ion-list>
-    <img id="profile-image" src="{{API_IMAGES}}{{appointment.professional.id}}.png">
+    <img id="profile-image" src="{{API_IMAGES}}{{appointment.professionalId}}.png">
 
-    <h3 class="nombreDoctor" text-center>
-        {{ appointment.professional.fullName }}
+    <h3 class="nombreDoctor" class="text-center">
+        {{ appointment.professionalName }} {{ appointment.professionalLastName1 }} {{ appointment.professionalLastName2 }}
     </h3>
 
     <ion-item>
         <ion-label bold>Sede:</ion-label>
         <ion-label class="blue" type="text" disabled="true">
-            Mendiola
+            {{appointment.centerName}}
         </ion-label>
     </ion-item>
     <ion-item>
         <ion-label>Especialidad:</ion-label>
         <ion-label item-end class="blue" disabled="true">
-            {{ appointment.service.basicService.description }}
+            {{ appointment.basicServiceDescription}}
         </ion-label>
     </ion-item>
     <ion-item>
@@ -51,7 +51,7 @@
     <ion-item>
         <ion-label>Tipo de pago:</ion-label>
         <ion-label class="blue" disabled="true">
-            {{appointment.payer.financing.description | lowercase }}
+            {{appointment.pagado | lowercase }}
         </ion-label>
     </ion-item>
 
@@ -81,6 +81,9 @@
     <!-- <div padding>
         <button ion-button (click)="gotosave()" block color="secondary" class="heighButton">OK</button>
     </div> -->
+    <div class="centerQr" *ngIf="appointment.pagado !== 'no'">
+        <qr-code value="{{appointment.appointmentId}}" [size]="300"></qr-code>
+    </div>
     <ion-row>
         <ion-col size="6">
             <ion-button size="full" color="warning" (click)='desactivateTask(appointment)'>ANULAR CITA</ion-button>

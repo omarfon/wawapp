@@ -106,7 +106,7 @@ export class FinancerComponent implements OnInit {
 
     this.dependentsPvr.getDependens().subscribe(data => {
       this.parents = data
-      /* console.log('this.parents:', this.parents); */
+      console.log('this.parents:', this.parents); 
     });
 
     this.openParents();

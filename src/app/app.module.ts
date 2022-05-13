@@ -41,7 +41,7 @@ import { MydatesComponent } from './pages/mydates/mydates.component';
 import { DetaildateComponent } from './pages/detaildate/detaildate.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 
-
+import { QRCodeModule } from 'angular2-qrcode';
 
 
 registerLocaleData(localeEs);
@@ -62,7 +62,8 @@ registerLocaleData(localeEs);
     BrowserAnimationsModule,
     MatExpansionModule,
     ChartsModule,
-    Ng2GoogleChartsModule
+    Ng2GoogleChartsModule,
+    QRCodeModule
     ],
   providers: [{ 
                 provide: LOCALE_ID, useValue: "es",

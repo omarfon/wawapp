@@ -16,7 +16,7 @@
       <ion-card *ngFor="let e of encuentro.appointments; let i = index" (click)="goToDetail(e, encuentro.user.id)">
         <ion-row>
           <ion-col offset="4" size="7" class="containerNombre">
-            <p class="nombreDepeConsulta">{{encuentro.user.patientName}}</p>
+            <p class="nombreDepeConsulta">{{encuentro.user.name}}</p>
           </ion-col>
           <ion-col size="4">
             <div class="iconoReceta">
@@ -26,9 +26,9 @@
           </ion-col>
           <ion-col size="8">
             <p class="especialidad">Especialidad</p>
-            <p class="resultado">{{e.service.basicService.description}}</p>
+            <p class="resultado">{{e.basicServiceDescription}}</p>
             <p class="especialidad">Doctor:</p>
-            <p class="resultado">{{e.professional.name}} {{e.professional.surname1}} {{e.professional.surname2}}</p>
+            <p class="resultado">{{e.professionalName}} {{e.professionalLastName1}} {{e.professionalLastName2}}</p>
           </ion-col>
         </ion-row>
       </ion-card>

@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flash.component.scss'],
 })
 export class FlashComponent implements OnInit {
-  flipped: boolean = false;
+  flipped: boolean = true;
   constructor() { }
 
   ngOnInit() {}
 
   flip(){
-    /* this.flipped = !this.flipped; */
+    this.flipped = !this.flipped;
     this.flipped = true;
   }
 

@@ -31,27 +31,37 @@ export class LoginComponent implements OnInit {
               }
           
   ngOnInit() {
-    
-    const authorization = localStorage.getItem('authorization');
-                if(!authorization){
-                  this.userSrv.getKey().subscribe(data =>{
-                    this.authPublic = JSON.stringify(data);
-                    localStorage.setItem('authorization', this.authPublic);
-                    localStorage.setItem('role', this.authPublic.role);
-                  });
-                }else{
-                  this.getDocuments();
-                }
-    const notas = localStorage.getItem('notas');
-    if(!notas){
-      this.getAllNotes();
-    }
+   /*  this.userSrv.getKey().subscribe(data => {
+      this.authPublic = JSON.stringify(data);
+      localStorage.setItem('authorization', this.authPublic);
+      localStorage.setItem('role', this.authPublic.role);
+    });
 
+    this.getDocuments();
+    const notas = localStorage.getItem('notas');
+    if (!notas) {
+      this.getAllNotes();
+    } */
+    
+  }
+
+  ionViewWillEnter(){
+    const authorization:any = localStorage.getItem('authorization');
+      if(!authorization) {
+        this.userSrv.getKey().subscribe((data: any) => {
+          localStorage.setItem('authorization', JSON.stringify(data));
+          this.getDocuments();
+        })
+      }else{
+        this.getDocuments();
+      }
+      console.log('constructor');
   }
 
   getDocuments(){
     this.dataSrv.getDocuments().subscribe((data:any) => {
       this.documents = data;
+      this.documents = this.documents.filter(document => document.name !== 'No Tiene');
       console.log(this.documents);
   });
 }
@@ -87,13 +97,6 @@ signIn(document, password) {
       localStorage.setItem('sigIn', 'completo');
       localStorage.setItem('role', this.data.role);
       localStorage.setItem('token', this.data.firebaseToken);
-/*       localStorage.setItem('usuario', this.data.userEmail);
-      localStorage.setItem('email', this.data.userEmail);
-      localStorage.setItem('id', this.data.patientId);
-      localStorage.setItem('photoUrl', this.data.photoUrl);
-      localStorage.setItem('patientName', this.data.patientName);
-      localStorage.setItem('name', this.data.name);
-      localStorage.setItem('uid', this.data.userId); */
       this.router.navigate(['tabs/tab1'])
       /* localStorage.setItem('uid', this.data.userId); */
       if (localStorage.getItem('token')) {
@@ -123,8 +126,8 @@ signIn(document, password) {
 
   async recovery(){
     const alert = await this.alert.create({
-      header:"Olvidaste tu contraseña...?",
-      message:'Ingresa tu N° de documento para recuperar',
+      header:"Olvidaste la contraseña...?",
+      message:'Ingresa tu N° de documento para recuperarla',
       inputs :[
         {
           name:'documento',

@@ -11,7 +11,8 @@ export class DependentsService {
   private SERVER = apiUrl;
   private apiUrl = `${this.SERVER}users/dependents`;
   private apiOldDates = `${this.SERVER}ebooking/encuentrosPaciente`;
-  private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`;
+  /* private apiDatesParents = `${this.SERVER}ebooking/appointments/patientContacts`; */
+  private apiDatesParents = `${this.SERVER}ebooking/citas-paciente-contactos`;
   public dependens;
   public appointment;
   public id;

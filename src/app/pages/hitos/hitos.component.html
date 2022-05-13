@@ -14,46 +14,26 @@
     <h4 class="tituloContenedorPendientes">Marca las tarjetas que tu bebé haya cumplido...</h4>
     <ion-slides [options]="slideOptions">
       <ion-slide *ngFor="let hito of porhacer">
-        <app-flash >
-          <div [ngClass]="{'zebraUno': hito.mes =='1' || hito.mes == '3' || hito.mes == '5' || hito.mes == '7' || hito.mes == 9 || hito.mes == '11', 'zebraDos': hito.mes == '2' || hito.mes == '4' || hito.mes == '6' || hito.mes == '8' || hito.mes == '10' || hito.mes == '12'}" class="flash-card-front animated bounce" >
-            <ion-card class="tarjeta">
-              <img class="imagenTarjeta" src="{{hito.imagenUrl}}" alt="">
-              <!-- <p class="hitoMes">{{hito.mes}}</p> -->
-              <ion-card-content>
-                <ion-row>
-                  <ion-col size="12">
-                    <h2 class="tituloPendietes">{{hito.titulo | slice:0:30}}</h2>
-                  </ion-col>
-                  <ion-col size="12" class="containerContenidoTexto">
-                    <p class="hitoPendienteDescripcion">{{hito.descripcion | slice:0:45}}...</p>
-                  </ion-col>
-                </ion-row>
-                <ion-col size="12" class="verMas">
-                  ver detalle
-                </ion-col>
-              </ion-card-content>
-            </ion-card>
-          </div>
-         <div class="flash-card-back animated bounce backCard">
-            <ion-row>
-              <ion-col size="12">
-                <p class="descripcionBack">
-                  {{hito.descripcion }}
-                </p>
-              </ion-col>
-              <div class="row">
-                <div size="12" class="containercheck">
-                  <ion-col size="8">
-                    <p class="disclaimerMarcar">para marcar como logrado haz check al hito</p>
-                  </ion-col>
-                  <ion-col size="4">
-                    <ion-checkbox (click)="idChanged($event, hito)"></ion-checkbox>
-                  </ion-col>
-                </div>
-              </div>
-            </ion-row>
-          </div> 
-        </app-flash>
+          <ion-row>
+            <ion-col size="12">
+              <ion-card class="tarjeta">
+                <img class="imagenTarjeta" src="{{hito.imagenUrl}}" alt="">
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col size="12">
+                      <h2 class="tituloPendietes">{{hito.titulo | slice:0:40}}</h2>
+                    </ion-col>
+                    <ion-col size="12" class="containerContenidoTexto">
+                      <p class="hitoPendienteDescripcion">{{hito.descripcion | slice:0:65}}...</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+       <ion-col size="12">
+         <ion-button (click)="idChanged($event, hito)" fill="clear">logrado</ion-button>
+       </ion-col>
+          </ion-row>
       </ion-slide>
     </ion-slides>
   </div>

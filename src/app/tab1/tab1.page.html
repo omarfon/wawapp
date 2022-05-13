@@ -116,7 +116,9 @@
 
         <ion-card id="hitos" *ngIf="nota.type == 'bebehitos'"  (click)="openModalHitos(nota)">
           <img class="imagenCard" src="{{nota.imagenUrl}}" alt="">
+          <ion-card-content>
             <h5 class="tituloCard">{{nota.titulo}}</h5>
+          </ion-card-content>
             <ion-row>
               <ion-col size="2">
                 <img class="iconType" src="assets/img/icons/hitos.png">

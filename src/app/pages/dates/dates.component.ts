@@ -121,12 +121,13 @@ export class DatesComponent implements OnInit {
 
   expandedItem(doctor, available) {
     if (!this.hora) {
-      /* console.log('doctor y available:', doctor, available); */
+      console.log('doctor y available:', doctor, available); 
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
+      /* this.escogido =  */
       this.citasSrv.getAvailablesPerDoctor(id, this.escogido, serviceId, fromDate, toDate).subscribe(hoy => {
         /* console.log('hoy', hoy); */
         const dates = hoy[0].hours;

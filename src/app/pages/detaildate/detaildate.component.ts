@@ -21,8 +21,14 @@ export class DetaildateComponent implements OnInit {
               public alertCtrl: AlertController) { }
 
   ngOnInit() {
+    const data = this.dependentsSrv.appointment
+    if(data){
       this.appointment = this.dependentsSrv.appointment;
+      console.log(this.appointment)
       this.id = this.dependentsSrv.id;
+    }else{
+      this.router.navigate(['mydates'])
+    }
   }
 
   async desactivateTask(appointment){

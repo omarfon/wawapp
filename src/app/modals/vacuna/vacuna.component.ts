@@ -12,7 +12,7 @@ export class VacunaComponent implements OnInit {
 
   ngOnInit() {
     this.nota = this.notasSrv.dataNota;
-   /*  console.log(this.nota); */
+   console.log(this.nota); 
   }
 
   

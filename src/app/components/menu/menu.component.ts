@@ -9,6 +9,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class MenuComponent implements OnInit {
   public nombre;
+  public version:string = "2.1.0"
   constructor(public router:Router,
               public menu: MenuController) { }
 
