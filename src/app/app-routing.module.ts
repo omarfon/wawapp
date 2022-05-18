@@ -14,7 +14,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { MydatesComponent } from './pages/mydates/mydates.component';
 import { ParametersComponent } from './pages/parameters/parameters.component';
 import { PayComponent } from './pages/pay/pay.component';
-import { RecipesComponent } from './pages/recipes/recipes.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TabsPageModule } from './tabs/tabs.module';
@@ -90,10 +89,6 @@ const routes: Routes = [
   {
     path: 'financer',
     component:  FinancerComponent
-  },
-  {
-    path: 'recetas',
-    component:  RecipesComponent
   },
   {
     path: 'detail-recipe',

@@ -109,17 +109,12 @@ export class FinancerComponent implements OnInit {
       console.log('this.parents:', this.parents); 
     });
 
+    // FUNCION PARA OBTENER LOS DEPENDIENTES AL CARGAR LA PAGINA
     this.openParents();
     this.financeSrv.getFinancers().subscribe(data => {
       this.items = data;
-      /* console.log('los financiadores:', data); */
-      // this.items.shift();
     });
     loading.dismiss();
-
-
-    /* this.isAndroid = platform.is('android'); */
-
     this.subida = this.hora.listjson;
     let role = localStorage.getItem('role');
     if (role == 'guest') {
@@ -136,6 +131,7 @@ export class FinancerComponent implements OnInit {
     }
   }
 
+  // AL SELECCIONAR UN DEPENDIENTE SE VISUALIZAN OTRAS OPCIONES
   evaluateEnsurance() {
     this.firtClick = !this.firtClick;
     this.isInsurance = false;
@@ -145,6 +141,7 @@ export class FinancerComponent implements OnInit {
     this.isCard = false;
   }
 
+  // FUNCIÓN PARA OBTENER LOS PLANES DE UN DEPENDIENTE ESPECIFICO.
   async planesPaciente() {
     const loading = await this.loadingCtrl.create({
       message: 'cargando financiadores'
@@ -172,10 +169,10 @@ export class FinancerComponent implements OnInit {
     this.ccolor = false;
     this.price = null;
     this.desabilitado = false;
-
     this.planesPaciente();
 
   }
+
 
   // mostrar los familiares adjuntos o la opción de crear uno nuevo
   openParents() {
@@ -208,6 +205,7 @@ export class FinancerComponent implements OnInit {
     })
   }
 
+  // METODO QUE SIRVE PARA LIMPIAR LA INFO DE UN PACIENTE ANTES SELECCIONADO Y CONSULTAR LA DE OTRO.
   cleanDepe() {
     this.secureOk = false;
     this.depe = {};
@@ -219,24 +217,7 @@ export class FinancerComponent implements OnInit {
     this.nomark = false;
   }
 
-  // mostrar el modal de la creación de familiares
-  /* async showDetailCreateParents() {
-    const data = {
-      doctor: this.doctor,
-      available: this.available,
-      hora: this.hora,
-      depe: this.depe,
-      price: this.price,
-      prestacion: this.prestacion
-    };
-    const modal = await this.modalCtrl.create({
-      component: CreateparentPage,
-      componentProps: data,
-      cssClass: 'my-custom-classParets'
-    })
-    await modal.present();
-  } */
-
+  //FUNCIÓN QUE SIRVE PARA REGISTRAR A UN USUARIO ESPECIFICO.
   async acceptFinancer(plan) {
     if (plan.siteds === 1) {
       this.paquete = true;
@@ -263,6 +244,7 @@ export class FinancerComponent implements OnInit {
     console.log('el plan:', plan);
   }
 
+// FUNCIÓN QUE ACEPTA EL FINANCIADOR DE TIPO PAQUETE.
   async acceptFinancerPaquete(plan) {
     if (plan.codigo_garante_pk === 1) {
       this.paquete = true;
@@ -293,7 +275,7 @@ export class FinancerComponent implements OnInit {
     console.log('el plan:', plan);
   }
 
-  // función para ir a pagos
+  // FUNCIÓN PARA IR A PAGOS CON LOS DATOS OBTENIDOS HASTA ESE MOMENTO.
   async goToPay() {
     if (this.price > 0) {
       console.log('precio y plan', this.price, this.plan);
@@ -317,11 +299,9 @@ export class FinancerComponent implements OnInit {
         await loading.present();
         let provisionId = this.hora.params.provisionId;
         this.appointmetPvr.createAppointment(this.subida, provisionId).subscribe(data => {
-          // console.log("se ha creado la cita");
           this.createCita();
           loading.dismiss();
           this.router.navigate(['home']);
-          /* this.navCtrl.setRoot(HomePage); */
         });
       } else {
         const alert = await this.alertCtrl.create({
@@ -337,10 +317,10 @@ export class FinancerComponent implements OnInit {
         await alert.present();
       }
       this.router.navigate(['home']);
-      /* this.navCtrl.setRoot(HomePage); */
     }
   }
 
+  // FUNCIÓN PARA LA CREACIÓN DE UNA CITA SI ESTA ES DE TIPO BENEFICIO LA CUAL NO NECESITA D EUN PAGO Y ES SOLO PARA CONSUMIR DE CLINICA.
   async createCita() {
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",

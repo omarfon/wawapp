@@ -25,7 +25,9 @@ export class DetailVacinneComponent implements OnInit {
               public nav: NavController,
               public router: Router,
               public alrtCtrl: AlertController) { }
-
+/* 
+    CARGA DE VACUNAS ADEMAS DE CONTENIDO PARA MOSTRAR CADA VACUNA Y SI ALGUNA FUE EFECTUADA SE MARCARÁ LA FECHA DE LAS MISMAS.
+*/
   async ngOnInit() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando información'
@@ -34,9 +36,6 @@ export class DetailVacinneComponent implements OnInit {
     if(this.vacinneSrv.vacuna){
       this.vacuna = this.vacinneSrv.vacuna;
       if(this.vacuna){
-        console.log('this.vacuna:', this.vacuna);
-        /* this.fecha = this.vacuna[0].momento_dosis / 30; */
-        // this.vacunasData = this.navParams.get('vacunas');
         console.log('lo que hay en this.vac:', this.vacuna);
         this.fechaVacunacion = this.vacuna[0].info_paciente.fecha_aplicacion_dosis;
         this.vacunaAviva = this.vacuna[0].info_paciente.administracion_externa;
@@ -48,7 +47,7 @@ export class DetailVacinneComponent implements OnInit {
       }
       const mes = this.vacinneSrv.month;
       this.vacinneSrv.getVaccine(mes).subscribe((data:any) =>{
-        console.log(data);
+/*         console.log(data); */
         if(data[0].enfermedades.length < 1 || data.length < 1){
           this.router.navigate(['tabs/tab3']);
           loading.dismiss();
@@ -57,9 +56,8 @@ export class DetailVacinneComponent implements OnInit {
           loading.dismiss();
         }
           loading.dismiss();
-          console.log('vacunas en detail vacunas:', this.vacunas);
+         /*  console.log('vacunas en detail vacunas:', this.vacunas); */
       },err => {
-        console.log(err);
         this.router.navigate(['tabs/tab3'])
         loading.dismiss();
       });
@@ -69,6 +67,7 @@ export class DetailVacinneComponent implements OnInit {
     }
   }
 
+  // ESTA FUNCIÓN FUE CREADA PARA ALERTAR AL USUARIO PARA PREPARARLO PARA FUTURAS VACUNAS.
   async sendAlertVaccine(){
     let alerta = await this.alrtCtrl.create({
         header: 'Hemos creado una alerta para esta {{vac.nombre}}',
@@ -81,6 +80,8 @@ export class DetailVacinneComponent implements OnInit {
   updateVacuna(){
     console.log('nuevo estado de vacuna:' + this.vacuna);
   }
+
+// FUNCIÓN QUE VUELVE PARA REGRESAR LA PAGINA
   back(){
     this.nav.back();
   }

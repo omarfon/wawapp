@@ -9,13 +9,11 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- 
+  DETALLE DE LA VACUNA SELECCIONADA, ESTO INCLUYE DATOS OBTENIDOS, DESDE EL GESTOR DE CONTENIDOS QUE ADMINISTRA DATOS DE VENTAJAS DE VACUNAS, DESCRIPCIÓN DE LAS MISMAS Y
+  PROBLEMAS DE NO TENERLAS, ADEMÁS UN TEMA IMPORTANTE ES QUE OBTIENE LA FECHA EN LA QUE SE INCORPORÓ LA VACUNA EN CLINICA Y PODER LLEVAR UN CONTROL ADECUADO.
+ -->
 <ion-content >
-  <!-- marcador para vacuna -->
-    <!-- <ion-item>
-        <ion-label>marcar si se realizó esta vacuna</ion-label>
-        <ion-checkbox [(ngModel)]="vacuna" (ionChange)="updateVacuna()"></ion-checkbox>
-      </ion-item> -->
-  <!-- fin de marcador para la vacuna     -->
 <ion-card>
   <ion-card-header>
         Detalle de vacuna aplicada
@@ -37,7 +35,6 @@
           </ion-item>
         </div>
         </ion-list>
-      <!-- <p *ngIf="fechaVacunacion"> vacuna realizada el dia {{fechaVacunacion | date:'mediumDate'}} </p> -->
       <p class="vacunarecibida" *ngIf="fechaVacunacion == null"> esta vacuna debería realizarse el día {{fechaEstimada | date:'mediumDate'}} </p>
       <p class="vacunarecibida" *ngIf="vacunaAviva == 1">Vacuna recibida en Aviva</p>
       <p class="vacunarecibida" *ngIf="vacunaAviva == 0 && vacunaExterna == 1">Vacuna no fue recibida en Aviva</p>
@@ -58,8 +55,6 @@
                 </ion-col>
               </ion-row>
               </mat-panel-title>
-              <!-- <mat-panel-description>
-              </mat-panel-description> -->
           </mat-expansion-panel-header>
           <div class="contenedorPreviene" *ngIf="e.enfermedades">
             <h4>Las enfermedades que previene:</h4>
@@ -91,9 +86,5 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-
-
-<!-- <button ion-button color="acento" center (click)="sendAlertVaccine()" block>crear una alerta para esta vacuna</button>
-<button ion-button block (click)="ModalCalendar()"> tomar una cita para esta vacuna</button> -->
 </ion-content>
 

@@ -61,43 +61,17 @@ export class DatesComponent implements OnInit {
     this.getDoctors();
   }
 
+  /*
+    ESTE COMPONENTE SE ENCARGAR DE TRAER LOS DATOS DE LA ESPECIALIDAD DE GINECOLOGÍA PREVENTIVA, EN ESTE MOMENTO ESTA ON EL ID 38, PERO ESTO ES ALGO QUE TIENE QUE ESCALAR EN FUNCIÓN
+    DESPUES DE LOS CENTROS, ES DECIR TRABAJARLO CON MULTISEDE, ADEMMÁS EL DATO DE LA ESPECIALIDAD DEBE VENIR DINAMICAMENTE, ESTO ES ALGO QUE TIENE QUE CONTRUIRSE EN EL FUTURO, EN ESTE
+    MOMENTO SIRVE DE ESTA MANERA.
+  */
   back(){
     this.nav.back();
   }
 
-/*   async getDoctors() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando doctores...'
-    });
-    await loading.present();
-    this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
-      this.disponibles = false;
-      if (doctors.length == 0) {
-        this.disponibles = true;
-        return null;
-      }
-      this.doctors = doctors;
-      for (let doctor of doctors) {
-        this.doctores = this.citasSrv.getAvailablesPerDoctor(doctor.id, this.escogido, doctor.service.id, this.fromDate, this.toDate).subscribe((availables: any) => {
-          if (availables && availables.length > 0) {
-            doctor.availables = availables;
-            doctor.isAvailable = true;
-            doctor.expanded = false;
-          }
-        })
-      }
-      this.doctorsF = this.doctors;
-      loading.dismiss();
-      console.log(this.doctorsF);
-      console.log('cerrando el loading')
-    }, err => {
-      console.log('err', err)
-    },
-      () => {
-        console.log('llamada finalizada')
-      });
-  } */
 
+  // LLAMA A LOS DOCTORES DE UNA ESPECIALIDAD ESPECIFICA EN UN RANGO DE 15 DÍAS(ESTO ESTA REGULADO EN EL BACK)
   async getDoctors(){
     this.doctorsF = [];
     const loading = await this.loadingCtrl.create({
@@ -119,6 +93,7 @@ export class DatesComponent implements OnInit {
     })
   } 
 
+  //EN ESTA FUNCIÓN SE OBTIENE LAS HORAS DE UN DÍA ESPECIFICO, DE UN DOCTOR ESPECIFICO.
   expandedItem(doctor, available) {
     if (!this.hora) {
       console.log('doctor y available:', doctor, available); 
@@ -127,9 +102,7 @@ export class DatesComponent implements OnInit {
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
-      /* this.escogido =  */
       this.citasSrv.getAvailablesPerDoctor(id, this.escogido, serviceId, fromDate, toDate).subscribe(hoy => {
-        /* console.log('hoy', hoy); */
         const dates = hoy[0].hours;
         if (this.escogido === 44) {
           this.consultaExterna = dates.filter(x => x.params.provisionId[0] === 44);
@@ -138,9 +111,7 @@ export class DatesComponent implements OnInit {
         } else {
           this.teleconsulta = dates.filter(x => x.params.provisionId[0] === 845337);
           this.dias = this.teleconsulta
-          /* console.log('this.teleconsulta:', this.teleconsulta); */
         }
-        // console.log('this.dias:',this.dias);
         this.doctors.map((listDoctor) => {
           if (doctor == listDoctor) {
             listDoctor.expanded = true;
@@ -150,21 +121,16 @@ export class DatesComponent implements OnInit {
           return listDoctor
         });
         this.horas = this.dias;
-        /* console.log('las horas:', this.horas); */
         this.dia = available.date;
-        // console.log('dias', this.dias);
       })
     } else {
-      /* console.log('doctor:', doctor, available); */
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, this.escogido, serviceId, fromDate, toDate).subscribe(hoy => {
-        /* console.log('hoy' , hoy); */
         this.dias = hoy[0].hours;
-        // console.log('this.dias:',this.dias);
         this.doctors.map((listDoctor) => {
           if (doctor == listDoctor) {
             listDoctor.expanded = true;
@@ -174,9 +140,7 @@ export class DatesComponent implements OnInit {
           return listDoctor
         });
         this.horas = this.dias;
-        // console.log('las horas:', this.horas);
         this.dia = available.date;
-        // console.log('dias', this.dias);
       })
     }
   }
@@ -188,12 +152,13 @@ export class DatesComponent implements OnInit {
     this.selectedDay = items;
   }
 
+  // MANEJO DE ERROR AL NO RECIBIR UNA IMAGEN DE UN ESPECIALISTA ADECUADO.
   errorHandler(event) {
     event.target.src = "https://1.bp.blogspot.com/-p8EFlkXywyE/UDZvWTyr1bI/AAAAAAAAEU0/xL8pmKN1KOY/s1600/facebook.png"
   }
 
+  // METODO PARA ENVIAR A FINANCIADOR CON LOS DATOS NECESARIOS PARA REGISTRO Y OBTENCIÓN DE PRECIOS.
   goToFinancer(doctor, hora) {
-    /* console.log('hora y doctor', hora, doctor); */
     const datos = {
       centerId: hora.params.centerId,
       servicio_id: hora.params.serviceId,

@@ -111,6 +111,7 @@ export class RegisterComponent implements OnInit {
     this.nav.back();
   }
 
+  //FUNCION PARA SELECCIONAR EL GENERO
   selecGender(event) {
     this.selectSexo = event.target.selectedOptions[0].textContent;
     this.sexo = event.target.value;
@@ -121,6 +122,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  //VALIDACIÓN DE CAMPOS PARA EL DISABLED DEL BOTON REGISTRAR
   validacion(){
     if(this.password && this.aprobed == true && this.name && this.surname1 && this.surname2 &&  this.email && this.phone ){
       return true;
@@ -129,17 +131,22 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  //FUNCIÓN PARA CAMBIAR EL GENERO Y METERLO EN UNA VARIABLE
   cambiogenero($event) {
     this._gender = this.gender;
     console.log('this.gender:', this._gender);
 
   }
 
+  //METODO PARA CAPTAR EL ACEPTAR LAS CONDICIONES QUE ES PARTE PARA EL DISABLED
   aceptaCondiciones(aprobed){
     console.log('aprobed cambia a true:', aprobed);
     this.aprobed = true;
   }
 
+  /* 
+  VALIDACIÓN DE DATOS RENIEC, SI EL PACIENTE EXISTE EN XHIS SE UTILIZAN LOS DATOS DEL XHIS, SINO EXISTE SE LLENAN LA MAYORÍA DE LOS CAMPOS
+  CON LA DATA OBTENIDA EN ESTA LLAMADA */
   async reniecValidateDatos(){
     const loading = await this.loadingCtrl.create({
       message:'estamos buscando los datos...'
@@ -173,6 +180,7 @@ export class RegisterComponent implements OnInit {
   })
   }
 
+  //ABRIR LA ALERTA DE VER CONDICIONES
   async seeConditions() {
     let terminos = await this.alertctrl.create({
       header: 'TÉRMINOS Y CONDICIONES',
@@ -186,6 +194,7 @@ export class RegisterComponent implements OnInit {
     this.cambio = true;
   }
 
+  // VALIDACIÓN BOTON PARA LA BUSQUEDA POR DNI
 validacionButton(){
   if(this.document && this.documentNumber && this.documentDigit){
     return true
@@ -193,7 +202,7 @@ validacionButton(){
     return false
   }
 }
-
+// METODO QUE SE UTILIZA EN EL CAMBIO DE DOCUMENTO CONSIDERANDO QUE LA BUSQUEDA DE DATOS ES SOLO PARA EL DNI Y NO PARA EL RESTO DE DOCUMENTOS.
 cambioDocument(event){
     this._documenType = this.document;
     console.log('this.document', this._documenType, this.document);
@@ -248,77 +257,8 @@ cambioDocument(event){
    selectDocument(event) {
   }
 
-/*   registerNewUser() {
-    let data = this.registerForm.value;
-    console.log('data de formulario:', data);
-    let datos: any = {
-      email: data.email,
-      password: data.password,
-      name: data.name,
-      surname1: data.surname1,
-      surname2: data.surname2,
-      birthdate: data.birthdate,
-      gender: {
-        id: this._gender.id,
-        name: this._gender.name
-      },
-      documentType: {
-        id: this._documenType.id,
-        name: this._documenType.name
-      },
-      documentNumber: data.documentNumber,
-      phone: data.phone
-    }
-    data.code = 1234;
-    data.id = "sendbooking";
 
-    data.birthdate = moment(data.birthdate).format('YYYY-MM-DD');
-    console.log('this.data: ', data.birthdate);
-    console.log('this.data: ', data);
-    console.log('data armada:', data);
-    this.userProvider.createNewUser(data).subscribe(async (data: any) => {
-      this.createOk = data;
-      console.log('la vuelta de this.createOK:', this.createOk);
-      const alert = await this.alertctrl.create({
-        header:'Creación de cuenta',
-        message:'la creación ha sido exitosa, ingresa tus credenciales',
-        buttons: [
-          {
-            text:'Ok'
-          }
-        ]
-      });
-      await alert.present();
-      console.log('datos que vienen del logueo: por registro:', this.createOk);
-      localStorage.setItem('idTokenUser', this.createOk.patientId);
-      localStorage.setItem('emailUser', this.createOk.userEmail);
-      localStorage.setItem('authorization', this.createOk.authorization);
-      localStorage.setItem('role', this.createOk.role);
-      localStorage.setItem('photoUrl', this.createOk.photoUrl);
-      localStorage.setItem('name', this.createOk.name);
-      localStorage.setItem('patientName', this.createOk.patientName);
-      localStorage.setItem('token', this.createOk.firebaseToken);
-      localStorage.setItem('token', data.firebaseToken);
-      localStorage.setItem('uid', data.userId);
-      localStorage.setItem('sigIn', 'completo');
-        this.router.navigate(['/login']);
-      if (localStorage.getItem('token')) {
-        const token = localStorage.getItem('token');
-      }
-    }, async err => {
-      const alert = await this.alertctrl.create({
-        header: 'Error en el envio del código',
-        message: `${err.error.message}`,
-        buttons: [{
-          text: 'Intentar de nuevo',
-          role: 'cancel'
-        }]
-      });
-      await alert.present();
-    });
-  }
- */
-
+// FUNCIÓN PARA REGISTRAR A UN USUARIO CUANDO HA LLENADO TODOS LOS DATOS.
   registerNewUser(){
     this.userProvider.sendValidationRegister(this.email,this.documentNumber, this.document.id, this.document.name).subscribe((resp:any)=>{
       if(resp.result == 'ok'){
@@ -416,6 +356,7 @@ cambioDocument(event){
     });
   }
 
+  // VALIDACIÓN PARA LA EXISTENCIA DEL EMAIL, SI EXISTE NO SE PODRÍA CREAR UNA CUENTA, ES MUY PROBABLE QUE YA TENGA UNA CREADA.
   async mailExisting() {
     const alert = await this.alertctrl.create({
       header: "Correo Utilizado",
@@ -431,7 +372,7 @@ cambioDocument(event){
   }
 
 
-
+//METODO PARA VOLVER AL LOGIN
   goToLogin() {
     this.router.navigate(['login']);
     /* this.navCtrl.push(LoginPage); */

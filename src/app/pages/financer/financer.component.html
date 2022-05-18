@@ -7,20 +7,15 @@
   </ion-toolbar>
 
 </ion-header>
+
+<!-- 
+  ESTA PAGINA RECIBE LOS DATOS SELECCIONADOS HASTA EL MOMENTO DE ESCOGER AL DOCTOR, ADEMAS MUESTRA LOS DEPENDIENTES PARA ESCOGER UNO DE ELLOS Y ENVIAR AL SELECCIONAR A ALGUNO
+  A FINANACIADOR Y CON ELLOS OBTENER EL PRECIO DE LA CONSULTA.
+ -->
 <ion-content>
   <h4 class="parrafoFinanciador">Lo que nos queda es escoger para quien es la cita y el financiador, ya casi terminamos…
   </h4>
-  <!-- <p class="teleconsulta" *ngIf="hora.params.provisionId[0] == 838517"> HAS ESCOGIDO TELECONSULTA</p> -->
   <div>
-   <!--  <ion-row class="pading">
-      <ion-col offset="3" size="6" class="cuadrado">
-        <ion-button (click)="openParents()" expand="full" size="default" color="tertiary"
-          [ngClass]="{'verde': ccolor === true}">
-          <ion-icon slot="start" name="people"></ion-icon>
-          un familiar
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
     <div *ngIf="addFamily">
       <ion-row>
         <ion-col size="6" *ngFor="let depe of parents">
@@ -36,19 +31,7 @@
       </ion-row>
     </div>
 
-   <!--  <ion-row *ngIf="addFamily" padding>
-      <ion-col size="12">
-        <ion-button expand="block" shape="round" fill="outline" color="success" class="m-t-20"
-          (click)="showDetailCreateParents()">
-          <ion-icon slot="start" name="add"></ion-icon>
-          Agregar Familiar
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
-
-
   </div>
-  <!-- fin del template de los familiares adjuntos -->
   <div *ngIf="depe">
     <div *ngIf="personOk === true">
       <ion-row>

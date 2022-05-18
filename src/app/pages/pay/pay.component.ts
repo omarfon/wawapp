@@ -58,18 +58,18 @@ export class PayComponent implements OnInit {
                 this.dataArmada = data;
                 console.log(this.dataArmada);
               }
-
+/* 
+TODO EL SETEO PREVIO DE CULQI SE ORIGINA AQUI Y ADEMÁS SE TIENE LA OPCIÓN DE PODER 
+REGISTRAR UNA CONSULTA MEDICA DESDE AQUI, MUESTRA EL RESUMEN DE LA CITA TAMBIEN
+Y Y AL FINALIZAR SI LA CITA ES EXITOSA, ROUTEO A HOME Y SINO LOS POSIBLES MENSAJES DE ERROR.
+ */
   ngOnInit() {
 
     window['culqi'] = this.culqi.bind(this);
 
     this.desactivadoBoton = true;
     this.desactivadoBotonLocal = true;
-    /*  this.culqiData = JSON.parse(localStorage.getItem('culqiData')); */
-    /* console.log('culqi guardada en local', localStorage.getItem('culqiData')); */
-
     this.pago = 'enLocal';
-
     this.doctor = this.dataArmada.doctor;
     this.available = this.dataArmada.available;
     this.hora = this.dataArmada.hora;
@@ -77,11 +77,9 @@ export class PayComponent implements OnInit {
     this.prestacion = this.hora.params.provisionId[0];
     console.log('this.hora:', this.hora);
     console.log('this.depe:', this.depe);
-    /* this.depe = this.navParams.get('depe'); */
     this.price = this.dataArmada.price;
     console.log('this.price:', this.price);
-    /* this.prestacion = this.navParams.get('prestacion'); */
-    console.log('this.prestacion:', this.prestacion);
+    console.log('this.prestacion:', this.prestacion);   
 
     this.subida = this.hora.listjson;
     this.plan = this.dataArmada.plan;
@@ -111,6 +109,7 @@ export class PayComponent implements OnInit {
     await alert.present();
   }
 
+  // SETEO DE PARAMETROS EN CULQI CONCERNIENTES A LA CITA
   payCulqi() {
     this.desactivadoBoton = false;
     console.log('this.price:', this.plan);
@@ -121,7 +120,6 @@ export class PayComponent implements OnInit {
     }
     if (this.depe) {
       let id = this.depe._id;
-      /* let id = this.depe.patientId; */
       let provisionId = this.hora.params.provisionId;
       console.log('provisionId ', provisionId);
       this.crudPvr.createParentDate(this.subida, id, provisionId)
@@ -240,7 +238,8 @@ export class PayComponent implements OnInit {
       });
   }
 
-
+/* 
+FUNCIÓN PARA ABRIR RL MODAL DE CULQI QUE ES UN WIDGET DEL CUAL NO TENEMOS CONTROL, PERO PODEMOS CONTROLAR SOLO DOS EVENTOS EL DE APERTURA Y EL DE CIERRE */
   async openCulqi() {
     const loadingPago = await this.loadingCtrl.create({
       message: "Haciendo el cobro...",
@@ -295,7 +294,8 @@ export class PayComponent implements OnInit {
     }
   }
 
-
+/*  POR LA FALTA DE SINCRONIA NO SE SABE A CIENCIA CIERTA CUANDO UNA CITA HA SIDO TOMADA ENTONCES SE HACE UNA REVISIÓN PREVIA 
+    PARA LA CREACIÓN RESPECTIVA O LA INFORMACIÓN DE QUE YA FUE TOMADA Y PUEDAN ESCOGER OTRA EN SU REEMPLAZO */
   checkStatus() {
     this.check = setInterval(() => {
       this.appointmentPrv.chekstatusAppointment(this.appointmentId).subscribe(async (status: any) => {
@@ -329,6 +329,9 @@ export class PayComponent implements OnInit {
       30000)
   }
 
+  /* 
+  ESTA FUNCIÓN SIRVE PARA VER SI LA CITA CREADA A UN DEPENDIENTE FUE PAGADA O NO, ESTO SE EFECTUA DESPUES DE HABER PAGADO CON TARJETA SI LA CITA NO APARECE COMO CONFIRMADA, DIGAMOS SI CERRO EL MODAL DE CULQI
+  O CUALQUIER OTRO INCONVENIENTE, POR LÓGICA DE LA APLICACIÓN DEBERÍA ELIMINARSE ESE AVAILABLE Y LIBERAR LA CITA, O EXPLICAR AL USUARIO QUE PUEDE PAGAR LA CITA LLEGANDO A LA CLINICA. */
   checkStatusParent() {
     const userId = this.currentAppointment.patient.id;
     const appointmentId = this.currentAppointment.appointmentId;
@@ -361,18 +364,22 @@ export class PayComponent implements OnInit {
       30000)
   }
 
+  // METODO PARA INFORMAR SOBRE LA CREACIÓN DE UNA CITA
   confirmCreate(appointmentId) {
     this.appointmentPrv.confirmDate(appointmentId).subscribe(confirm => {
       console.log({ confirm });
     })
   }
 
+  // METODO PARA INFORMAR SOBRE LA CREACIÓN DE UNA CITA DE UN DEPENDIENTE.
   confirmCreateParent(patientId, appointmentId) {
     this.appointmentPrv.confirmDateParent(patientId, appointmentId).subscribe(confirm => {
       console.log({ confirm })
     })
   }
 
+  /* 
+  CULQI ES LA PARTE FINAL DE EL LLAMADO A CULQI EN DONDE SE HACE EL PAGO RESPECTIVO Y LA POSIBLE RESPUESTA DE EL ABONO CORRESPONDIENTE */
   async culqi() {
     console.log('culqi del componente', this);
     if (window['Culqi'].token) {
@@ -468,6 +475,8 @@ export class PayComponent implements OnInit {
     }
   }
 
+  /* 
+  LA OPCIÓN DE CREACIÓN DE RESERVA DE CITA CON PAGO EN LOCAL, TERMINA EN EL HOME CON LA CONFIRMACIÓN DE LA MISMA*/
   async payClinic() {
     let alert = await this.alertCtrl.create({
       header: 'error al hacer cargo',
@@ -501,7 +510,7 @@ export class PayComponent implements OnInit {
     alert.present();
   }
 
-
+// METODO QUE TAMBIEN REGISTRA A UN USUARIO DESPUES QQUE SE HA CERRADO CULQI SIN PAGAR Y SE LE DA LA OPCIONDE PAGAR EN LOCAL CON ESTE METODO SE CONFIRMA LA CITA.
   next() {
     let provisionId = this.prestacion;
     this.desactivadoBotonLocal = false;
@@ -609,6 +618,8 @@ export class PayComponent implements OnInit {
   }
 
 
+  // CREACION DE LA CITA PARA UN DEPENDIENTE ESTO UTILIZA OTRO TIPO DE CREACIÓN CONSIDERANDO QUE EL AUTHORIZATION NO ES EL MISMO PARA LOS DEPENDIENTES Y NO LOS POSEEMOS EN ESE MOMENTO
+
   nextDepe() {
     this.desactivadoBotonLocal = false;
     let id = this.depe._id;
@@ -653,6 +664,7 @@ export class PayComponent implements OnInit {
     });
   }
 
+  // LOCADING DE ESPERA PARA CREACIÓN DE UNA CITA ESPECIFICA.
   async waitingCreate() {
     const loading = await this.loadingCtrl.create({
       message: "creando cita"
@@ -660,6 +672,7 @@ export class PayComponent implements OnInit {
     await loading.present();
   }
 
+  // ALERT SOBRE CREACIÓN DE UNA CITA ESPECIFICA.
   async createDate() {
     const alert = await this.alertCtrl.create({
       header: "Creación de cita",
@@ -671,10 +684,10 @@ export class PayComponent implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 
+  // FUNCIÓN NO IMPLE,ENTADA PARA UN REINTENTO DE CREACIÓN DE CITA SI NO TENEMOS RESULTADOS POSITIVOS EN INTENTOS PREVIOS
   retry(){
     console.log('retry');
   }

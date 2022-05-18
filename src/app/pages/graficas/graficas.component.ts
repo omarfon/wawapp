@@ -239,6 +239,9 @@ export class GraficasComponent implements OnInit {
     });
   }
 
+  /* 
+  OBTENEMOS LA DATA DE LOS CONTROLES PREVIOS Y LAS ORDENAMOS EN FUNCIÓN DE LA NECESIDAD 
+  */
   async getData(){
     const loading = await this.loadingCtrl.create({
       message:'obteniendo parametros...'
@@ -256,9 +259,16 @@ export class GraficasComponent implements OnInit {
             return 0;
           }
         });
+        /* 
+        SE ARMARN LAS VARIABLES CON LAS OPCIONES PARA RENDERIZARLAS
+         */
         const pesos = parametros.filter(item => item.descripcion == 'Peso').map(item => item.valor);
         const tallas = parametros.filter(item => item.descripcion == 'Talla').map(item => item.valor);
         const perimetros = parametros.filter(item => item.descripcion == 'Perímetro cefálico').map(item => item.valor);
+
+     /*    AQUI SETEAMOS LOS DATOS QUE SON PERCENTILES PARA CUALQUIER NIVEL 
+        SOBRE ESO SE CREA LA LINEA EN DONDE SE VA DESARROLLANDO LOS DATOS DEL BEBE QUE SE SELECCIONA */
+
         this.barChartDataPeso = [
           {data: [2.5, 3.4, 4.4, 5.1, 5.6, 6.1, 6.4, 6.7, 7.0, 7.2, 7.5, 7.7, 7.8, 8.0, 8.2, 8.4, 8.5, 8.7], label: 'percentil 3'},
           {data: [2.9, 3.9, 4.9, 5.6, 6.2, 6.7, 7.1, 7.4, 7.7, 7.9, 8.2, 8.4, 8.6, 8.8, 9.0, 9.2, 9.4, 9.6], label: 'percentil 15'},
@@ -331,11 +341,12 @@ export class GraficasComponent implements OnInit {
           {data: [...pesos], label: 'Peso/talla'}
         ]
   
-        /* console.log('this.parametros:', this.parametros, parametros,{pesos, tallas, perimetros}); */
       })
     loading.dismiss();
   }
   
+  /* 
+  AQUI SE OBTIENE LA INFORMACIÓN DE CADA PACIENTE, CONSIDERANDO QUE PUEDEN SER VARIOS BEBES */
   async getDataForPatient(depe){
     this.id = depe.patientId;
     this.sex = depe.sex;
@@ -343,6 +354,7 @@ export class GraficasComponent implements OnInit {
     this.getData();
   }
 
+  // FUNCIÓN QUE SE UTILIZA PARA RETROCEDER LA PAGINA
   back(){
     this.nav.back();
   }

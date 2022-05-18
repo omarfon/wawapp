@@ -19,7 +19,9 @@ export class DetaildateComponent implements OnInit {
               public appointmentPrv: AppoinmentService,
               public dependentsSrv: DependentsService,
               public alertCtrl: AlertController) { }
-
+/* 
+    AQUI SE OBTIENE LA DATA QUE LLEGA DESDE RECIPES Y ES ENVIADA DESDE EL SERVICIO DEPENDENTSSERVICE
+*/
   ngOnInit() {
     const data = this.dependentsSrv.appointment
     if(data){
@@ -31,6 +33,7 @@ export class DetaildateComponent implements OnInit {
     }
   }
 
+  // FUNCIÓN PARA CANCELAR UNA CITA.
   async desactivateTask(appointment){
     console.log('appointment:', appointment);
         let confirm = await this.alertCtrl.create({
@@ -52,15 +55,16 @@ export class DetaildateComponent implements OnInit {
               }
             }
           ],
-  /*         enableBackdropDismiss: true */
         });
         confirm.present();
       }
 
+      // FUNCIÓN PARA VOLVER A LA PAGINA ANTERIOR.
       back(){
         this.nav.back();
       }
 
+      //DESTRUCCIÓN DE NAVEGACIÓN A LA PANTALLA ANTERIOR.
       dismiss(){
         this.nav.back();
       }

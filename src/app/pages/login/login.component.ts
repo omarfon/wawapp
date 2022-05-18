@@ -31,20 +31,10 @@ export class LoginComponent implements OnInit {
               }
           
   ngOnInit() {
-   /*  this.userSrv.getKey().subscribe(data => {
-      this.authPublic = JSON.stringify(data);
-      localStorage.setItem('authorization', this.authPublic);
-      localStorage.setItem('role', this.authPublic.role);
-    });
-
-    this.getDocuments();
-    const notas = localStorage.getItem('notas');
-    if (!notas) {
-      this.getAllNotes();
-    } */
     
   }
 
+  //CARGAMOS EN EL CICLO DE VIDA CARACTERISTICO DE IONIC LA AUTHORIZATION QUE CONTIENE EL JWT Y TAMBIEN LOS TIPOS DE DOCUMENTOS QUE SE UTILIZAN EN EL LOGIN.
   ionViewWillEnter(){
     const authorization:any = localStorage.getItem('authorization');
       if(!authorization) {
@@ -58,6 +48,7 @@ export class LoginComponent implements OnInit {
       console.log('constructor');
   }
 
+  // METODO PARA OBTENER LOS TIPOS DE DOCUMENTOS.
   getDocuments(){
     this.dataSrv.getDocuments().subscribe((data:any) => {
       this.documents = data;
@@ -66,6 +57,7 @@ export class LoginComponent implements OnInit {
   });
 }
 
+// INICIAMOS LA CARGA DE LAS NOTAS DESDE EL LOGIN PARA PODER MOSTRARLAS EN LA PAGINA INTERIOR Y REDUCIR TIEMPOS DE CARGA.
   getAllNotes(){
     this.notasSrv.getAllNotes().subscribe((data:any) => {
       console.log(data);
@@ -75,24 +67,11 @@ export class LoginComponent implements OnInit {
   }
 
 
+  // FUNCIÓN PARA LOGUEAR A UN USUARIO, Y GUARDADO EN EL LOCALSTORAGE DATOS IMPORTANTES PARA SU
 signIn(document, password) {
   console.log(this.tipeDocument,document, password) 
   this.userSrv.newLoginWithDni(this.tipeDocument, document, password).subscribe(async response => {
-    this.data = response;
-    console.log('lo que me trae el login:', this.data);
-    if (this.data.sex == 'HOMBRE') {
-      const alert = await this.alert.create({
-        header: "LO SENTIMOS",
-        subHeader: "Esta aplicación es de uso exclusivo para pacientes de sexo femenino",
-        buttons: [
-          {
-            text: 'ok',
-            role: 'cancel'
-          }
-        ]
-      })
-      await alert.present();
-    } else {
+    this.data = response; 
       localStorage.setItem('authorization', JSON.stringify(this.data));
       localStorage.setItem('sigIn', 'completo');
       localStorage.setItem('role', this.data.role);
@@ -102,7 +81,6 @@ signIn(document, password) {
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
       }
-    }
   }, async error => {
     const alert = await this.alert.create({
       header: '',
@@ -110,20 +88,20 @@ signIn(document, password) {
       buttons: [{
         text: "Volver a intentar",
         handler: data => {
-          // console.log('intentar de nuevo');
         }
       }]
     });
     await alert.present();
-    // this.msgError = error.message;
     }
   );
 }
 
+// METODO PARA EL ENRUTAMIENTO HACIA LA PAGINA DE REGISTRO
   register(){
     this.router.navigate(['register'])
   }
 
+  // FUNCIÓN QUE LEVANTA UN MODAL EN DONDE SE INGRESA EL NUMERO DE DOCUMENTO, PARA LA RECUPERACIÓN DE LA CONTRASEÑA.
   async recovery(){
     const alert = await this.alert.create({
       header:"Olvidaste la contraseña...?",
@@ -139,9 +117,9 @@ signIn(document, password) {
           {
             text:'Enviar',
             handler: data => {
-              console.log('enviando correo electronico');
+/*               console.log('enviando correo electronico'); */
               let document = data.documento;
-              console.log('lo que se almacena en correo:', document);
+      /*         console.log('lo que se almacena en correo:', document); */
               const dataSend = {
                 documentNumber:  data.documento,
                 documentType: {
@@ -158,8 +136,7 @@ signIn(document, password) {
                     this.userSrv.dataSend = dataSend;
                     this.router.navigate(['recovery']);
                   }else{
-
-                  console.log('correo no valido levantar un alert o pintar un mensaje')
+                      return
                   }
               })
             }
@@ -169,7 +146,7 @@ signIn(document, password) {
    await alert.present(); 
   }
 
-
+// FUNCIÓN PARA SELECCIONAR EL TIPO DE DOCUMENTO.
   selectDocument(d){
     const document = d.target.value;
     this.tipeDocument = document.id.toString();

@@ -30,6 +30,9 @@ export class RecoveryComponent implements OnInit {
               public nav: NavController,
               public userSrv: UserService) { }
 
+              /* 
+              SE CREA UN FORMULARIO QUE ALMACENE LOS DIGITOS RECIBIDOS POR EL USUARIO, QUE SE COMPLEMENTAN CON LOS DATOS QUE RECIBE A LA HORA DE SOLICITAR 
+              LA RECUPERACIÓN EN TODO MOMENTO AL USUARIO NO SE LE PERMITE CONOCER EL CORREO AL CUAL SE LE HA ENVIADO LA INFORMACIÓN SOLO SE LE DA UNA SEÑA DE CUAL SERÍA SU CORREO. */
   ngOnInit() {
     this.datos = this.userSrv.recovery;
     this.formCode = this.form.group({
@@ -46,6 +49,7 @@ export class RecoveryComponent implements OnInit {
    
   }
 
+  //METODO PARA VALIDAR QUE LAS CONTRASEÑAS ENVIADAS SON IGUALES
   validacion(){
     const valid = this.formCode.value;
     if(valid.password == valid.passwordRepeat){
@@ -55,6 +59,8 @@ export class RecoveryComponent implements OnInit {
     }
   }
 
+  /* 
+  FUNCIÓN QUE ENVIA LA DATA Y GENERA EL CAMBIO DE CONTRASEÑA CORRESPONDIENTE */
   async saveData(data){
     const loading = await  this.loadingCtrl.create({
       message: 'cambiando contraseña'
@@ -87,6 +93,7 @@ export class RecoveryComponent implements OnInit {
       });
 }
 
+// METODO QUE NOTIFICA SI LA CUENTA FUE RECUPERADA CON UN ALERT
 async recoverySuccess(){
   const alert = await this.alertCtrl.create({
     header:"Cuenta recuperada",
@@ -100,6 +107,7 @@ async recoverySuccess(){
   await alert.present();
 }
 
+//METODO QUE NOTIFICA SI EL CODIGO ES ERRONEO
 async erroCode(){
   const alert = await this.alertCtrl.create({
     header:`Error en la recuperación`,
@@ -109,11 +117,13 @@ async erroCode(){
   await alert.present();
 }
 
+// ROUTER PARA VOLVER AL LOGIN
 goToLogin(){
   this.router.navigate(['login']);
   /* this.navCtrl.setRoot(LoginPage); */
 }
 
+// FUNCIÓN DE RETROCESO.
 back(){
   this.nav.back();
 }

@@ -22,10 +22,14 @@ export class EstimulacionComponent implements OnInit {
     this.getStimulus();
   }
 
+  // FUNCIÓN PARA REGRESAR UNA VEZ EN LAS PÁGINAS.
   back(){
     this.nav.back();
   }
 
+  /* 
+  ESTE LLAMADO SE UTILIZA PARA OBTENER LA LISTA DE ESTIMULOS QUE ESTA CREADA Y ALMACENADA EN EL GESTOR DE CONTENIDOS Y PODER REENDERIZARLA A DEMANDA, ESTO SE OBTIENE EN LA CARGA INICIAL DE LA PAGINA Y ES INDEPENDIENTE DE LA EDAD DEL BEBÉ,
+  */
   async getStimulus(){
     const loading = await this.loading.create({
         message: 'Cargando datos...'

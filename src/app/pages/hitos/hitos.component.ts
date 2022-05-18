@@ -23,16 +23,17 @@ export class HitosComponent implements OnInit {
               public hitosSrv: HitosService) { }
 
   ngOnInit() {
+    // FUNCIÓN QUE SE ENCARGA DE TRAER TODOS LOS HITOS INDEPENDIENTEMENTE SI ESTAN LOGRADOS O NO
     this.hitosSrv.getHitos().subscribe(data =>{
       this.hitos = data;
       this.porhacer = this.hitos.filter(h => !h.fecha);
       this.hechas = this.hitos.filter(f => f.fecha);
   console.log('trayendo hitos:', this.hitos);
-      /*     console.log('hitos sin fecha:', this.porhacer); */
       this.sinLograr = this.hitos.length;
     });
   }
 
+  // FUNCIÓN QUE SIRVE PARA CAMBIAR DE ESTADO UN HITO.
   async idChanged(e, hito){
     const loading = await this.loadingCtrl.create({
       message:'guardando cambios'
@@ -52,11 +53,10 @@ export class HitosComponent implements OnInit {
           this.hechas = this.hitos.filter(f => f.fecha);
         });
         loading.dismiss();
-        //this._hitos = this.hitos;
-        /* console.log('nueva tabla de hitos:', this.hitos); */
     });
   }
 
+  // FUNCIÓN PARA DESMARCAR UN HITO LOGRADO.
   async uncheckHito(hito){
     const loading = await this.loadingCtrl.create({
       message:'regresando a lista pendiente'
@@ -89,6 +89,7 @@ export class HitosComponent implements OnInit {
       loading.dismiss();
   }
 
+  // FUNCIÓN PARA RETROCEDER UNA PAGINA
   back(){
     this.nav.back();
   }

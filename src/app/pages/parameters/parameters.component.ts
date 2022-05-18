@@ -37,6 +37,7 @@ export class ParametersComponent implements OnInit {
     loading.dismiss();
   }
 
+  // FUNCIÓN PARA OBTENER LOS PARAMETROS DE UNA CONSULTA ESPECIFICA REALIZADA CON ANTERIORIDAD.
   getParameters(){
     this.parametersSrv.getParametersPerId(this.patientId, this.id).subscribe(data =>{
       this._parametros = data;
@@ -45,6 +46,7 @@ export class ParametersComponent implements OnInit {
       })
   }
 
+  // FUNCIÓN PARA RETROCEDER
   back(){
     this.nav.back();
   }

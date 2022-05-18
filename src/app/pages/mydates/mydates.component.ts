@@ -21,7 +21,8 @@ export class MydatesComponent implements OnInit {
               public loading: LoadingController,
               public nav: NavController,
               public appointmentSrv: AppoinmentService) { }
-
+/* 
+ESTE COMPONENTE SE ENCARGA DE TRAER INFORMACIÓN DE CITAS PENDIENTES */
 async ngOnInit() {
     const loading = await this.loading.create({
       message: 'cargando citas'
@@ -31,9 +32,7 @@ async ngOnInit() {
       this.dependentsAppointments = data;
       if(this.dependentsAppointments){
          this.appointments = this.dependentsAppointments.filter(x => x.appointments) ;
-         loading.dismiss();
-       console.log('con citas:', this.dependentsAppointments);   
-         console.log('this.appointnments:', this.appointments);            
+         loading.dismiss();           
       }else{
         this.appointments = 0;
       } 
@@ -45,7 +44,7 @@ async ngOnInit() {
   }
 
 
-
+// METODO QUE SIRVE PARA IR A LA PAGINA DE DETALLE DE LA CITA PENDIENTE Y ENVIA ALGUNOS CAMPOS NECESARIOS PARA LA RENDERIZACIÓN
   goToDetail(e, id){
     console.log('e:' ,e, id);
     this.dependetsSrv.appointment = e;
@@ -53,6 +52,7 @@ async ngOnInit() {
     this.router.navigate(['detail-date']);
    }
 
+   // RETROCEDER
    back(){
      this.nav.back();
    }

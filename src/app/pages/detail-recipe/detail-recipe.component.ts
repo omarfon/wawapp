@@ -24,6 +24,9 @@ export class DetailRecipeComponent implements OnInit {
               public loading: LoadingController,
               public recipeSrv: RecipesService) { }
 
+              /*
+              RECEPCIONA LOS DATOS ENVIADOS DESDE EL RESUMEN DE TODA LAS CITAS DESDE EL SERVICIO PARA MOSTRAR LAS RECETA COMPLETA O EL DETALLE.
+              */ 
   async ngOnInit() {
     const loading = await this.loading.create({
         message:'Cargando información...'
@@ -52,6 +55,7 @@ export class DetailRecipeComponent implements OnInit {
   })
 }
 
+  // FUNCIÓN PARA REGRESAR A LA PÁGINA ANTERIOR.
   back(){
     this.nav.back();
   }
